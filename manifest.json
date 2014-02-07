@@ -1,0 +1,28 @@
+{
+  "name": "ExtraSafe",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "One Master Password --> Different Password for Different Sites",
+  "homepage_url": "http://www.extrasafe.in",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [ "js/sha3.js", "src/bg/hasher.js", "src/bg/background.js" ]
+  },
+  "options_page": "src/options/options.html",
+  "permissions" : [ "tabs", "webRequest", "<all_urls>" ],
+  "content_scripts" : [
+    {
+      "matches" : [ "<all_urls>" ],
+      "js" : [ "js/jquery.min.js","src/inject/inject.js" ],
+      "css": [ "src/inject/inject.css" ],
+      "run_at" : "document_idle",
+      "all_frames" : true
+    }
+  ],
+  "minimum_chrome_version": "20"
+}
