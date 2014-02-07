@@ -33,7 +33,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         	currentTab = tabs[0];
 			siteTag = tabs[0].url.split(".")[1];
 
-			var siteTagAfterPattern = new RegExp("(com|in|co|html|jsp|php)","g");
+			var siteTagPattern = new RegExp("(com|in|co|html|jsp|php)","g");
 
 			if(afterPattern.test(siteTag)){
 				siteTag = currentTab.url.split(".")[0];

@@ -24,7 +24,6 @@ Hasher = {
 										var middle = Math.floor((Hasher.start+Hasher.end)/2);
 										Hasher.password = Hasher.replaceAt(middle,"@");
 										Hasher.password = Hasher.replaceAt(middle+2,"#");
-										window.alert(Hasher.password);
 					},
 	//Utility Helper method
 	replaceAt: function(index, character) {

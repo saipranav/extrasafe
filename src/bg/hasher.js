@@ -5,12 +5,11 @@ Hasher = {
 	password: "", //output password
 	start: 0, //start from triming
 	end: 10, //end for triming
-	doubleSecurity: "", //includes another key for hashing
 	requireSpecialCharacters: true,
 
 	//Call the crypto graphic algorithm.
 	hashy: function(){	
-						Hasher.password = CryptoJS.SHA3( Hasher.masterPassword + Hasher.siteTag + Hasher.doubleSecurity).toString();
+						Hasher.password = CryptoJS.SHA3( Hasher.masterPassword + Hasher.siteTag ).toString();
 					 },
 	//It will be called after the Crypto returns.
 	modify: function(){
