@@ -15,7 +15,7 @@ Hasher = {
 	//It will be called after the Crypto returns.
 	modify: function(){
 						Hasher.password = Hasher.password.substr(Hasher.start, Hasher.end);
-						if(requireSpecialCharacters == true){
+						if(Hasher.requireSpecialCharacters == true){
 							Hasher.addSpecialCharacters();
 						}
 					},
