@@ -631,7 +631,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    One Master Password to generate Different Password for Different Sites. We do not store any password.
+    Just Remember one Master Password to generate Different Passwords for Different Sites. We do NOT store any passwords.
     Copyright (C) 2014  Sai Pranav
 
     This program is free software: you can redistribute it and/or modify
