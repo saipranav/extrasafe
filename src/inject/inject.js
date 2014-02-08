@@ -1,11 +1,20 @@
-var inputFields = new Array();
+var noInputFields = 0;
 
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new text box (master password) before.
 //On hover of password fields it shows the password fields on 2 second gap.
 $("input[type='password']").each(function(){
-	$(this).before('<input type="password" id="master_password" placeholder="Master Password"></input>');
-	inputFields.push($(this));
+	noInputFields++;
+	var passwordPosition = $(this).position();
+	var passwordHeight = $(this).height();
+	var passwordWidth = $(this).outerWidth();
+	window.alert(passwordWidth+" "+passwordHeight);
+	var masterPasswordDiv = $('<div class="masterPasswordDiv" style="top:'+passwordPosition.top+'px; left:'+passwordPosition.left+'px; height:'+passwordHeight+'px; width:'+passwordWidth+'px" ></div>');
+	var close = $('<div class="close"></div>');
+	masterPasswordDiv.append($('<input type="password" class="masterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>'));
+	masterPasswordDiv.append(close);
+	$(document.body).append(masterPasswordDiv);
+	$(this).addClass(""+noInputFields);
 });
 
 //Single message handler function to handle messages from content scripts.
@@ -13,21 +22,24 @@ $("input[type='password']").each(function(){
 chrome.runtime.onMessage.addListener(function(message){
 	//To rerun the DOM modifications.
 	if(message.result == "rerun input script"){
-		if(!$("#master_password").length){
+		if(!$(".masterPassword").length){
 			$("input[type='password']").each(function(){
-				$(this).before('<input type="password" id="master_password" placeholder="Master Password"></input>');
+				noInputFields++;
+				$(this).before('<input type="password" class="masterPassword" id="master_password'+noInputFields+'" placeholder="Master Password"></input>');
+				$(this).addClass(""+noInputFields);
 			});
 		}
 	}
+
 	//This is the password. Set in the password field.
 	else{
-		$("input[type='password']:not('#master_password')").each(function(){
+		$("."+message.fromInputField).each(function(){
 			$(this).val(message.result);
 		});
 	}
 });
 
 //For each keyup pass the master password to background.
-$("#master_password").keyup(function(){
-	chrome.runtime.sendMessage({ masterPassword: $("#master_password").val() });
+$(".masterPassword").keyup(function(){
+	chrome.runtime.sendMessage({ masterPassword: $(".master_password").val(), fromInputField: $(this).attr('inputField') });
 });

@@ -2,7 +2,7 @@
   "name": "ExtraSafe",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "One Master Password --> Different Password for Different Sites",
+  "description": "Just Remember one Master Password to generate Different Passwords for Different Sites . . We do NOT and will NEVER store your password any where.",
   "homepage_url": "http://www.extrasafe.in",
   "icons": {
     "16": "icons/icon16.png",
