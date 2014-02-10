@@ -1,11 +1,22 @@
 .masterPasswordDiv{
-	position:absolute !important;
-	z-index:100;
+	position: absolute !important;
+	z-index: 100;
 }
 
 .masterPassword{
 	height: 90% !important;
 	width: 90% !important;
-	margin-top: 1% !important;
-	margin-left: 1% !important;
+}
+
+.close{
+	height: 90%;
+	width: 7%;
+	float: right;
+	background: blue;
+}
+
+.open{
+	position: absolute !important;
+	z-index: 90;
+	background: red;
 }

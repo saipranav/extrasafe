@@ -2,20 +2,38 @@ var noInputFields = 0;
 
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new text box (master password) before.
-//On hover of password fields it shows the password fields on 2 second gap.
 $("input[type='password']").each(function(){
 	noInputFields++;
-	var passwordPosition = $(this).position();
-	var passwordHeight = $(this).height();
-	var passwordWidth = $(this).outerWidth();
-	window.alert(passwordWidth+" "+passwordHeight);
+
+	var passwordPosition = $(this).offset();
+	var passwordHeight = $(this).innerHeight();
+	var passwordWidth = $(this).innerWidth();
+	
 	var masterPasswordDiv = $('<div class="masterPasswordDiv" style="top:'+passwordPosition.top+'px; left:'+passwordPosition.left+'px; height:'+passwordHeight+'px; width:'+passwordWidth+'px" ></div>');
+	var masterPasswordField = $('<input type="password" class="masterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>');
+	masterPasswordDiv.append(masterPasswordField);
+
 	var close = $('<div class="close"></div>');
-	masterPasswordDiv.append($('<input type="password" class="masterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>'));
+	close.click(function(){
+		masterPasswordDiv.hide();
+	});
 	masterPasswordDiv.append(close);
+
 	$(document.body).append(masterPasswordDiv);
+
+	var openPosition = close.offset();
+	var openHeight = close.innerHeight();
+	var openWidth = close.innerWidth();
+
+	var open = $('<div class="open" inputField="'+$(this).closest("#master_password").attr('inputField')+'" style="top:'+openPosition.top+'px; left:'+openPosition.left+'px; height:'+openHeight+'px; width:'+openWidth+'px" ></div>');
+	open.click(function(){
+		masterPasswordDiv.show();
+	});
+	$(document.body).append(open);
+
 	$(this).addClass(""+noInputFields);
 });
+
 
 //Single message handler function to handle messages from content scripts.
 //Note: message.result is the only field in all messages.
