@@ -1,21 +1,21 @@
-.masterPasswordDiv{
+.extrasafeMasterPasswordDiv{
 	position: absolute !important;
 	z-index: 100;
 }
 
-.masterPassword{
+.extrasafeMasterPassword{
 	height: 90% !important;
 	width: 90% !important;
 }
 
-.close{
+.extrasafeClose{
 	height: 90%;
 	width: 7%;
 	float: right;
 	background: blue;
 }
 
-.open{
+.extrasafeOpen{
 	position: absolute !important;
 	z-index: 90;
 	background: red;
