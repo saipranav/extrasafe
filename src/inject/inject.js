@@ -6,11 +6,16 @@ $("input[type='password']").each(function(){
 	noInputFields++;
 
 	var passwordPosition = $(this).offset();
-	var passwordHeight = $(this).innerHeight();
-	var passwordWidth = $(this).innerWidth();
+	var passwordHeight = $(this).outerHeight(true);
+	/*var passwordWidth = $(this).innerWidth();*/
 	
-	var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+passwordPosition.top+'px; left:'+passwordPosition.left+'px; height:'+passwordHeight+'px; width:'+passwordWidth+'px" ></div>');
-	var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>');
+	/*var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+passwordPosition.top+'px; left:'+passwordPosition.left+'px; height:'+passwordHeight+'px; width:'+passwordWidth+'px" ></div>');
+	var masterPasswordField = $(this).clone(false);
+	masterPasswordField.addClass("extrasafeMasterPassword");
+	masterPasswordField.attr("id","master_password");
+	masterPasswordField.attr("inputField",""+noInputFields);
+	masterPasswordField.attr("placeholder","Master Password");
+	//var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>');
 	masterPasswordDiv.append(masterPasswordField);
 
 	var close = $('<div class="extrasafeClose"></div>');
@@ -29,7 +34,23 @@ $("input[type='password']").each(function(){
 	open.click(function(){
 		masterPasswordDiv.show();
 	});
-	$(document.body).append(open);
+	$(document.body).append(open);*/
+
+	var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight)+'px; left:'+passwordPosition.left+'px ">');
+	var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password" ></input>');
+
+	masterPasswordField.focusout(function(){
+		masterPasswordDiv.hide();
+	});
+	$(this).focus(function(){
+		masterPasswordDiv.show();
+		masterPasswordField.focus();
+	});
+
+	masterPasswordDiv.append(masterPasswordField);
+	masterPasswordDiv.hide();
+
+	$(document.body).append(masterPasswordDiv);
 
 	$(this).addClass(""+noInputFields);
 });
@@ -58,6 +79,6 @@ chrome.runtime.onMessage.addListener(function(message){
 });
 
 //For each keyup pass the master password to background.
-$("#master_password").keyup(function(){
+$(".extrasafeMasterPassword").keyup(function(){
 	chrome.runtime.sendMessage({ masterPassword: $(this).val(), fromInputField: $(this).attr('inputField') });
 });

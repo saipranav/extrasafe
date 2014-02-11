@@ -4,19 +4,5 @@
 }
 
 .extrasafeMasterPassword{
-	height: 90% !important;
-	width: 90% !important;
-}
-
-.extrasafeClose{
-	height: 90%;
-	width: 7%;
-	float: right;
-	background: blue;
-}
-
-.extrasafeOpen{
-	position: absolute !important;
-	z-index: 90;
-	background: red;
+	
 }
