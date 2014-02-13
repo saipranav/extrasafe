@@ -1,8 +1,19 @@
 .extrasafeMasterPasswordDiv{
 	position: absolute !important;
-	z-index: 100;
+	z-index: 1000;
+	padding: 0.5% 3% 0.5% 0.5%;
+	background: #F5F5F5;
+	border: 1px solid #4169E1;
+	box-shadow: 0px 0px 20px #151515;
 }
 
 .extrasafeMasterPassword{
-	
+	border: none !important;
+}
+
+.extrasafeClose{
+	background: green;
+	height: 20px;
+	width: 20px;
+	float: right;
 }

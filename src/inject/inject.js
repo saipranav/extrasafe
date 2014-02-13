@@ -1,59 +1,54 @@
-var noInputFields = 0;
+var globalNoInputFields = 0;
 
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new text box (master password) before.
 $("input[type='password']").each(function(){
-	noInputFields++;
+	globalNoInputFields++;
 
-	var passwordPosition = $(this).offset();
-	var passwordHeight = $(this).outerHeight(true);
-	/*var passwordWidth = $(this).innerWidth();*/
-	
-	/*var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+passwordPosition.top+'px; left:'+passwordPosition.left+'px; height:'+passwordHeight+'px; width:'+passwordWidth+'px" ></div>');
-	var masterPasswordField = $(this).clone(false);
-	masterPasswordField.addClass("extrasafeMasterPassword");
-	masterPasswordField.attr("id","master_password");
-	masterPasswordField.attr("inputField",""+noInputFields);
-	masterPasswordField.attr("placeholder","Master Password");
-	//var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password"></input>');
-	masterPasswordDiv.append(masterPasswordField);
+	var originalPassword = $(this);
+	var passwordPosition = originalPassword.offset();
+	var passwordHeight = originalPassword.outerHeight(true);
 
-	var close = $('<div class="extrasafeClose"></div>');
-	close.click(function(){
+	var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
+	var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
+	 
+	masterPasswordDiv.focusout(function(){
 		masterPasswordDiv.hide();
-	});
-	masterPasswordDiv.append(close);
-
-	$(document.body).append(masterPasswordDiv);
-
-	var openPosition = close.offset();
-	var openHeight = close.innerHeight();
-	var openWidth = close.innerWidth();
-
-	var open = $('<div class="extrasafeOpen" inputField="'+$(this).closest("#master_password").attr('inputField')+'" style="top:'+openPosition.top+'px; left:'+openPosition.left+'px; height:'+openHeight+'px; width:'+openWidth+'px" ></div>');
-	open.click(function(){
-		masterPasswordDiv.show();
-	});
-	$(document.body).append(open);*/
-
-	var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight)+'px; left:'+passwordPosition.left+'px ">');
-	var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+noInputFields+'" placeholder="Master Password" ></input>');
-
-	masterPasswordField.focusout(function(){
-		masterPasswordDiv.hide();
-	});
-	$(this).focus(function(){
-		masterPasswordDiv.show();
-		masterPasswordField.focus();
 	});
 
 	masterPasswordDiv.append(masterPasswordField);
 	masterPasswordDiv.hide();
 
+	var toggleFocus = function(){
+		masterPasswordDiv.show();
+		masterPasswordField.focus();
+	}
+
+	$(this).on("focus",toggleFocus);
+
+	$(this).on("classToggled",function(){
+		if($(this).hasClass('enableExtrasafe')){
+			$(this).on("focus",toggleFocus);
+		}
+		else if($(this).hasClass('disableExtrasafe')){
+			$(this).off("focus");
+		}
+	});
+
 	$(document.body).append(masterPasswordDiv);
 
-	$(this).addClass(""+noInputFields);
+	originalPassword.addClass(""+globalNoInputFields);
+	originalPassword.addClass('enableExtrasafe');
+
 });
+
+//$(".enableExtrasafe").each(function(){
+//	$(this).on( 'focus', $(this).toggleFocus );
+//});
+//
+//$(".disableExtrasafe").each(function(){
+//	$(this).off('focus');
+//});
 
 
 //Single message handler function to handle messages from content scripts.
@@ -63,11 +58,25 @@ chrome.runtime.onMessage.addListener(function(message){
 	if(message.result == "rerun input script"){
 		if(!$(".extrasafeMasterPassword").length){
 			$("input[type='password']").each(function(){
-				noInputFields++;
-				$(this).before('<input type="password" class="extrasafeMasterPassword" id="master_password'+noInputFields+'" placeholder="Master Password"></input>');
-				$(this).addClass(""+noInputFields);
+				globalNoInputFields++;
+				$(this).before('<input type="password" class="extrasafeMasterPassword" id="master_password'+globalNoInputFields+'" placeholder="Master Password"></input>');
+				$(this).addClass(""+globalNoInputFields);
 			});
 		}
+	}
+
+	//disable password div
+	else if(message.result == "disable password div"){
+		$("input[type='password']:not('.extrasafeMasterPassword')").removeClass('enableExtrasafe');
+		$("input[type='password']:not('.extrasafeMasterPassword')").addClass('disableExtrasafe');
+		$("input[type='password']:not('.extrasafeMasterPassword')").trigger('classToggled');
+	}
+
+	//enable password div
+	else if(message.result == "enable password div"){
+		$("input[type='password']:not('.extrasafeMasterPassword')").removeClass('disableExtrasafe');
+		$("input[type='password']:not('.extrasafeMasterPassword')").addClass('enableExtrasafe');
+		$("input[type='password']:not('.extrasafeMasterPassword')").trigger('classToggled');
 	}
 
 	//This is the password. Set in the password field.

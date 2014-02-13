@@ -23,5 +23,8 @@
       "all_frames" : true
     }
   ],
+  "page_action": {
+	"default_icon": "icon19.png"
+  },
   "minimum_chrome_version": "20"
 }
