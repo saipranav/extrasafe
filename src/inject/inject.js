@@ -11,12 +11,32 @@ $("input[type='password']").each(function(){
 
 	var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
 	var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
-	 
+	var images = $('<span class="images"></span>');
+	var showPassword = $('<img class="extrasafeUnmask" src="'+chrome.extension.getURL("icons/Unmask16.png")+'"></img>');
+	var extrasafeIcon = $('<img class="extrasafeIcon" src="'+chrome.extension.getURL("icons/Extrasafe16.png")+'"></img>');
+	
+	images.append(showPassword);
+	images.append(extrasafeIcon);
+
 	masterPasswordDiv.focusout(function(){
 		masterPasswordDiv.hide();
 	});
+	masterPasswordField.keypress(function(e){
+		if(e.keyCode == 13){
+			chrome.runtime.sendMessage({ masterPassword: $(this).val(), fromInputField: masterPasswordField.attr('inputField') });
+			masterPasswordDiv.hide();
+			originalPassword.closest("form").submit();
+		}
+	});
+	showPassword.mouseenter(function(){
+		masterPasswordField.attr('type','text');
+	});
+	showPassword.mouseleave(function(){
+		masterPasswordField.attr('type','password');
+	});
 
 	masterPasswordDiv.append(masterPasswordField);
+	masterPasswordDiv.append(images);
 	masterPasswordDiv.hide();
 
 	var toggleFocus = function(){
@@ -30,8 +50,8 @@ $("input[type='password']").each(function(){
 		if($(this).hasClass('enableExtrasafe')){
 			$(this).on("focus",toggleFocus);
 		}
-		else if($(this).hasClass('disableExtrasafe')){
-			$(this).off("focus");
+	else if($(this).hasClass('disableExtrasafe')){
+		$(this).off("focus");
 		}
 	});
 
@@ -42,15 +62,6 @@ $("input[type='password']").each(function(){
 
 });
 
-//$(".enableExtrasafe").each(function(){
-//	$(this).on( 'focus', $(this).toggleFocus );
-//});
-//
-//$(".disableExtrasafe").each(function(){
-//	$(this).off('focus');
-//});
-
-
 //Single message handler function to handle messages from content scripts.
 //Note: message.result is the only field in all messages.
 chrome.runtime.onMessage.addListener(function(message){
@@ -58,9 +69,63 @@ chrome.runtime.onMessage.addListener(function(message){
 	if(message.result == "rerun input script"){
 		if(!$(".extrasafeMasterPassword").length){
 			$("input[type='password']").each(function(){
+				//copy the inject code
 				globalNoInputFields++;
-				$(this).before('<input type="password" class="extrasafeMasterPassword" id="master_password'+globalNoInputFields+'" placeholder="Master Password"></input>');
-				$(this).addClass(""+globalNoInputFields);
+				
+					var originalPassword = $(this);
+					var passwordPosition = originalPassword.offset();
+					var passwordHeight = originalPassword.outerHeight(true);
+
+					var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
+					var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
+					var images = $('<span class="images"></span>');
+					var showPassword = $('<img class="extrasafeUnmask" src="'+chrome.extension.getURL("icons/Unmask16.png")+'"></img>');
+					var extrasafeIcon = $('<img class="extrasafeIcon" src="'+chrome.extension.getURL("icons/Extrasafe16.png")+'"></img>');
+	
+					images.append(showPassword);
+					images.append(extrasafeIcon);
+
+					masterPasswordDiv.focusout(function(){
+						masterPasswordDiv.hide();
+					});
+					masterPasswordField.keypress(function(e){
+						if(e.keyCode == 13){
+							chrome.runtime.sendMessage({ masterPassword: $(this).val(), fromInputField: masterPasswordField.attr('inputField') });
+							masterPasswordDiv.hide();
+							originalPassword.closest("form").submit();
+						}
+					});
+					showPassword.mouseenter(function(){
+						masterPasswordField.attr('type','text');
+					});
+					showPassword.mouseleave(function(){
+						masterPasswordField.attr('type','password');
+					});
+
+					masterPasswordDiv.append(masterPasswordField);
+					masterPasswordDiv.append(images);
+					masterPasswordDiv.hide();
+
+					var toggleFocus = function(){
+						masterPasswordDiv.show();
+						masterPasswordField.focus();
+					}
+
+					$(this).on("focus",toggleFocus);
+
+					$(this).on("classToggled",function(){
+						if($(this).hasClass('enableExtrasafe')){
+							$(this).on("focus",toggleFocus);
+						}
+					else if($(this).hasClass('disableExtrasafe')){
+						$(this).off("focus");
+						}
+					});
+
+					$(document.body).append(masterPasswordDiv);
+
+					originalPassword.addClass(""+globalNoInputFields);
+					originalPassword.addClass('enableExtrasafe');
 			});
 		}
 	}

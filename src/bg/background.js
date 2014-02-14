@@ -74,12 +74,12 @@ chrome.pageAction.onClicked.addListener(function togglePasswordDiv(){
 	chrome.pageAction.getTitle({tabId: currentTab.id}, function toggleTitle(title){
 		if(title == "Click to disable extrasafe in this site"){
 			chrome.tabs.sendMessage(currentTab.id,{result:"disable password div"});
-			chrome.pageAction.setIcon({tabId: currentTab.id, path:"icon19.png"});
+			chrome.pageAction.setIcon({tabId: currentTab.id, path:"icons/Extrasafe_red19.png"});
 			chrome.pageAction.setTitle({tabId: currentTab.id,title: "Click to enable extrasafe in this site"});
 		}
 		else{
 			chrome.tabs.sendMessage(currentTab.id,{result:"enable password div"});
-			chrome.pageAction.setIcon({tabId: currentTab.id, path:"icon19.png"});
+			chrome.pageAction.setIcon({tabId: currentTab.id, path:"icons/Extrasafe19.png"});
 			chrome.pageAction.setTitle({tabId: currentTab.id,title: "Click to disable extrasafe in this site"});
 		}
 	});
