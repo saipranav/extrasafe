@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Extrasafe</title>
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<nav>
+		<span id="logo">
+			<img src="images/ExtrasafeIconText.png">
+		</span>
+		<ul>
+			<li>Home</li>
+			<li>Know More</li>
+			<li>Downloads</li>
+			<li>About</li>
+		</ul>
+	</nav>
+	<section id="home">
+		<div id="page1" class="page">	
+			<heading>Are you lazy in remembering <b>different</b> secured passwords for different sites?</heading>
+			<br>
+			<heading>How about remembering one master password to generate different secured passwords for different sites on the fly!</heading>
+			<p>Here is a demo of Extrasafe, Hover on sites to see passwords generated from the <b>same</b> Master Password.</p>
+		</div>
+		<div id="container" class="container">
+			<ul id="scene" class="scene">
+				<li class="layer" id="extrasafeIcon" data-depth="0.00"><img src="images/Extrasafe512.png"></img></li>
+				<li class="layer" id="amazonIcon" data-depth="0.80"><img src="images/amazonicon.png"></img></li>
+				<li class="layer" id="appleIcon" data-depth="0.70"><img src="images/appleicon.png"></img></li>
+				<li class="layer" id="evernoteIcon" data-depth="0.50"><img src="images/evernoteicon.png"></img></li>
+				<li class="layer" id="facebookIcon" data-depth="0.60"><img src="images/facebookicon.png"></img></li>
+				<li class="layer" id="googleIcon" data-depth="0.50"><img src="images/googleicon.png"></img></li>
+				<li class="layer" id="instagramIcon" data-depth="0.40"><img src="images/instagramicon.png"></img></li>
+				<li class="layer" id="linkedinIcon" data-depth="0.60"><img src="images/linkedinicon.png"></img></li>
+				<li class="layer" id="pinterestIcon" data-depth="0.70"><img src="images/pinteresticon.png"></img></li>
+				<li class="layer" id="twitterIcon" data-depth="0.80"><img src="images/twittericon.png"></img></li>
+				<li class="layer" id="wordpressIcon" data-depth="0.90"><img src="images/wordpressicon.png"></img></li>
+				<li class="layer" id="yahooIcon" data-depth="1.00"><img src="images/yahooicon.png"></img></li>
+			</ul>
+			<img id="MasterPassword" class="sceneText" src="images/masterpassword.png"></img>
+			<img id="Amazon" class="sceneText" src="images/amazon.png"></img>
+			<img id="Apple" class="sceneText" src="images/apple.png"></img>
+			<img id="Evernote" class="sceneText" src="images/evernote.png"></img>
+			<img id="Facebook" class="sceneText" src="images/facebook.png"></img>
+			<img id="Google" class="sceneText" src="images/google.png"></img>
+			<img id="Instagram" class="sceneText" src="images/instagram.png"></img>
+			<img id="Linkedin" class="sceneText" src="images/linkedin.png"></img>
+			<img id="Pinterest" class="sceneText" src="images/pinterest.png"></img>
+			<img id="Twitter" class="sceneText" src="images/twitter.png"></img>
+			<img id="Wordpress" class="sceneText" src="images/wordpress.png"></img>
+			<img id="Yahoo" class="sceneText" src="images/yahoo.png"></img>
+		</div>
+		<div id="page2" class="page">
+			<heading><b>Why</b> should you use Extrasafe</heading>
+			<ul>
+				<li class="usePoint">
+					You are safe
+					<p>blah blah</p>
+				</li>
+				<li class="usePoint">
+					You are safe
+					<p>blah blah</p>
+				</li>
+			</ul>
+			<heading><b>How</b> to use Extrasafe</heading>
+			<div id="howToUse">
+				<img class="shown" src="images/howToUse1.png"></img>
+				<img src="images/howToUse2.png"></img>
+			</div>
+		</div>
+		<div id="page3" class="page">
+			
+		</div>
+	</section>
+
+	<section id="knowMore">
+		
+	</section>
+
+	<!-- Scripts -->
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/parallax.js"></script>
+	<script>
+	var scene = document.getElementById('scene');
+	var parallax = new Parallax(scene);
+	</script>
+	<script src="scripts/script.js"></script>
+</body>
+</html>
