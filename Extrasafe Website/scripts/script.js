@@ -162,5 +162,3 @@ $(".usePoint").hover(
 		$(this).children("p").css("opacity","0.5");
 	}
 );
-
-#("")
