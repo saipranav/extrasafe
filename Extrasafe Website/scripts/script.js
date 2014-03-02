@@ -162,3 +162,8 @@ $(".usePoint").hover(
 		$(this).children("p").css("opacity","0.5");
 	}
 );
+
+$("#homeButton").click(function(){$("body").scrollTop(0);});
+$("#knowMoreButton").click(function(){$("body").scrollTop(1660);});
+$("#installButton").click(function(){$("body").scrollTop(2700);});
+$("#aboutButton").click(function(){$("body").scrollTop(2800);});

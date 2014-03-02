@@ -89,7 +89,7 @@ nav>ul>li:hover{
 
 #page2{
 	background: #FFFFFF;
-	height: 150%;
+	height: 130%;
 }
 
 #page2>ul{
@@ -108,8 +108,8 @@ nav>ul>li:hover{
 	transition: all 0.2s ease-in-out;
 }
 
-#page2>#howToUse{
-	height: 47%;
+#page3>#howToUse{
+	height: 76%;
 	width: 67%;
 	padding: 1%;
 	box-shadow: 0px 0px 10px 5px #151515 inset;
@@ -120,7 +120,7 @@ nav>ul>li:hover{
 	background: #002f75;
 }
 
-#page2>#howToUse>iframe{
+#page3>#howToUse>iframe{
 	width: 800px;
 	height: 461px;
 }
@@ -150,8 +150,9 @@ nav>ul>li:hover{
 	width: auto;
 	padding: 2% 4%;
 	margin: 2%;
-	border-radius: 5%;
-	transition: all 0.25s ease;
+	border-radius: 10%;
+	transition: all 0.5s ease;
+	background: rgba(245,245,245,0.3);
 }
 
 #page4>ul>li:nth-child(1){
