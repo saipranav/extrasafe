@@ -109,20 +109,20 @@ nav>ul>li:hover{
 }
 
 #page3>#howToUse{
-	height: 76%;
+	height: 69%;
 	width: 67%;
 	padding: 1%;
 	box-shadow: 0px 0px 10px 5px #151515 inset;
 	margin-top: 3%;
 	margin-bottom: 0.5%;
-	margin-left: 15%;
-	margin-right: 15%;
+	margin-left: 16%;
+	margin-right: 16%;
 	background: #002f75;
 }
 
 #page3>#howToUse>iframe{
-	width: 800px;
-	height: 461px;
+	width: 100%;
+	height: 100%;
 }
 
 #page3>ul{
