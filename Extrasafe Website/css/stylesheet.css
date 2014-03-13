@@ -230,6 +230,7 @@ nav>ul>li:hover{
 
 #page4>#inProgress>input[type="button"]:hover{
 	background: #006400;
+	cursor: pointer;
 }
 
 #page5>ul{
