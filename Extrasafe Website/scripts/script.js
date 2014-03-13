@@ -167,6 +167,7 @@ $(".usePoint").hover(
 $("#firefox").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
+	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Firefox. Try for Chrome [NEW]");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("firefox",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -176,7 +177,8 @@ $("#firefox").click(function(){
 			}
 			else{
 				$("#inProgress>#invite").val("You are already in the list");
-				$("#inProgress>#invite").css("background", "#B20000");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
 			}
 		}, 1000);
 	});
@@ -185,6 +187,7 @@ $("#firefox").click(function(){
 $("#internetExplorer").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
+	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for IE. Try for Chrome [NEW]");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("internetExplorer",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -194,7 +197,8 @@ $("#internetExplorer").click(function(){
 			}
 			else{
 				$("#inProgress>#invite").val("You are already in the list");
-				$("#inProgress>#invite").css("background", "#B20000");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
 			}
 		}, 1000);
 	});
@@ -203,6 +207,7 @@ $("#internetExplorer").click(function(){
 $("#safari").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
+	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Safari. Try for Chrome [NEW]");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("safari",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -212,7 +217,8 @@ $("#safari").click(function(){
 			}
 			else{
 				$("#inProgress>#invite").val("You are already in the list");
-				$("#inProgress>#invite").css("background", "#B20000");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
 			}
 		}, 1000);
 	});
@@ -221,6 +227,7 @@ $("#safari").click(function(){
 $("#opera").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
+	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Opera. Try for Chrome [NEW]");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("opera",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -230,7 +237,8 @@ $("#opera").click(function(){
 			}
 			else{
 				$("#inProgress>#invite").val("You are already in the list");
-				$("#inProgress>#invite").css("background", "#B20000");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
 			}
 		}, 1000);
 	});
