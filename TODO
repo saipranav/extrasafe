@@ -1,7 +1,2 @@
-7 FEB 2014
-
-	Inject css so that it does'nt kill the sites like twitter or facebook.
-	Check the Zomato site for password generation.
-	Change the special character injection algorithm.
-	Create the site for Extrasafe.
-	Create a logo.
+Check the Zomato site, IRCTC for password generation.
+Change the special character injection algorithm in special case.
