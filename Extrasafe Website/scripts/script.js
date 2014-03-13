@@ -10,6 +10,7 @@ $("#Pinterest").hide();
 $("#Twitter").hide();
 $("#Wordpress").hide();
 $("#Yahoo").hide();
+$("#inProgress").hide();
 
 $("#container").hover(function(){
 	$("#MasterPassword").show();
@@ -163,7 +164,81 @@ $(".usePoint").hover(
 	}
 );
 
-$("#homeButton").click(function(){$("body").scrollTop(0);});
-$("#knowMoreButton").click(function(){$("body").scrollTop(1660);});
-$("#installButton").click(function(){$("body").scrollTop(2700);});
-$("#aboutButton").click(function(){$("body").scrollTop(2800);});
+$("#firefox").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("firefox",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#B20000");
+			}
+		}, 1000);
+	});
+});
+
+$("#internetExplorer").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("internetExplorer",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#B20000");
+			}
+		}, 1000);
+	});
+});
+
+$("#safari").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("safari",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#B20000");
+			}
+		}, 1000);
+	});
+});
+
+$("#opera").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("opera",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#B20000");
+			}
+		}, 1000);
+	});
+});
+
+
+
+$("#homeButton").click(function(){$("body").scrollTop( $("#home").offset().top );});
+$("#knowMoreButton").click(function(){$("body").scrollTop( $("#knowMore").offset().top-100  );});
+$("#installButton").click(function(){$("body").scrollTop( $("#install").offset().top-100  );});
+$("#aboutButton").click(function(){$("body").scrollTop( $("#about").offset().top-100  );});

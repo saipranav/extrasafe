@@ -89,7 +89,6 @@ nav>ul>li:hover{
 
 #page2{
 	background: #FFFFFF;
-	height: 130%;
 }
 
 #page2>ul{
@@ -193,6 +192,44 @@ nav>ul>li:hover{
 
 #page4>ul>li:hover:nth-child(5){
 	box-shadow: 0 3px 2px -2px #B80C0C;
+}
+
+#page4>#inProgress{
+	background: rgba(245,245,245,0.3);
+	border-radius: 5%;
+	padding: 1% 5%;
+	height: 8%;
+	width: 90%;	
+}
+
+#page4>#inProgress>input{
+	height: 60%;
+	width: 18%;
+	display: inline;
+}
+
+#page4>#inProgress>input[type="text"]{
+	outline: none;
+	border: 1px solid #808080;
+	padding: 0.5%;
+	transition: all 0.25s ease;
+}
+
+#page4>#inProgress>input[type="text"]:focus{
+	border-color: #37A5E4;
+	box-shadow: 0px 0px 10px #37A5E4;
+}
+
+#page4>#inProgress>input[type="button"]{
+	outline: none;
+	border: none;
+	transition: all 0.25s ease;
+	background: #008000;
+	color: #FFFFFF;
+}
+
+#page4>#inProgress>input[type="button"]:hover{
+	background: #006400;
 }
 
 #page5>ul{
