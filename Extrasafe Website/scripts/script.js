@@ -11,6 +11,7 @@ $("#Twitter").hide();
 $("#Wordpress").hide();
 $("#Yahoo").hide();
 $("#inProgress").hide();
+$(".usePoint>p").hide();
 
 $("#container").hover(function(){
 	$("#MasterPassword").show();
@@ -156,18 +157,18 @@ $("#yahooIcon").mousemove(function(e){
 
 $(".usePoint").hover(
 	function(){
-		$(this).children("p").css("opacity","1.0");	
+		$(this).children("p").show("slow");	
 	}
 	,
 	function(){
-		$(this).children("p").css("opacity","0.5");
+		$(this).children("p").hide("slow");
 	}
 );
 
 $("#firefox").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
-	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Firefox. Try for Chrome [NEW]");
+	$("#inProgress>span>#thisBrowser").html("Firefox");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("firefox",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -187,7 +188,7 @@ $("#firefox").click(function(){
 $("#internetExplorer").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
-	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for IE. Try for Chrome [NEW]");
+	$("#inProgress>span>#thisBrowser").html("IE");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("internetExplorer",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -207,7 +208,7 @@ $("#internetExplorer").click(function(){
 $("#safari").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
-	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Safari. Try for Chrome [NEW]");
+	$("#inProgress>span>#thisBrowser").html("Safari");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("safari",$("#inProgress>#email").val());
 		setTimeout(function(){
@@ -227,9 +228,49 @@ $("#safari").click(function(){
 $("#opera").click(function(){
 	$("#inProgress>#invite").off("click");
 	$("#inProgress").show();
-	$("#inProgress>span").html("We will get back to you once we have crafted Extrasafe for Opera. Try for Chrome [NEW]");
+	$("#inProgress>span>#thisBrowser").html("Opera");
 	$("#inProgress>#invite").click(function(){
 		Couch.updateDB("opera",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
+			}
+		}, 1000);
+	});
+});
+
+$("#playStore").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>span>#thisBrowser").html("Android Phones");
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("playStore",$("#inProgress>#email").val());
+		setTimeout(function(){
+			if(Couch.result == "true"){
+				$("#inProgress>#invite").val("Thank You");
+				$("#inProgress>#invite").css("background", "#008000");
+			}
+			else{
+				$("#inProgress>#invite").val("You are already in the list");
+				$("#inProgress>#invite").css("background", "#FF8C00");
+				$("#inProgress>#invite").css("color", "#151515");
+			}
+		}, 1000);
+	});
+});
+
+$("#appleStore").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").show();
+	$("#inProgress>span>#thisBrowser").html("Apple Phones");
+	$("#inProgress>#invite").click(function(){
+		Couch.updateDB("appleStore",$("#inProgress>#email").val());
 		setTimeout(function(){
 			if(Couch.result == "true"){
 				$("#inProgress>#invite").val("Thank You");

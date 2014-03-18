@@ -98,13 +98,12 @@ nav>ul>li:hover{
 #page2>ul>.usePoint{
 	margin-bottom: 3%;
 	font-size: 1.75em;
+	transition: all 2s ease-in-out;
 }
 
 #page2>ul>.usePoint>p{
 	font-size: .75em;
-	opacity: 0.5;
 	margin-left: 2%;
-	transition: all 0.2s ease-in-out;
 }
 
 #page3>#howToUse{
@@ -154,44 +153,74 @@ nav>ul>li:hover{
 	background: rgba(245,245,245,0.3);
 }
 
-#page4>ul>li:nth-child(1){
+#page4>ul>li>a{
+	text-decoration:none;
+	color: #000000;
+}
+
+#page4>ul>li#firefox{
 	box-shadow: 0 10px 2px -2px #D55613;
 }
 
-#page4>ul>li:hover:nth-child(1){
+#page4>ul>li#firefox:hover{
 	box-shadow: 0 3px 2px -2px #D55613;
 }
 
-#page4>ul>li:nth-child(2){
+#page4>ul>li#chrome{
 	box-shadow: 0 10px 2px -2px #4BB547;
 }
 
-#page4>ul>li:hover:nth-child(2){
+#page4>ul>li#chrome:hover{
 	box-shadow: 0 3px 2px -2px #4BB547;
 }
 
-#page4>ul>li:nth-child(3){
+#page4>ul>li#internetExplorer{
 	box-shadow: 0 10px 2px -2px #37A5E4;
 }
 
-#page4>ul>li:hover:nth-child(3){
+#page4>ul>li#internetExplorer:hover{
 	box-shadow: 0 3px 2px -2px #37A5E4;
 }
 
-#page4>ul>li:nth-child(4){
+#page4>ul>li#safari{
 	box-shadow: 0 10px 2px -2px #AEBFC6;
 }
 
-#page4>ul>li:hover:nth-child(4){
+#page4>ul>li#safari:hover{
 	box-shadow: 0 3px 2px -2px #AEBFC6;
 }
 
-#page4>ul>li:nth-child(5){
+#page4>ul>li#opera{
 	box-shadow: 0 10px 2px -2px #B80C0C;
 }
 
-#page4>ul>li:hover:nth-child(5){
+#page4>ul>li#opera:hover{
 	box-shadow: 0 3px 2px -2px #B80C0C;
+}
+
+#page4>ul>li#playStore{
+	margin-left: 18.75%;
+	box-shadow: 0 10px 2px -2px #AA39BD;
+}
+
+#page4>ul>li#playStore:hover{
+	box-shadow: 0 3px 2px -2px #AA39BD;
+}
+
+#page4>ul>li#appleStore{
+	box-shadow: 0 10px 2px -2px #303135;
+}
+
+#page4>ul>li#appleStore:hover{
+	box-shadow: 0 3px 2px -2px #303135;
+}
+
+#page4>ul>li#portable{
+	box-shadow: 0 10px 2px -2px #FFA500;
+}
+
+#page4>ul>li#portable:hover{
+	box-shadow: 0 3px 2px -2px #FFA500;
 }
 
 #page4>#inProgress{
@@ -300,4 +329,16 @@ nav>ul>li:hover{
 
 .sceneText{
 	position: absolute;
+}
+
+#share-buttons {
+	float: right;
+}
+
+#share-buttons img {
+width: 35px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
 }
