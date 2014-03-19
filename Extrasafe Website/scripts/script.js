@@ -183,6 +183,23 @@ $("#firefox").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'firefox');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
+});
+
+$("#chrome").click(function(){
+	$("#inProgress>#invite").off("click");
+	$("#inProgress").hide();
+	try{
+		ga('send', 'event', 'button', 'click', 'chrome');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 $("#internetExplorer").click(function(){
@@ -203,6 +220,12 @@ $("#internetExplorer").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'internet explorer');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 $("#safari").click(function(){
@@ -223,6 +246,12 @@ $("#safari").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'safari');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 $("#opera").click(function(){
@@ -243,6 +272,12 @@ $("#opera").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'opera');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 $("#playStore").click(function(){
@@ -263,6 +298,12 @@ $("#playStore").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'play store');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 $("#appleStore").click(function(){
@@ -283,6 +324,21 @@ $("#appleStore").click(function(){
 			}
 		}, 1000);
 	});
+	try{
+		ga('send', 'event', 'button', 'click', 'apple store');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
+});
+
+$("#portable").click(function(){
+	try{
+		ga('send', 'event', 'button', 'click', 'portable');
+	}
+	catch(e){
+		console.log("google analytics not installed properly");
+	}
 });
 
 
