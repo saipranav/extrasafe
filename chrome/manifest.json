@@ -29,6 +29,5 @@
   ],
   "page_action": {
 	"default_icon": "icons/Extrasafe19.png"
-  },
-  "minimum_chrome_version": "20"
+  }
 }
