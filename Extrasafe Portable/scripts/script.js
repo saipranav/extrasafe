@@ -1,7 +1,6 @@
 $("#helpSiteName").hide();
 $("#helpMasterPassword").hide();
 $("#helpExtrasafe").hide();
-$("#copied").hide();
 
 $("#siteName").hover(function(){
 	$("#helpSiteName").show();
@@ -25,6 +24,12 @@ $("#extrasafePassword").hover(function(){
 ,
 function(){
 	$("#helpExtrasafe").hide();
+});
+
+$("#showPassword").hover(function(){
+	$("#masterPassword").attr("type","text");
+},function(){
+	$("#masterPassword").attr("type","password");
 });
 
 $("#generate").click(function(){

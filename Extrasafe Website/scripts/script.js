@@ -157,11 +157,11 @@ $("#yahooIcon").mousemove(function(e){
 
 $(".usePoint").hover(
 	function(){
-		$(this).children("p").show("slow");	
+		$(this).children("p").show(500);	
 	}
 	,
 	function(){
-		$(this).children("p").hide("slow");
+		$(this).children("p").hide(1000);
 	}
 );
 
