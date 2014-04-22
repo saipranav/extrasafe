@@ -225,7 +225,7 @@ nav>ul>li:hover{
 }
 
 #page4>#inProgress{
-	background: #8B008B;
+	background: rgba(245,245,245,0.8);
 	border-radius: 5%;
 	padding: 1% 5%;
 	height: 8%;
