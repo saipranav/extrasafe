@@ -1,0 +1,12 @@
+.options{
+	margin: auto auto;
+	margin-top: 10%;
+	height: 50%;
+	width: 50%;
+	box-shadow: 0px 0px 10px #151515;
+}
+
+.alert{
+	display: block;
+	border: 2px solid red;
+}

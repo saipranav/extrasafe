@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Just Remember one Master Password to generate Different Passwords for Different Sites . . We do NOT and will NEVER store your password any where.",
-  "homepage_url": "http://www.extrasafe.in",
+  "homepage_url": "http://saipranav.github.io/extrasafe",
   "icons": {
     "16": "icons/Extrasafe16.png",
     "48": "icons/Extrasafe48.png",
@@ -27,7 +27,8 @@
 	"icons/Unmask16.png",
 	"icons/Extrasafe16.png"
   ],
-  "page_action": {
-	"default_icon": "icons/Extrasafe19.png"
+  "browser_action": {
+	   "default_icon": "icons/Extrasafe19.png",
+     "default_title": "Click to disable extrasafe"
   }
 }

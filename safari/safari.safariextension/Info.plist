@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Sai Pranav</string>
+	<key>Builder Version</key>
+	<string>534.57.2</string>
+	<key>CFBundleDisplayName</key>
+	<string>safari</string>
+	<key>CFBundleIdentifier</key>
+	<string>saipranav.extrasafe.safari</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>src/bg/background.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>disable</string>
+				<key>Identifier</key>
+				<string>extrasafeButton</string>
+				<key>Image</key>
+				<string>icons/Extrasafe16.png</string>
+				<key>Label</key>
+				<string>Extrasafe</string>
+				<key>Tool Tip</key>
+				<string>Click to disable extrasafe in this site</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>js/jquery.min.js</string>
+				<string>src/inject/inject.js</string>
+			</array>
+		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>src/inject/inject.css</string>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Just remember one master password to generate different passwords for different sites without storing</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://saipranav.github.io/extrasafe</string>
+</dict>
+</plist>
