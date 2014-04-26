@@ -13,7 +13,7 @@ Hasher = {
 	
 	//Call the crypto graphic algorithm.
 	hashy: function(){	
-			Hasher.password = CryptoJS.SHA3( Hasher.masterPassword + Hasher.siteTag ).toString();
+			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword ).toString();
 			},
 
 	//It will be called after the Crypto returns.

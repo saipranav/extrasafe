@@ -62,6 +62,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 			if(siteTag.indexOf("://") > 0){
 				siteTag = siteTag.substr( siteTag.indexOf("://")+3, siteTag.length );
 			}
+			window.alert(siteTag);
 		});
 	}
 });

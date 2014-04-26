@@ -182,6 +182,7 @@ chrome.runtime.onMessage.addListener(function(message){
 	else{
 		$("."+message.fromInputField).each(function(){
 			$(this).val(message.result);
+			window.alert($(this).val());
 		});
 	}
 });

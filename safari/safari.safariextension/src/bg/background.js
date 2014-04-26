@@ -58,6 +58,7 @@ safari.application.addEventListener("navigate", function(event) {
 		if(siteTag.indexOf("://") > 0){
 			siteTag = siteTag.substr( siteTag.indexOf("://")+3, siteTag.length );
 		}
+		window.alert(siteTag);
 }, true);
 
 safari.application.addEventListener("command", function(event){
