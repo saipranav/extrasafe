@@ -61,7 +61,7 @@ Hasher = {
 	//Utility Helper methods - replaceAt(index to be replaced, character to be placed)
 	countNoAndChars: function() {
 					Hasher.noPos.length = Hasher.charPos.length = 0;
-					for(iterator=0;iterator<Hasher.password.length;iterator++) {
+					for(var iterator=0;iterator<Hasher.password.length;iterator++) {
 						if (!isNaN(parseInt(Hasher.password[iterator]))) {
 							Hasher.noPos[Hasher.noPos.length++]=iterator;
 						}
