@@ -2,14 +2,16 @@
 var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
+//Global variable to remember enabling and disabling
+var extrasafeDisabled = false;
 
 //For web pages containing login form dynamically generated through ajax.
 //This function listens to xmlhttprequests and reruns the DOM modification script in content script.
 chrome.webRequest.onCompleted.addListener(function(info){
-		/*chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-			chrome.tabs.sendMessage(tabs[0].id,{result:"rerun input script"});
-		});*/
 		chrome.tabs.sendMessage(info.tabId,{result:"rerun input script"});
+		if(extrasafeDisabled){
+			chrome.tabs.sendMessage(info.tabId, {result:"disable password div"});
+		}
 	},
 	{
 		urls: ["<all_urls>"],
@@ -30,15 +32,26 @@ chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 	chrome.browserAction.getTitle({},function(title){
 		if(title == "Click to disable extrasafe"){
 			broadcast({result:"disable password div"});
+			extrasafeDisabled = true;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe_red19.png"});
 			chrome.browserAction.setTitle({title: "Click to enable extrasafe"});
 		}
 		else{
 			broadcast({result:"enable password div"});
+			extrasafeDisabled = false;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe19.png"});
 			chrome.browserAction.setTitle({title: "Click to disable extrasafe"});
 		}
 	});
+});
+
+//To send disabled message to newly created or navigated when browser action is already disabled
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	if(extrasafeDisabled){
+		if(changeInfo.status == "complete"){
+			chrome.tabs.sendMessage(tabId, {result:"disable password div"});
+		}
+	}
 });
 
 function broadcast(message){

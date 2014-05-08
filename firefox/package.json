@@ -1,9 +1,12 @@
 {
-  "name": "firefox",
-  "title": "firefox",
+  "name": "extrasafe",
+  "title": "Extrasafe",
   "id": "jid1-tduaYdKe3PCdug",
-  "description": "a basic add-on",
-  "author": "",
+  "icon": "data/icons/Extrasafe16.png",
+  "permissions": {"private-browsing": true},
+  "homepage": "http://saipranav.github.io/extrasafe",
+  "description": "Just Remember one Master Password to generate Different Passwords for Different Sites. We do NOT and will NEVER store your password any where.",
+  "author": "Sai Pranav",
   "license": "MPL 2.0",
-  "version": "0.1"
+  "version": "1.0"
 }

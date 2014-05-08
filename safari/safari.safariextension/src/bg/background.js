@@ -2,10 +2,13 @@
 var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
+//Global variable to remember enabling and disabling
+var extrasafeDisabled = false;
 
-/*//For web pages containing login form dynamically generated through ajax.
+//For web pages containing login form dynamically generated through ajax.
 //This function listens to xmlhttprequests and reruns the DOM modification script in content script.
-chrome.webRequest.onCompleted.addListener(function(info){
+//TODO find similar functionality in safari
+/*chrome.webRequest.onCompleted.addListener(function(info){
 		safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("rerun", {result:"rerun input script"});
 	},
 	{
@@ -27,6 +30,7 @@ safari.application.activeBrowserWindow.addEventListener("message", function(even
 safari.application.addEventListener("command", function(event){
 	if(event.command == "disable"){
 		broadcast("disable password div", "");
+		extrasafeDisabled = true;
 		var image = safari.extension.baseURI + "icons/Extrasafe_striked16.png";
 		var windows = safari.extension.toolbarItems.length;
 		for(var i=0; i<windows; i++){
@@ -37,6 +41,7 @@ safari.application.addEventListener("command", function(event){
 	}
 	else if(event.command == "enable"){
 		broadcast("enable password div", "");
+		extrasafeDisabled = false;
 		var image = safari.extension.baseURI + "icons/Extrasafe16.png";
 		var windows = safari.extension.toolbarItems.length;
 		for(var i=0; i<windows; i++){
@@ -44,9 +49,15 @@ safari.application.addEventListener("command", function(event){
 			safari.extension.toolbarItems[0].toolTip = "Click to disable extrasafe in this site";
 			safari.extension.toolbarItems[i].image = image;
 		}
-	}
-	
+	}	
 }, true);
+
+//To send disabled message to newly created or navigated when browser action is already disabled
+safari.application.addEventListener("navigate", function(event) {
+	if(extrasafeDisabled){
+		event.target.page.dispatchMessage("disable password div","");
+	}
+});
 
 function broadcast(command,message){
 	var windows = safari.application.browserWindows;

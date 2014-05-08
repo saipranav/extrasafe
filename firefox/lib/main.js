@@ -117,6 +117,7 @@ var workers = require("sdk/content/worker");
 
 var siteTag = "";
 var siteUrl = "";
+var extrasafeDisabled = false;
 var injectedWorkers = [];
 
 function detachWorker(worker, workerArray) {
@@ -136,6 +137,9 @@ pageMod.PageMod({
   	contentStyleFile: self.data.url("inject/inject.css"),
 	onAttach: function(worker){
 		injectedWorkers.push(worker);
+		if(extrasafeDisabled){
+			worker.port.emit("disable password div",{});
+		}
 		worker.port.on("master password", function(message){
 			findSiteTag(worker.url);
 			var password = Hasher.passy(message.masterPassword,siteTag);
@@ -147,6 +151,41 @@ pageMod.PageMod({
     	});
 	}
 });
+
+var button = ui.ActionButton({
+  id: "Extrasafe",
+  label: "Click to disable Extrasafe",
+  icon: {"16": "./icons/Extrasafe16.png", "48": "./icons/Extrasafe48.png"},
+  onClick: function(state) {
+    if(state.label == "Click to disable Extrasafe"){
+			broadcast("disable password div",{});
+			extrasafeDisabled = true;
+			button.state(button, { label: "Click to enable Extrasafe", icon: {"16": "./icons/Extrasafe_red16.png", "48": "./icons/Extrasafe_red48.png"} });
+	}
+	else{
+			broadcast("enable password div",{});
+			extrasafeDisabled = false;
+			button.state(button, { label: "Click to disable Extrasafe", icon: {"16": "./icons/Extrasafe16.png", "48": "./icons/Extrasafe48.png"} });
+	}
+  }
+});
+
+//TODO: firefox 28 and earlier supports widget not action button
+/*var widget = widgets.Widget({
+  id: "mozilla-link",
+  label: "",
+  contentURL: self.data.url("icon/Extrasafe16.png"),
+  onClick: function() {
+    tabs.open("http://developer.mozilla.org/");
+  }
+});*/
+
+function broadcast(kind,messageBody){
+	var i;
+	for(i=0; i<injectedWorkers.length; i++){
+		injectedWorkers[i].port.emit(kind,messageBody);
+	}
+}
 
 function findSiteTag(url){
 	console.error(siteUrl+" : "+url+" : "+siteTag);
@@ -185,35 +224,3 @@ function findSiteTag(url){
 	}
 	return;
 }
-
-/*var widget = widgets.Widget({
-  id: "mozilla-link",
-  label: "",
-  contentURL: self.data.url("icon/Extrasafe16.png"),
-  onClick: function() {
-    tabs.open("http://developer.mozilla.org/");
-  }
-});*/
-
-function broadcast(kind,messageBody){
-	var i;
-	for(i=0; i<injectedWorkers.length; i++){
-		injectedWorkers[i].port.emit(kind,messageBody);
-	}
-}
-
-var button = ui.ActionButton({
-  id: "Extrasafe",
-  label: "Click to disable Extrasafe",
-  icon: {"16": "./icons/Extrasafe16.png", "48": "./icons/Extrasafe48.png"},
-  onClick: function(state) {
-    if(state.label == "Click to disable Extrasafe"){
-			broadcast("disable password div",{});
-			button.state(button, { label: "Click to enable Extrasafe", icon: {"16": "./icons/Extrasafe_red16.png", "48": "./icons/Extrasafe_red48.png"} });
-	}
-	else{
-			broadcast("enable password div",{});
-			button.state(button, { label: "Click to disable Extrasafe", icon: {"16": "./icons/Extrasafe16.png", "48": "./icons/Extrasafe48.png"} });
-	}
-  }
-});
