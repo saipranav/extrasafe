@@ -30,7 +30,7 @@ Hasher = {
 					if(Hasher.charPos.length == 0){
 						window.alert("numbers");
 						Hasher.password = Hasher.replaceAt(Hasher.start, Hasher.injectCharacter[Hasher.password[Hasher.start]%(Hasher.injectCharacter.length/2)]);
-						Hasher.password = Hasher.replaceAt(Hasher.end, Hasher.injectCharacter[(Hasher.password[Hasher.end-1]%(Hasher.injectCharacter.length/2))+5]);
+						Hasher.password = Hasher.replaceAt(Hasher.end-1, Hasher.injectCharacter[(Hasher.password[Hasher.end-1]%(Hasher.injectCharacter.length/2))+5]);
 					}
 
 					//all are characters
