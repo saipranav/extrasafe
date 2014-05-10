@@ -2,8 +2,6 @@ EXTRASAFE
 =========
 Check the Zomato site, IRCTC for password generation.
 
-for sha's output with number the output password has 11 characters
-
 check icons for Extrasafe add ons
 
 change license
@@ -15,6 +13,8 @@ Change the special character injection algorithm in special case.
 get rid of currentTab and compute every time on the fly. Reason: open 2 tabs with different sites, press the first tab for password, password will be generated in second tab, because current tab points to second tab.
 
 if disabled, convey messages to newly injected
+
+for sha's output with number the output password has 11 characters
 
 FIREFOX
 =======
