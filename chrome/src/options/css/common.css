@@ -1,12 +1,106 @@
-.options{
-	margin: auto auto;
-	margin-top: 10%;
-	height: 50%;
-	width: 50%;
-	box-shadow: 0px 0px 10px #151515;
+body{
+	font-family: Lucida Sans Unicode;
+	overflow: hidden;
 }
 
-.alert{
+#options{
+
+}
+
+#sideDiv{
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 100%;
+	border-right: 2px #888888 solid;
+	border-color: #888888;
+	background-color: rgba(242,242,242,0.3);
+}
+
+#sideDiv>img{
+	margin: 5%;
+}
+
+#header{
+	font-size: 15px;
+	margin: 5%;
+}
+
+.option{
 	display: block;
-	border: 2px solid red;
+	margin: 3%;
+	margin-top: 15%;
+	padding: 0% 2%;
+	cursor: pointer;
+}
+
+.activeOption{
+	border-left: 5px #FF4500 solid;
+}
+
+.page{
+	margin-left: 15%;
+	display: inline-block;
+	padding: 1%;
+}
+
+#buttons{
+	width: 50%;
+	position: fixed;
+	margin-left: 50%
+}
+
+#buttons>button{
+	height: 40px;
+	width: 100px;
+	margin: 2%;
+	outline: medium;
+	border: 1px #151515 solid;
+}
+
+#buttons>button:hover{
+	box-shadow: 0px 0px 5px #151515;
+}
+
+button:nth-child(2){
+	background-color: #32CD32;
+	color: #FFFFFF;
+}
+
+button:nth-child(3){
+	background-color: #FF8C00;
+	color: #FFFFFF;
+}
+
+button:nth-child(4){
+	background-color: #1E90FF;
+	color: #FFFFFF;
+}
+
+input[type="text"], [type="number"]{
+	padding: 1% 2%;
+	width: 300px;
+	margin: 1% 0%;
+	transition: ease 0.25s;
+	outline: none;
+	border-radius: 5%;
+	border: 2px #FF9900 solid;
+}
+
+input[type="text"], [type="number"]:focus{
+	box-shadow: 0px 0px 20px #151515;
+}
+
+.note{
+	display: block;
+	padding: 1%;
+	border-radius: 5%;
+	background-color: #FF9900;
+}
+
+.recommend{
+	display: block;
+	padding: 1%;
+	border-radius: 5%;
+	background-color: #9ACD32;
 }

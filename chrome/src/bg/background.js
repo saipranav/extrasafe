@@ -2,8 +2,10 @@
 var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
-//Global variable to remember enabling and disabling
+//Global variable to remember enabling and disabling.
 var extrasafeDisabled = false;
+//Global variable for extra security sequence.
+var extraSecuritySequence = "";
 
 //For web pages containing login form dynamically generated through ajax.
 //This function listens to xmlhttprequests and reruns the DOM modification script in content script.
@@ -24,7 +26,7 @@ chrome.webRequest.onCompleted.addListener(function(info){
 //Returns the password from algorithm to content script.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	findSiteTag(sender.url);
-	chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword,siteTag), fromInputField: request.fromInputField });
+	chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword,siteTag,extraSecuritySequence), fromInputField: request.fromInputField });
 });
 
 //Toggle browser actions.
@@ -53,6 +55,32 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		}
 	}
 });
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+	for (key in changes) {
+	  var storageChange = changes[key];
+	  if(key == "securitySequence"){
+	  	extraSecuritySequence = storageChange.newValue;
+	  }
+	  else if(key == "minPasswordLength"){
+	  	Hasher.start = storageChange.newValue;
+	  }
+	  else if(key == "maxPasswordLength"){
+	  	Hasher.end = storageChange.newValue;
+	  }
+	  /*else if(key == "specialCharactersCheck"){
+	  	Hasher. = storageChange.newValue;
+	  }*/
+	}
+});
+
+function initializeStorageVariables(){
+	chrome.storage.sync.get({
+    	securitySequence : "",
+  	}, function(items) {
+		extraSecuritySequence = items.securitySequence;
+  	});
+}
 
 function broadcast(message){
 	chrome.tabs.query({}, function(tabs){
@@ -99,3 +127,5 @@ function findSiteTag(url){
 	}
 	return;
 }
+
+initializeStorageVariables();

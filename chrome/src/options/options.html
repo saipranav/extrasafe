@@ -1,20 +1,57 @@
 <html>
 <head>
-<title>Extra Safe Options</title>
+<title>Extrasafe Options</title>
 <link rel="stylesheet" href="css/common.css"></link>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
 </head>
 <body>
-	<div class="options">
-		<h3>Extra Safe Options</h3>
-		<div class="subtopic">Double the security by giving the most hard sequence of characters that you will remember</div>
-		<input id="double_security_input" placeholder="Double Security"></checkbox>
-		<p class="alert">Note: Double Security Sequence will be added with your master password and site name for hashing</p>
-		
-		<div class="subtopic">Raise Password's Security level with Special characters</div>
-		<input type="checkbox" id="special_characters_input" name="special_characters">Special Characters</input>
-
-	</div>
+	<div id="options">
+		<div id="sideDiv">
+			<img src="../../icons/Extrasafe128.png"></img>
+			<span id="header">Extrasafe Options</span>
+			<span id="securityLevelHeader" class="option">Security Level</span>
+			<span id="passwordLengthHeader" class="option">Password Length</span>
+			<!-- <span id="specialCharactersHeader" class="option">Special Characters</span> -->
+		</div>
+		<div id="buttons">
+			<span id="status">Your options are updated.</span>
+			<button id="save">Save</button>
+			<button id="cancel">Cancel</button>
+			<button id="reset">Reset</button>
+		</div>
+		<div id="securityLevel" class="page">
+			<h4>Security Level</h4>
+			<span>
+				<span>Raise the security level by giving the most hardest sequence of characters, numbers, special characters that you will remember. This sequence will be added to your master password automatically.</span>
+				<div>
+					<input type="text" id="securityLevelInput" placeholder="Security Charcter Sequence"></input>
+				</div>
+			</span>
+			<p class="recommend">We recommend you to use this option</p>
+			<p class="note">NOTE: This will be stored in browser storage area. You need not give it every time for creating passwords.</p>
+		</div>
+		<div id="passwordLength" class="page">
+			<h4>Password Length</h4>
+			<span>
+				<span>Number of characters to be generated for password.</span>
+				<div>
+					<input type="number" id="minLength" min=0 max=127 placeholder="Minimum Password Length"></input> Minimum: 0
+					<br>
+					<input type="number" id="maxLength" min=1 max=128 placeholder="Maximum Password Length"></input> Maximum: 128
+				</div>
+			</span>
+		</div>
+		<!-- <div id="specialCharacters" class="page">
+			<h4>Special Characters</h4>
+			<span>
+				<span>Include or Exclude special characters for password generation.</span>
+				<div>
+				<br>
+					<input type="checkbox" id="specialCharactersInput">Include Special Characters.</input>
+				</div>
+			</span>
+		</div> -->
+	<div>
+<script src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 </body>
 </html>

@@ -6,6 +6,10 @@ check icons for Extrasafe add ons
 
 change license
 
+Hasher for numbers will should be dynamic
+
+options for safari, firefox
+
 Done
 ----
 Change the special character injection algorithm in special case.
@@ -16,6 +20,10 @@ if disabled, convey messages to newly injected
 
 for sha's output with number the output password has 11 characters
 
+Hasher will splice the sha string not substr
+
+options for chrome tested
+
 FIREFOX
 =======
 Add 32 and 64 icons in firefox
@@ -25,3 +33,7 @@ find xmlhttp listerer is available
 SAFARI
 ======
 find xmlhttp listener is available
+
+CHROME
+======
+add special chars options if required

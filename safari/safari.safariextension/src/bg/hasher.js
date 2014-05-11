@@ -18,7 +18,7 @@ Hasher = {
 
 	//It will be called after the Crypto returns.
 	modify: function(){
-				Hasher.password = Hasher.password.substr(Hasher.start, Hasher.end);
+				Hasher.password = Hasher.password.splice(Hasher.start, Hasher.end);
 				Hasher.extrasafeModification();
 			},
 	

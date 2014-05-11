@@ -13,7 +13,7 @@
   "background": {
     "scripts": [ "js/sha3.js", "src/bg/hasher.js", "src/bg/background.js" ]
   },
-  "permissions" : [ "tabs", "webRequest", "<all_urls>" ],
+  "permissions" : [ "tabs", "storage", "webRequest", "<all_urls>" ],
   "content_scripts" : [
     {
       "matches" : [ "<all_urls>" ],
@@ -23,6 +23,7 @@
       "all_frames" : true
     }
   ],
+  "options_page": "./src/options/options.html",
   "web_accessible_resources": [
 	"icons/Unmask16.png",
 	"icons/Extrasafe16.png"
