@@ -1,15 +1,22 @@
 body{
-	width: 300px;
+	width: 30%;
 	margin: auto auto;
 }
 
+#options{
+	cursor: pointer;
+	display: block;
+	height: 3%;
+	padding: 1% 35%;
+}
+
 input{
-	height: 40px;
-	width: 250px;
+	height: 6%;
+	width: 90%;
 	outline: none;
-	padding: 10px;
+	padding: 3%;
 	border: 1px solid grey;
-	margin: 5px;
+	margin: 1%;
 }
 
 input:focus{
@@ -18,7 +25,7 @@ input:focus{
 }
 
 input[type="button"]{
-	height: 40px;
+	height: 10%;
 	border-radius: 5%;
 	background: green;
 	border: 1px solid white;

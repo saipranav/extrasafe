@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Extrasafe Portable</title>
-	<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+	<link rel="stylesheet" type="text/css" href="./css/stylesheet.css"/>
 </head>
 <body>
 	<h2>Extrasafe Portable</h2>
@@ -15,7 +15,13 @@
 	<div>
 		<input id="siteName" type="text" placeholder="Site Name"></input>
 		<input id="masterPassword" type="password" placeholder="Master Password"></input>
-		<span id="showPassword"><img src="images/Unmask16.png"></img></span>
+		<span id="showPassword"><img src="./images/Unmask16.png"></img></span>
+		<span id="options">Show Options</span>
+		<div id="optionsDiv">
+			<input id="extraSequence" type="text" placeholder="Extra Security Sequence"></input>
+			<input id="minLength" type="number" min=0 max=127 placeholder="Minimum Password Length Default: 0"></input>
+			<input id="maxLength" type="number" min=1 max=128 placeholder="Maximum Password Length Default: 10"></input>
+		</div>
 		<input id="extrasafePassword" type="text" placeholder="Your Extrasafe Password for the site." readonly></input>
 		<input id="generate" type="button" value="Generate"></input>
 	</div>
@@ -25,9 +31,9 @@
 
 	<p><b>Tip :: </b> Bookmark Me!</p>
 
-	<script src="scripts/jquery.min.js"></script>
-	<script src="scripts/sha3.js"></script>
-	<script src="scripts/hasher.js"></script>
-	<script src="scripts/script.js"></script>
+	<script src="./scripts/jquery.min.js"></script>
+	<script src="./scripts/sha3.js"></script>
+	<script src="./scripts/hasher.js"></script>
+	<script src="./scripts/script.js"></script>
 </body>
 </html>
