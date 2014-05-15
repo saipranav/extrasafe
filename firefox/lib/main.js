@@ -26,6 +26,7 @@ Hasher = {
 
 	masterPassword: "", //input master password
 	siteTag: "", //site name
+	extraSecuritySequence: "", //extra security sequence 
 	password: "", //output password
 	start: 0, //start from triming
 	end: 10, //end for triming
@@ -37,12 +38,12 @@ Hasher = {
 	
 	//Call the crypto graphic algorithm.
 	hashy: function(){	
-			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword ).toString();
+			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword + Hasher.extraSecuritySequence).toString();
 			},
 
 	//It will be called after the Crypto returns.
 	modify: function(){
-				Hasher.password = Hasher.password.splice(Hasher.start, Hasher.end);
+				Hasher.password = Hasher.password.slice(Hasher.start, Hasher.end);
 				Hasher.extrasafeModification();
 			},
 	
@@ -83,6 +84,7 @@ Hasher = {
 	//Utility Helper methods - replaceAt(index to be replaced, character to be placed)
 	countNoAndChars: function() {
 					Hasher.noPos.length = Hasher.charPos.length = 0;
+					var iterator = 0;
 					for(iterator=0;iterator<Hasher.password.length;iterator++) {
 						if (!isNaN(parseInt(Hasher.password[iterator]))) {
 							Hasher.noPos[Hasher.noPos.length++]=iterator;
@@ -114,6 +116,7 @@ var tabs = require("sdk/tabs");
 var widgets = require("sdk/widget");
 var ui = require("sdk/ui");
 var workers = require("sdk/content/worker");
+var simplePrefs = require("sdk/simple-prefs");
 
 var siteTag = "";
 var siteUrl = "";
@@ -169,6 +172,44 @@ var button = ui.ActionButton({
 	}
   }
 });
+
+//For saving options
+simplePrefs.on("update",function(){
+	var start = simplePrefs.prefs.startIndex;
+	var end = simplePrefs.prefs.endIndex;
+	var extraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
+	if((start<0) || (end>128) || (start>=end) || (start>127) || (end<8) || ((end-start)<8) ){
+		simplePrefs.prefs.updateStatus = "Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 8";
+	}
+	else{
+		Hasher.extraSecuritySequence = extraSecuritySequence;
+		Hasher.start = start;
+		Hasher.end = end;
+		simplePrefs.prefs.updateStatus = "Your options are Saved";
+	}
+});
+simplePrefs.on("reset",function(){
+	var start = 0;
+	var end = 10;
+	var extraSecuritySequence = "";
+	Hasher.extraSecuritySequence = extraSecuritySequence;
+	Hasher.start = start;
+	Hasher.end = end;
+	simplePrefs.prefs.startIndex = start;
+	simplePrefs.prefs.endIndex = end;
+	simplePrefs.prefs.extraSecuritySequence = extraSecuritySequence;
+	simplePrefs.prefs.updateStatus = "Your options are Reset to default";
+});
+simplePrefs.on("cancel",function(){
+	var start = Hasher.start;
+	var end = Hasher.end;
+	var extraSecuritySequence = Hasher.extraSecuritySequence;
+	simplePrefs.prefs.startIndex = start;
+	simplePrefs.prefs.endIndex = end;
+	simplePrefs.prefs.extraSecuritySequence = extraSecuritySequence;
+	simplePrefs.prefs.updateStatus = "Your options are Reset to previous state";
+});
+
 
 //TODO: firefox 28 and earlier supports widget not action button
 /*var widget = widgets.Widget({

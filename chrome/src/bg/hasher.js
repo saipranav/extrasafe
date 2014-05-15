@@ -72,10 +72,9 @@ Hasher = {
 
 	
 	//Single method to call from outside to return the hashed and modified password.
-	passy: function(masterPassword, siteTag, extraSecuritySequence){ 
+	passy: function(masterPassword, siteTag){ 
 						Hasher.masterPassword = masterPassword;
 						Hasher.siteTag = siteTag;
-						Hasher.extraSecuritySequence = extraSecuritySequence;
 						Hasher.hashy();
 						Hasher.modify();
 						return Hasher.password;

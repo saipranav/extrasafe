@@ -7,6 +7,49 @@
   "homepage": "http://saipranav.github.io/extrasafe",
   "description": "Just Remember one Master Password to generate Different Passwords for Different Sites. We do NOT and will NEVER store your password any where.",
   "author": "Sai Pranav",
+  "preferences": [{
+        "name": "extraSecuritySequence",
+        "title": "Extra Security Sequence",
+        "description": "We RECOMMEND this option. Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
+        "type": "string"
+    },
+    {
+        "name": "startIndex",
+        "title": "Password Start Index",
+        "description": "Your passwords will get sliced using this index. Default 0",
+        "type": "integer"
+    },
+    {
+        "name": "endIndex",
+        "title": "Password End Index",
+        "description": "Your passwords will get sliced using this index. Default 10",
+        "type": "integer"
+    },
+    {
+		"name": "update",
+		"title": "Save your choices",
+		"label": "Save",
+		"type": "control"
+	},
+	{
+		"name": "reset",
+		"title": "Reset your choices to default",
+		"label": "Reset",
+		"type": "control"
+	},
+	{
+		"name": "cancel",
+		"title": "Reset your choices to previous state",
+		"label": "Cancel",
+		"type": "control"
+	},
+	{
+		"name": "updateStatus",
+		"title": "Status of Saving Options",
+		"description": "Please scroll through text to see the full message.",
+		"value": "Status",
+		"type": "string"
+	}],
   "license": "MPL 2.0",
   "version": "1.0"
 }
