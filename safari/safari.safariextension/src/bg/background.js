@@ -59,6 +59,35 @@ safari.application.addEventListener("navigate", function(event) {
 	}
 });
 
+safari.extension.secureSettings.addEventListener("change", function(event) {
+	if(event.key == "extraSequence"){
+		Hasher.extraSequence = event.newValue;
+		safari.extension.settings.status = "Your options are saved";
+	}
+	else if(event.key == "startIndex"){
+		var start = event.newValue;
+		var end = Hasher.end;
+		if((start<0) || (end>128) || (start>=end) || (start>127) || (end<8) || ((end-start)<8) ){
+			safari.extension.settings.status = "Password Length :: Minimum: 0, Maximum: 128. End index should be greater than Start index. Difference between End index and Start index should be greater than 8";
+		}
+		else{
+			Hasher.start = event.newValue;
+			safari.extension.settings.status = "Your options are saved";
+		}
+	}
+	else if(event.key == "endIndex"){
+		var start = Hasher.start;
+		var end = event.newValue;
+		if((start<0) || (end>128) || (start>=end) || (start>127) || (end<8) || ((end-start)<8) ){
+			safari.extension.settings.status = "Password Length :: Minimum: 0, Maximum: 128. End index should be greater than Start index. Difference between End index and Start index should be greater than 8";
+		}
+		else{
+			Hasher.end = event.newValue;
+			safari.extension.settings.status = "Your options are saved";
+		}
+	}
+}, false);
+
 function broadcast(command,message){
 	var windows = safari.application.browserWindows;
 	for (var i = 0; i < windows.length; i++) {

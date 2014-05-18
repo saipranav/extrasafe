@@ -3,6 +3,7 @@ Hasher = {
 	masterPassword: "", //input master password
 	siteTag: "", //site name
 	password: "", //output password
+	extraSequence: "", //extra security sequence
 	start: 0, //start from triming
 	end: 10, //end for triming
 	specialCharacter : new Array("@","!","&","*","#"),
@@ -13,12 +14,12 @@ Hasher = {
 	
 	//Call the crypto graphic algorithm.
 	hashy: function(){	
-			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword ).toString();
+			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword + Hasher.extraSequence).toString();
 			},
 
 	//It will be called after the Crypto returns.
 	modify: function(){
-				Hasher.password = Hasher.password.splice(Hasher.start, Hasher.end);
+				Hasher.password = Hasher.password.slice(Hasher.start, Hasher.end);
 				Hasher.extrasafeModification();
 			},
 	

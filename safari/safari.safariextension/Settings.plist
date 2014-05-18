@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array/>
+<array>
+	<dict>
+		<key>Title</key>
+		<string>Extra Security</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>extraSequence</string>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Extra Security Sequence</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>Password Length</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>startIndex</string>
+		<key>MaximumValue</key>
+		<real>127</real>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Start Index, Default : 0</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>endIndex</string>
+		<key>MaximumValue</key>
+		<real>128</real>
+		<key>MinimumValue</key>
+		<real>8</real>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>End Index, Default : 10</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>Status</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>status</string>
+		<key>Title</key>
+		<string>Status of saving your options</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+</array>
 </plist>
