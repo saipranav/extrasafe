@@ -32,7 +32,7 @@
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
-		<string>Start Index, Default : 0</string>
+		<string>Start Index</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -46,21 +46,7 @@
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
-		<string>End Index, Default : 10</string>
-		<key>Type</key>
-		<string>TextField</string>
-	</dict>
-	<dict>
-		<key>Title</key>
-		<string>Status</string>
-		<key>Type</key>
-		<string>Group</string>
-	</dict>
-	<dict>
-		<key>Key</key>
-		<string>status</string>
-		<key>Title</key>
-		<string>Status of saving your options</string>
+		<string>End Index</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
