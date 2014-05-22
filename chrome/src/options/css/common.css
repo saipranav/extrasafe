@@ -81,14 +81,14 @@ input[type="text"], [type="number"]{
 	padding: 1% 2%;
 	width: 300px;
 	margin: 1% 0%;
-	transition: ease 0.25s;
+	transition: ease-in-out 0.5s;
 	outline: none;
-	border-radius: 5%;
+	border-radius: 4px;
 	border: 2px #FF9900 solid;
 }
 
 input[type="text"], [type="number"]:focus{
-	box-shadow: 0px 0px 20px #151515;
+	box-shadow: 0px 0px 15px #151515;
 }
 
 .note{

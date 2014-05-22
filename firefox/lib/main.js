@@ -185,6 +185,7 @@ simplePrefs.on("update",function(){
 		Hasher.extraSecuritySequence = extraSecuritySequence;
 		Hasher.start = start;
 		Hasher.end = end;
+		window.alert("asdf");
 		simplePrefs.prefs.updateStatus = "Your options are Saved";
 	}
 });
