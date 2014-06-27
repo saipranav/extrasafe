@@ -4,7 +4,7 @@ Hasher = {
 	siteTag: "", //site name
 	extraSecuritySequence: "", // extra string to be added with master password
 	password: "", //output password
-	start: 0, //start from triming
+	start: 0, //start for triming
 	end: 15, //end for triming
 	specialCharacters : new Array("@","!","&","*","#","(",")","/"),
 	capitalCharacters : new Array("A","B","C","D","E","F","G","H"),
@@ -30,23 +30,6 @@ Hasher = {
 	
 	//Extrasafe modification
 	extrasafeModification: function(){
-					/*Hasher.countNoAndChars();
-
-					//all are numbers
-					if(Hasher.charPos.length == 0){
-						Hasher.password = Hasher.replaceAt(Hasher.start, Hasher.injectCharacter[Hasher.password[Hasher.start]%(Hasher.injectCharacter.length/2)]);
-						Hasher.password = Hasher.replaceAt(Hasher.end-1, Hasher.injectCharacter[(Hasher.password[Hasher.end-1]%(Hasher.injectCharacter.length/2))+5]);
-					}
-
-					//all are characters
-					else if(Hasher.noPos.length == 0){
-						Hasher.password = Hasher.replaceAt(0, '0');
-						Hasher.password = Hasher.replaceAt(3, '3');
-						Hasher.password = Hasher.replaceAt(6, '6');
-					}
-
-					Hasher.countNoAndChars();
-					Hasher.addSpecialCharacters();*/
 					Hasher.fillCountCharacters();
 					Hasher.checker();
 					Hasher.finalTrim();
@@ -55,6 +38,13 @@ Hasher = {
 
 	checker: function(){
 					//all small characters
+
+					//Inside if structure:
+					// derive replace index (password) from position array and charAt (denotes instance of injection) (should be within password length)
+					// replaces the password at replaceIndex, with character taken from predefined array (take the password character at position (take from position array ) convert to integer value) (fold the integer with predefined array length so that it stays within predefined array)
+					// add replaceIndex in deficit position array
+					// remove replaceIndex from surplus position array
+					// add replaceIndex in injectedChars so that its not replaced again with another injected character
 					if(/^[a-z]*$/.test(Hasher.password) == true || Hasher.numberPos.length < 4){
 
 						var replaceIndex = Hasher.getReplaceIndex(Hasher.smallCharactersPos, 0);
@@ -105,119 +95,66 @@ Hasher = {
 						replaceIndex = Hasher.getReplaceIndex(Hasher.smallCharactersPos, 1);
 						Hasher.password = Hasher.replaceAt(replaceIndex, Hasher.capitalCharacters[((Hasher.password[Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-2]]).charCodeAt(0))%(Hasher.capitalCharacters.length-1)]);
 						Hasher.injectedChars.push(replaceIndex);
-						//replaceIndex = Hasher.getReplaceIndex(Hasher.smallCharactersPos, 2);
-						//Hasher.password = Hasher.replaceAt(replaceIndex, Hasher.capitalCharacters[((Hasher.password[Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1]]).charCodeAt(0))%(Hasher.capitalCharacters.length-1)]);
 					}
 					//special characters not found
 					if(/^([a-z]|[A-Z]|[0-9])*$/.test(Hasher.password) == true){
 						var replaceIndex = Hasher.getReplaceIndex(Hasher.numberPos, 0);
 						Hasher.password = Hasher.replaceAt(replaceIndex, Hasher.specialCharacters[((Hasher.password[Hasher.numberPos[Hasher.numberPos.length-1]]).charCodeAt(0))%(Hasher.specialCharacters.length-1)]);
 						Hasher.injectedChars.push(replaceIndex);
-						//replaceIndex = Hasher.getReplaceIndex(Hasher.numberPos, 1);
-						//Hasher.password = Hasher.replaceAt(replaceIndex, Hasher.specialCharacters[((Hasher.password[Hasher.numberPos[Hasher.numberPos.length-1]]).charCodeAt(0))%(Hasher.specialCharacters.length-1)]);
 					}
 				},
 
+	//takes the passwords char code (int) at charAt, fold it to the size of array/2, to make sure index stays inside the password (because array elements are subset of password indexes)
+	//it takes care of injected characters not being replaced
+	//it might some times give undefined which makes the password grow by repeating chars at replaceAt function, but finalTrim takes care of this issue
 	getReplaceIndex: function(array, charAt){
 					var index = array[(Hasher.password.charCodeAt(charAt))%(Math.ceil(array.length/2))];
-					/*if(index == 0){
-						Hasher.password = "."+Hasher.password;
-						index = 1;
-					}
-					index = index - 1;*/
-					/*if(Hasher.injectedChars.indexOf(index) == -1){
-						return index;
-					}
-					while(charAt >= Hasher.password.length-1){
-						charAt--;
-					}
-					while(charAt <= 0 && charAt){
-						charAt++;
-					}
-					return Hasher.getReplaceIndex(array, charAt);*/
-					//var climb = true;
 					if(Hasher.injectedChars.indexOf(index) != -1){
 						index = undefined;
-						/*if(climb){
-							if((charAt+1) <= Hasher.password.length-1 ){
-								charAt++;
-								index = undefined;
-							}
-							else{
-								climb = false;
-								Hasher.iterator++;
-							}
-						}
-						else if(!climb){
-							if((charAt-1) >= 0 ){
-								charAt--;
-								index = array[(Hasher.password.charCodeAt(charAt))%(Math.ceil(array.length-charAt))];
-							}
-							else{
-								climb = true;
-								Hasher.iterator++;
-								if(Hasher.iterator > 1){
-									return index;
-								}
-							}
-						}*/
 					}
 					return index;
 				},	
 	
+	//function to reduce the size of passwords if required
 	finalTrim: function(){
 					if(Hasher.password.length > Hasher.end){
 						Hasher.fillCountCharacters();
+						//check whether numbers or small chars are more in number
 						if(Hasher.numberPos.length > Hasher.smallCharactersPos.length){
+							//reduce the numbers but minimum of 4
 							while(Hasher.password.length > Hasher.end && Hasher.numberPos.length > 4){
 								Hasher.password = Hasher.password.substr(0, Hasher.numberPos[Hasher.numberPos.length-1])+Hasher.password.substr((Hasher.numberPos[Hasher.numberPos.length-1])+1, Hasher.password.length);
 								Hasher.numberPos.splice(-1,1);
 							}
 							Hasher.iterator++;
+							//check to trim more for 2 times max then forcefully come out
 							if(Hasher.iterator < 2){
 								Hasher.finalTrim();
 							}
 						}
 						else{
+							//reduce the small chars but minimum of 4
 							while(Hasher.password.length > Hasher.end && Hasher.smallCharactersPos.length > 4){
 								Hasher.password = Hasher.password.substr(0, Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+Hasher.password.substr((Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+1, Hasher.password.length);
 								Hasher.smallCharactersPos.splice(-1,1);
 							}
 							Hasher.iterator++;
+							//check to trim more for 2 times max then forcefully come out
 							if(Hasher.iterator < 2){
 								Hasher.finalTrim();
 							}
 						}
 					}
 				},
-
-	addSpecialCharacters: function(){
-					//Tweaking the password to include special characters (at the position of the middle digit)
-					Hasher.password = Hasher.replaceAt(Hasher.noPos[Math.floor(Hasher.noPos.length/2)],Hasher.specialCharacter[Hasher.password[Hasher.noPos[Hasher.noPos.length-1]]%Hasher.specialCharacter.length]);
-						
-					//Capitalizing the middle letter
-					Hasher.password = Hasher.replaceAt(Hasher.charPos[Math.floor(Hasher.charPos.length/2)],Hasher.password[Hasher.charPos[Math.floor(Hasher.charPos.length/2)]].toUpperCase());		
-					},
 
 	//Utility Helper methods - replaceAt(index to be replaced, character to be placed)
 	replaceAt: function(index, character) {
    							return Hasher.password.substr(0, index) + character + Hasher.password.substr(index+character.length);
 						},
 
-	//Utility Helper methods - replaceAt(index to be replaced, character to be placed)
-	countNoAndChars: function() {
-					Hasher.noPos.length = Hasher.charPos.length = 0;
-					for(var iterator=0;iterator<Hasher.password.length;iterator++) {
-						if (!isNaN(parseInt(Hasher.password[iterator]))) {
-							Hasher.noPos[Hasher.noPos.length++]=iterator;
-						}
-						else {
-							Hasher.charPos[Hasher.charPos.length++]=iterator;
-						}
-					}	
-				},
-
+	//fill the position array buckets
 	fillCountCharacters: function() {
+					//reset array to 0
 					Hasher.injectedChars.length = Hasher.specialCharactersPos.length = Hasher.numberPos.length = Hasher.smallCharactersPos.length = Hasher.capitalCharactersPos.length = 0;
 					for(var iterator=0;iterator<Hasher.password.length;iterator++) {
 						if(/^[a-z]$/.test(Hasher.password[iterator])){
@@ -230,7 +167,7 @@ Hasher = {
 							Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length++]=iterator;
 						}
 						else if(/^\W$/.test(Hasher.password[iterator])){
-							Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length++]=iterator;
+							Hasher.specialCharactersPos[Hasher.specialCharactersPos.length++]=iterator;
 						}
 					}	
 				},			
