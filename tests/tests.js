@@ -4,7 +4,7 @@
 	changeHasherOptions("", 0, 10);
 });*/
 
-test( 'Hasher.passy("","")', function() {
+test( 'Consistency check for master password - "", site name - ""', function() {
 	var testRuns = 100000;
 	var password = Hasher.passy("","");
 	for(var i=0; i < testRuns; i++){
@@ -12,14 +12,14 @@ test( 'Hasher.passy("","")', function() {
 	}
 });
 
-test( 'Hasher.passy("e@1#$fpQc%**(","Extrasafe")', function() {
+test( 'Consistency check for master password - "e@1#$fpQc%**(", site name - "Extrasafe"', function() {
 	var testRuns = 100000;
 	for(var i=0; i < testRuns; i++){
 		equal( Hasher.passy("e@1#$fpQc%**(","Extrasafe"), "4664*6CcedDCced", "Passed!" );
 	}
 });
 
-test( 'Checking with option : Extra Security Sequence', function() {
+test( 'Consistency check with option : Extra Security Sequence - "A#1-@26Z"', function() {
 	var testRuns = 100000;
 	changeHasherOptions("A#1-@26Z", 0, 15);
 	for(var i=0; i < testRuns; i++){
@@ -27,7 +27,7 @@ test( 'Checking with option : Extra Security Sequence', function() {
 	}
 });
 
-test( 'Checking with option : Start Index', function() {
+test( 'Consistency check with option : Start Index - "2"', function() {
 	var testRuns = 100000;
 	changeHasherOptions("", 2, 15);
 	for(var i=0; i < testRuns; i++){
@@ -35,7 +35,7 @@ test( 'Checking with option : Start Index', function() {
 	}
 });
 
-test( 'Checking with option : End Index', function() {
+test( 'Consistency check with option : End Index - "128"', function() {
 	var testRuns = 100000;
 	changeHasherOptions("", 0, 128);
 	for(var i=0; i < testRuns; i++){
@@ -43,7 +43,7 @@ test( 'Checking with option : End Index', function() {
 	}
 });
 
-test( 'Check for Special Characters, Upper Case, Lower Case, Numbers', function() {
+test( 'Consistency check for Special Characters, Upper Case, Lower Case, Numbers', function() {
 	var testRuns = 100000;
 	var result;
 	//equal( checkFor_SpecialChars_UpperCase_LowerCase_Numbers( Hasher.passy("e@1#$fpQc%**(","Extrasafe") ), true, Hasher.passy("e@1#$fpQc%**(","Extrasafe")+"" );
@@ -53,37 +53,34 @@ test( 'Check for Special Characters, Upper Case, Lower Case, Numbers', function(
 	}
 });
 
-test( 'Check for Special Characters', function() {
+test( 'Consistency check for Special Characters', function() {
 	var testRuns = 100000;
 	changeHasherOptions("", 0, 15);
 	for(var i=0; i < testRuns; i++){
 		var result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForSpecialChars( result ), true, result );
 	}
-	changeHasherOptions("", 0, 10);
 });
 
-test( 'Check for Upper Case', function() {
+test( 'Consistency check for Upper Case', function() {
 	var testRuns = 100000;
 	changeHasherOptions("", 0, 15);
 	for(var i=0; i < testRuns; i++){
 		var result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForUpperCase( result ), true, result );
 	}
-	changeHasherOptions("", 0, 10);
 });
 
-test( 'Check for Lower Case', function() {
+test( 'Consistency check for Lower Case', function() {
 	var testRuns = 100000
 	changeHasherOptions("", 0, 15);
 	for(var i=0; i < testRuns; i++){
 		var result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForLowerCase( result ), true, result );
 	}
-	changeHasherOptions("", 0, 10);
 });
 
-test( 'Check for Numbers', function() {
+test( 'Consistency check for Numbers', function() {
 	var testRuns = 100000;
 	var result = "";
 	changeHasherOptions("", 0, 15);
@@ -91,7 +88,6 @@ test( 'Check for Numbers', function() {
 		result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForNumbers( result ), true, result );
 	}
-	changeHasherOptions("", 0, 10);
 });
 
 var checkFor_SpecialChars_UpperCase_LowerCase_Numbers = function(password){
