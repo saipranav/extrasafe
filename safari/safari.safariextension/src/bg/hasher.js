@@ -5,7 +5,7 @@ Hasher = {
 	extraSecuritySequence: "", // extra string to be added with master password
 	password: "", //output password
 	start: 0, //start for triming
-	end: 15, //end for triming
+	end: 12, //end for triming
 	specialCharacters : new Array("@","!","&","*","#","(",")","/"),
 	capitalCharacters : new Array("A","B","C","D","E","F","G","H"),
 	smallCharacters : new Array("a","b","c","d","e","f","g","h"),

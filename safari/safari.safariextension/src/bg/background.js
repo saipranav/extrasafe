@@ -68,8 +68,8 @@ safari.extension.secureSettings.addEventListener("change", function(event) {
 	else{
 		var	start = safari.extension.secureSettings.startIndex;
 		var	end = safari.extension.secureSettings.endIndex;
-		if((start<0) || (end>128) || (start>=end) || (start>127) || (end<8) || ((end-start)<8) ){
-			window.alert("Password Length ::\nStart index : Default 0, Minimum: 0, Maximum: 120.\nEnd index : Default 10, Minimum: 8, Maximum: 128.\nEnd index should be greater than Start index.\n Difference between End index and Start index should be greater than 8");
+		if((start<0) || (end>128) || (start>=end) || (start>115) || (end<12) || ((end-start)<12) ){
+			window.alert("Password Length ::\nStart index : Default 0, Minimum: 0, Maximum: 115.\nEnd index : Default 12, Minimum: 12, Maximum: 128.\nEnd index should be greater than Start index.\n Difference between End index and Start index should be greater than 12");
 		}
 		else{
 			Hasher.start = start;

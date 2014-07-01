@@ -22,7 +22,7 @@
     {
         "name": "endIndex",
         "title": "Password End Index",
-        "description": "Your passwords will get sliced using this index. Default 10",
+        "description": "Your passwords will get sliced using this index. Default 12",
         "type": "integer"
     },
     {

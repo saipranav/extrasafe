@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	chrome.storage.sync.get({
     	securitySequence : "",
 		startIndex : 0,
-		endIndex : 10
+		endIndex : 12
 		//specialCharactersCheck : true
   	}, function(items) {
 		$("#securityLevelInput").val(items.securitySequence);
@@ -49,8 +49,8 @@ $("#save").click(function(){
 	var min = parseInt($("#startIndex").val());
 	var max = parseInt($("#endIndex").val());
 	//var special = $("#specialCharactersInput").is(":checked");
-	if((min<0) || (max>128) || (min>=max) || (min>127) || (max<8) || ((max-min)<8) ){
-		window.alert("Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 8");
+	if((min<0) || (max>128) || (min>=max) || (min>115) || (max<12) || ((max-min)<12) ){
+		window.alert("Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 12");
 	}
 	else{
 		chrome.storage.sync.set({
@@ -74,6 +74,6 @@ $("#cancel").click(function(){
 $("#reset").click(function(){
 	$("#securityLevelInput").val("");
 	$("#startIndex").val("0");
-	$("#endIndex").val("10");
+	$("#endIndex").val("12");
 	//$("#specialCharactersInput").prop("checked",true);
 });

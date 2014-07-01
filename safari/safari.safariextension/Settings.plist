@@ -25,10 +25,14 @@
 		<string>Group</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
 		<key>Key</key>
 		<string>startIndex</string>
 		<key>MaximumValue</key>
-		<real>127</real>
+		<real>115</real>
+		<key>Password</key>
+		<false/>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
@@ -37,12 +41,14 @@
 		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
 		<key>Key</key>
 		<string>endIndex</string>
 		<key>MaximumValue</key>
 		<real>128</real>
 		<key>MinimumValue</key>
-		<real>8</real>
+		<real>12</real>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>

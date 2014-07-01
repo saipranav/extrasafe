@@ -29,7 +29,7 @@ Hasher = {
 	extraSecuritySequence: "", // extra string to be added with master password
 	password: "", //output password
 	start: 0, //start for triming
-	end: 15, //end for triming
+	end: 12, //end for triming
 	specialCharacters : new Array("@","!","&","*","#","(",")","/"),
 	capitalCharacters : new Array("A","B","C","D","E","F","G","H"),
 	smallCharacters : new Array("a","b","c","d","e","f","g","h"),
@@ -279,20 +279,19 @@ simplePrefs.on("update",function(){
 	var start = simplePrefs.prefs.startIndex;
 	var end = simplePrefs.prefs.endIndex;
 	var extraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
-	if((start<0) || (end>128) || (start>=end) || (start>127) || (end<8) || ((end-start)<8) ){
-		simplePrefs.prefs.updateStatus = "Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 8";
+	if((start<0) || (end>128) || (start>=end) || (start>115) || (end<12) || ((end-start)<12) ){
+		simplePrefs.prefs.updateStatus = "Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 12";
 	}
 	else{
 		Hasher.extraSecuritySequence = extraSecuritySequence;
 		Hasher.start = start;
 		Hasher.end = end;
-		window.alert("asdf");
 		simplePrefs.prefs.updateStatus = "Your options are Saved";
 	}
 });
 simplePrefs.on("reset",function(){
 	var start = 0;
-	var end = 10;
+	var end = 12;
 	var extraSecuritySequence = "";
 	Hasher.extraSecuritySequence = extraSecuritySequence;
 	Hasher.start = start;

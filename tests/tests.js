@@ -1,5 +1,5 @@
 /*test( 'Summa', function() {
-	changeHasherOptions("", 0, 15);
+	changeHasherOptions("", 0, 12);
 	equal( Hasher.passy("Extrasafe52496","52496"), "&3feeeeeff", "Passed!" );
 	changeHasherOptions("", 0, 10);
 });*/
@@ -14,38 +14,42 @@ test( 'Consistency check for master password - "", site name - ""', function() {
 
 test( 'Consistency check for master password - "e@1#$fpQc%**(", site name - "Extrasafe"', function() {
 	var testRuns = 100000;
+	var password = Hasher.passy("e@1#$fpQc%**(","Extrasafe");
 	for(var i=0; i < testRuns; i++){
-		equal( Hasher.passy("e@1#$fpQc%**(","Extrasafe"), "4664*6CcedDCced", "Passed!" );
+		equal( Hasher.passy("e@1#$fpQc%**(","Extrasafe"), password, "Passed!" );
 	}
 });
 
 test( 'Consistency check with option : Extra Security Sequence - "A#1-@26Z"', function() {
 	var testRuns = 100000;
-	changeHasherOptions("A#1-@26Z", 0, 15);
+	changeHasherOptions("A#1-@26Z", 0, 12);
+	var password = Hasher.passy("e@1#$fpQc%**(","Extrasafe");
 	for(var i=0; i < testRuns; i++){
-		equal( Hasher.passy("e@1#$fpQc%**(","Extrasafe"), "eCA37cd)c9b7cbd", "Passed!" );
+		equal( Hasher.passy("e@1#$fpQc%**(","Extrasafe"), password, "Passed!" );
 	}
 });
 
 test( 'Consistency check with option : Start Index - "2"', function() {
 	var testRuns = 100000;
-	changeHasherOptions("", 2, 15);
+	changeHasherOptions("", 2, 12);
+	var password = Hasher.passy("Extrasafe","e@1#$fpQc%**(");
 	for(var i=0; i < testRuns; i++){
-		equal( Hasher.passy("Extrasafe","e@1#$fpQc%**("), "8C@1B168cd621", "Passed!" );
+		equal( Hasher.passy("Extrasafe","e@1#$fpQc%**("), password, "Passed!" );
 	}
 });
 
 test( 'Consistency check with option : End Index - "128"', function() {
 	var testRuns = 100000;
 	changeHasherOptions("", 0, 128);
+	var password = Hasher.passy("Extrasafe","e@1#$fpQc%**(");
 	for(var i=0; i < testRuns; i++){
-		equal( Hasher.passy("Extrasafe","e@1#$fpQc%**("), "db8B61d168Bd621cb2a17079cf1701de3#b3d6b474efc43467019841301ceedbe0b685140400b6c3aa1b034212a3eb83e162eede758de00b4bc139ce6cc51565", "Extrasafe"+" :: "+"e@1#$fpQc%**(" );
+		equal( Hasher.passy("Extrasafe","e@1#$fpQc%**("), password, "Extrasafe"+" :: "+"e@1#$fpQc%**(" );
 	}
 });
 
 test( 'Consistency check for Special Characters, Upper Case, Lower Case, Numbers', function() {
 	var testRuns = 100000;
-	var result;
+	var result = "";
 	//equal( checkFor_SpecialChars_UpperCase_LowerCase_Numbers( Hasher.passy("e@1#$fpQc%**(","Extrasafe") ), true, Hasher.passy("e@1#$fpQc%**(","Extrasafe")+"" );
 	for(var i=0; i < testRuns; i++){
 		result = Hasher.passy(""+i,""+i);
@@ -55,27 +59,30 @@ test( 'Consistency check for Special Characters, Upper Case, Lower Case, Numbers
 
 test( 'Consistency check for Special Characters', function() {
 	var testRuns = 100000;
-	changeHasherOptions("", 0, 15);
+	changeHasherOptions("", 0, 12);
+	var result = "";
 	for(var i=0; i < testRuns; i++){
-		var result = Hasher.passy("Extrasafe"+i,""+i);
+		result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForSpecialChars( result ), true, result );
 	}
 });
 
 test( 'Consistency check for Upper Case', function() {
 	var testRuns = 100000;
-	changeHasherOptions("", 0, 15);
+	changeHasherOptions("", 0, 12);
+	var result = "";
 	for(var i=0; i < testRuns; i++){
-		var result = Hasher.passy("Extrasafe"+i,""+i);
+		result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForUpperCase( result ), true, result );
 	}
 });
 
 test( 'Consistency check for Lower Case', function() {
-	var testRuns = 100000
-	changeHasherOptions("", 0, 15);
+	var testRuns = 100000;
+	changeHasherOptions("", 0, 12);
+	var result = "";
 	for(var i=0; i < testRuns; i++){
-		var result = Hasher.passy("Extrasafe"+i,""+i);
+		result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForLowerCase( result ), true, result );
 	}
 });
@@ -83,7 +90,7 @@ test( 'Consistency check for Lower Case', function() {
 test( 'Consistency check for Numbers', function() {
 	var testRuns = 100000;
 	var result = "";
-	changeHasherOptions("", 0, 15);
+	changeHasherOptions("", 0, 12);
 	for(var i=0; i < testRuns; i++){
 		result = Hasher.passy("Extrasafe"+i,""+i);
 		equal( checkForNumbers( result ), true, result );
