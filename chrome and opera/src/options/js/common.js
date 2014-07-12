@@ -49,7 +49,7 @@ $("#save").click(function(){
 	var min = parseInt($("#startIndex").val());
 	var max = parseInt($("#endIndex").val());
 	//var special = $("#specialCharactersInput").is(":checked");
-	if((min<0) || (max>128) || (min>=max) || (min>115) || (max<12) || ((max-min)<12) ){
+	if((min<0) || (max>128) || (min>=max) || (min>116) || (max<12) || ((max-min)<12) ){
 		window.alert("Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 12");
 	}
 	else{

@@ -174,7 +174,6 @@ function captureFunction(event){
 	else if(event.name == "result"){
 		$("."+event.message.fromInputField).each(function(){
 			$(this).val(event.message.result);
-			window.alert($(this).val());
 		});
 	}
 }

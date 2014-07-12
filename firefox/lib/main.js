@@ -279,7 +279,7 @@ simplePrefs.on("update",function(){
 	var start = simplePrefs.prefs.startIndex;
 	var end = simplePrefs.prefs.endIndex;
 	var extraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
-	if((start<0) || (end>128) || (start>=end) || (start>115) || (end<12) || ((end-start)<12) ){
+	if((start<0) || (end>128) || (start>=end) || (start>116) || (end<12) || ((end-start)<12) ){
 		simplePrefs.prefs.updateStatus = "Password Length :: Minimum: 0, Maximum: 128\nEnd index should be greater than Start index\nDifference between End index and Start index should be greater than 12";
 	}
 	else{
