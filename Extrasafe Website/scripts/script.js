@@ -343,7 +343,8 @@ $("#portable").click(function(){
 
 
 
-$("#homeButton").click(function(){$("body").scrollTop( $("#home").offset().top );});
-$("#knowMoreButton").click(function(){$("body").scrollTop( $("#knowMore").offset().top-100  );});
-$("#installButton").click(function(){$("body").scrollTop( $("#install").offset().top-100  );});
-$("#aboutButton").click(function(){$("body").scrollTop( $("#about").offset().top-100  );});
+$("#homeButton").click(function(){$("body").scrollTop( $("#home").offset().top);});
+$("#knowMoreButton").click(function(){$("body").scrollTop( $("#knowMore").offset().top+420);});
+$("#tipsAndTricksButton").click(function(){$("body").scrollTop( $("#tipsAndTricks").offset().top-100);});
+$("#installButton").click(function(){$("body").scrollTop( $("#install").offset().top-100);});
+$("#aboutButton").click(function(){$("body").scrollTop( $("#about").offset().top-100);});

@@ -140,10 +140,26 @@ nav>ul>li:hover{
 
 #page4>ul{
 	list-style: none;
+}
+
+#page4>ul>.usePoint{
+	margin-bottom: 2%;
+	margin-top: 1%;
+	font-size: 1.75em;
+	transition: all 2s ease-in-out;
+}
+
+#page4>ul>.usePoint>p{
+	font-size: .75em;
+	margin-left: 2%;
+}
+
+#page5>ul{
+	list-style: none;
 	font-size: 1.25em;
 }
 
-#page4>ul>li{
+#page5>ul>li{
 	cursor: pointer;
 	display: inline-block;
 	width: auto;
@@ -154,77 +170,77 @@ nav>ul>li:hover{
 	background: rgba(245,245,245,0.3);
 }
 
-#page4>ul>li>a{
+#page5>ul>li>a{
 	text-decoration:none;
 	color: #000000;
 }
 
-#page4>ul>li#firefox{
+#page5>ul>li#firefox{
 	box-shadow: 0 10px 2px -2px #D55613;
 }
 
-#page4>ul>li#firefox:hover{
+#page5>ul>li#firefox:hover{
 	box-shadow: 0 3px 2px -2px #D55613;
 }
 
-#page4>ul>li#chrome{
+#page5>ul>li#chrome{
 	box-shadow: 0 10px 2px -2px #4BB547;
 }
 
-#page4>ul>li#chrome:hover{
+#page5>ul>li#chrome:hover{
 	box-shadow: 0 3px 2px -2px #4BB547;
 }
 
-#page4>ul>li#internetExplorer{
+#page5>ul>li#internetExplorer{
 	box-shadow: 0 10px 2px -2px #37A5E4;
 }
 
-#page4>ul>li#internetExplorer:hover{
+#page5>ul>li#internetExplorer:hover{
 	box-shadow: 0 3px 2px -2px #37A5E4;
 }
 
-#page4>ul>li#safari{
+#page5>ul>li#safari{
 	box-shadow: 0 10px 2px -2px #AEBFC6;
 }
 
-#page4>ul>li#safari:hover{
+#page5>ul>li#safari:hover{
 	box-shadow: 0 3px 2px -2px #AEBFC6;
 }
 
-#page4>ul>li#opera{
+#page5>ul>li#opera{
 	box-shadow: 0 10px 2px -2px #B80C0C;
 }
 
-#page4>ul>li#opera:hover{
+#page5>ul>li#opera:hover{
 	box-shadow: 0 3px 2px -2px #B80C0C;
 }
 
-#page4>ul>li#playStore{
-	margin-left: 18.75%;
+#page5>ul>li#playStore{
+	margin-left: 14.65%;
 	box-shadow: 0 10px 2px -2px #AA39BD;
 }
 
-#page4>ul>li#playStore:hover{
+#page5>ul>li#playStore:hover{
 	box-shadow: 0 3px 2px -2px #AA39BD;
 }
 
-#page4>ul>li#appleStore{
+#page5>ul>li#appleStore{
 	box-shadow: 0 10px 2px -2px #303135;
 }
 
-#page4>ul>li#appleStore:hover{
+#page5>ul>li#appleStore:hover{
 	box-shadow: 0 3px 2px -2px #303135;
 }
 
-#page4>ul>li#portable{
+#page5>ul>li#portable{
 	box-shadow: 0 10px 2px -2px #FFA500;
 }
 
-#page4>ul>li#portable:hover{
+#page5>ul>li#portable:hover{
 	box-shadow: 0 3px 2px -2px #FFA500;
 }
 
-#page4>#inProgress{
+#page5>#inProgress{
 	background: rgba(245,245,245,0.8);
 	border-radius: 5%;
 	padding: 1% 5%;
@@ -232,25 +248,25 @@ nav>ul>li:hover{
 	width: 90%;	
 }
 
-#page4>#inProgress>input{
+#page5>#inProgress>input{
 	height: 60%;
 	width: 18%;
 	display: inline;
 }
 
-#page4>#inProgress>input[type="text"]{
+#page5>#inProgress>input[type="text"]{
 	outline: none;
 	border: 1px solid #808080;
 	padding: 0.5%;
 	transition: all 0.25s ease;
 }
 
-#page4>#inProgress>input[type="text"]:focus{
+#page5>#inProgress>input[type="text"]:focus{
 	border-color: #37A5E4;
 	box-shadow: 0px 0px 10px #37A5E4;
 }
 
-#page4>#inProgress>input[type="button"]{
+#page5>#inProgress>input[type="button"]{
 	outline: none;
 	border: none;
 	transition: all 0.25s ease;
@@ -258,14 +274,40 @@ nav>ul>li:hover{
 	color: #FFFFFF;
 }
 
-#page4>#inProgress>input[type="button"]:hover{
+#page5>#inProgress>input[type="button"]:hover{
 	background: #006400;
 	cursor: pointer;
 }
 
-#page5>ul{
+#page6>ul{
 	list-style: none;
 	font-size: 1.5em;
+}
+
+li.person{
+	height: 280px;
+	width: 210px;
+	display: inline-block;
+	margin: 5px;
+}
+
+.personDetails{
+	height: 50px;
+	width: 100%;
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+.personDetailsLinks>a>img{
+	height: 30px;
+	width: 30px;
+	margin: 10px;
+	float: right;
+}
+
+.personDetailsName{
+	color: black;
+	font-style: italic;
 }
 
 #scene>#extrasafeIcon{
@@ -342,4 +384,73 @@ padding: 5px;
 border: 0;
 box-shadow: 0;
 display: inline;
+}
+
+/* made by Brenna - http://csshexagon.com */
+.hexagon {
+  position: relative;
+  width: 200px; 
+  height: 115.47px;
+  margin: 57.74px 0;
+  background-size: auto 230.9401px;
+  background-position: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.75);
+}
+
+.hexTop,
+.hexBottom {
+  position: absolute;
+  z-index: 1;
+  width: 141.42px;
+  height: 141.42px;
+  overflow: hidden;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background: inherit;
+  left: 29.29px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.75);
+}
+
+/*counter transform the bg image on the caps*/
+.hexTop:after,
+.hexBottom:after {
+  content: "";
+  position: absolute;
+  width: 200.0000px;
+  height: 115.47005383792516px;
+  -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-57.7350px);
+  -ms-transform:      rotate(45deg) scaleY(1.7321) translateY(-57.7350px);
+  transform:          rotate(45deg) scaleY(1.7321) translateY(-57.7350px);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  background: inherit;
+}
+
+.hexTop {
+  top: -70.7107px;
+}
+
+.hexTop:after {
+  background-position: center top;
+}
+
+.hexBottom {
+  bottom: -70.7107px;
+}
+
+.hexBottom:after {
+  background-position: center bottom;
+}
+
+.hexagon:after {
+  content: "";
+  position: absolute;
+  top: 0.0000px;
+  left: 0;
+  width: 200.0000px;
+  height: 115.4701px;
+  z-index: 2;
+  background: inherit;
 }
