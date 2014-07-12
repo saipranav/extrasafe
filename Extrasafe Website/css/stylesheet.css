@@ -305,9 +305,9 @@ li.person{
 	float: right;
 }
 
-.personDetailsName{
+.person>a{
 	color: black;
-	font-style: italic;
+	text-decoration: none;
 }
 
 #scene>#extrasafeIcon{
