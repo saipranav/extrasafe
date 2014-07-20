@@ -96,33 +96,30 @@ function findSiteTag(url){
 	}
 	siteUrl = url;
 	siteTag = "";
+
+	//Remove the http:// tag if its in siteTag there.
+	if(url.indexOf("://") > 0){
+		url = url.substr( url.indexOf("://")+3, url.length );
+	}
+	//Split the url with "/"
+	var url = url.split("/")[0];
+
 	//Split the url with ".".
 	var siteUrlBreakupArray = url.split(".");
 
 	if(siteUrlBreakupArray.length == 0){
 		siteTag = siteUrlBreakupArray[0];
+		return;
 	}
 
 	//check the array strings with the pattern.
 	for(var i=0; i<siteUrlBreakupArray.length; i++){
 		var tempVar = siteUrlBreakupArray[i];
-		if(tempVar.match("^com") || tempVar.match("^org") || tempVar.match("^gov")){
-			siteTag = siteUrlBreakupArray[i-1];
-			break;
-		}
-		else if(tempVar.match("^co")){
-			siteTag = siteUrlBreakupArray[i-1];
-			break;
-		}
-		else if(tempVar.match("^in")){
+		if(tempVar.match("^(com|org|net|int|edu|gov|mil|co)$") || tempVar.match("^(in|ae|an|aq|ar|au|bd|be|bm|br|bw|ca|ch|cl|cn|cr|cs|cu|cz|de|dk|eg|es|eu|fi|fr|gb|ge|gl|gr|hk|hu|id|ie|il|iq|ir|is|it|jm|jp|ke|kh|kw|lk|mm|mn|mx|my|ng|np|nz|om|pe|pt|qa|ro|ru|sa|se|sg|su|th|uk|us|uz|va|ve|vn|za|zw)$")){
 			siteTag = siteUrlBreakupArray[i-1];
 			break;
 		}
 	}
 
-	//Remove the http:// tag if its in siteTag there.
-	if(siteTag.indexOf("://") > 0){
-		siteTag = siteTag.substr( siteTag.indexOf("://")+3, siteTag.length );
-	}
 	return;
 }
