@@ -2,6 +2,8 @@ $("#helpSiteName").hide();
 $("#helpMasterPassword").hide();
 $("#helpExtrasafe").hide();
 $("#optionsDiv").slideToggle("slow");
+$("#minLength").val(0);
+$("#maxLength").val(12);
 
 $("#siteName").hover(function(){
 	$("#helpSiteName").show();
@@ -60,7 +62,8 @@ $("#generate").click(function(){
 			else{
 				Hasher.start = minLength;
 				Hasher.end = maxLength;
-				$("#extrasafePassword").val(Hasher.passy($("#siteName").val(), $("#masterPassword").val(), $("#extraSequence").val() ));
+				Hasher.extraSecuritySequence = $("#extraSequence").val();
+				$("#extrasafePassword").val( Hasher.passy($("#masterPassword").val(), $("#siteName").val()) );
 			}
 		}
 		else{
