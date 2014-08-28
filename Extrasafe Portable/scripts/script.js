@@ -2,6 +2,8 @@ $("#helpSiteName").hide();
 $("#helpMasterPassword").hide();
 $("#helpExtrasafe").hide();
 $("#optionsDiv").slideToggle("slow");
+$("#minLength").val(0);
+$("#maxLength").val(12);
 
 $("#siteName").hover(function(){
 	$("#helpSiteName").show();
@@ -55,12 +57,13 @@ $("#generate").click(function(){
 				maxLength = 10;
 			}
 			if( (minLength<0) || (maxLength>128) || (minLength>=maxLength) || (minLength>116) || (maxLength<12) || ((maxLength-minLength)<12) ){
-				window.alert("Minimum length : 0\nMaximum length : 128\nstart index greater than end index\nDifference between end index and start index should be greater than 12");
+				window.alert("Minimum length : 0\nMaximum length : 128\nMinimum length greater than Maximum length\nDifference between max length and min length should be greater than 12");
 			}
 			else{
 				Hasher.start = minLength;
 				Hasher.end = maxLength;
-				$("#extrasafePassword").val(Hasher.passy($("#siteName").val(), $("#masterPassword").val(), $("#extraSequence").val() ));
+				Hasher.extraSecuritySequence = $("#extraSequence").val();
+				$("#extrasafePassword").val( Hasher.passy($("#masterPassword").val(), $("#siteName").val()) );
 			}
 		}
 		else{
