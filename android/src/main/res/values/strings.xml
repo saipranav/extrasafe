@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Extrasafe</string>
+    <string name="info">Extrasafe generates different passwords for different sites using your same master password</string>
+    <string name="settingsInfo">Extrasafe provides you ways to manifold your security. The hacker or intruder must know these settings to get your site password, even if he knows the master password some how! You are not requested to enter it every time like master password</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="enter_url">Site Tag</string>
+    <string name="enter_url_example">Example: google for www.google.com</string>
+
+    <string name="enter_master_password">Your Master Password</string>
+    <string name="generate">Your Password</string>
+
+    <string name="extraSecuritySequenceInfo">Extra security sequence is a very long random string which is stored with in your Android Application. Please make note of this string if you change your computer/mobile devices often, as you may need this to reenter it in Extrasafe settings again to generate your correct site password.</string>
+    <string name="extraSecuritySequenceText">Extra Security Sequence</string>
+    <string name="startIndexInfo">Start index is the point which is used to generating your site password. Default value is 0. Minimum value is 0. Maximum value is 116.</string>
+    <string name="startIndexText">Start Index</string>
+    <string name="endIndexInfo">End index is the point which is used to generating your site password. Default value is 12. Minimum value is 12. Maximum value is 128.</string>
+    <string name="endIndexText">End Index</string>
+
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset">Reset</string>
+
+</resources>
