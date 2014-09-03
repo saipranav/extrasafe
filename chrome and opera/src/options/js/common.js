@@ -1,4 +1,6 @@
-$("#status").css("visibility","hidden");
+$("#statusSave").css("display","none");
+$("#statusCancel").css("display","none");
+$("#statusReset").css("display","none");
 $("#passwordLength").hide();
 //$("#specialCharacters").hide();
 $("#securityLevelHeader").addClass("activeOption");
@@ -59,21 +61,31 @@ $("#save").click(function(){
 			endIndex : max
 			//specialCharactersCheck : special
 		}, function(){
-			$("#status").css("visibility","visible");
+			$("#statusSave").css("display","inline");
 			setTimeout(function(){
-				$("#status").css("visibility","hidden");
-			}, 1000)
+				$("#statusSave").css("display","none");
+				window.close();
+			}, 2000);
 		});
 	}
 });
 
 $("#cancel").click(function(){
-	window.close();
+	$("#statusCancel").css("display","inline");
+	setTimeout(function(){
+		$("#statusCancel").css("display","none");
+		window.close();
+	}, 2000);
 });
 
 $("#reset").click(function(){
 	$("#securityLevelInput").val("");
 	$("#startIndex").val("0");
 	$("#endIndex").val("12");
+	$("#statusReset").css("display","inline");
+	setTimeout(function(){
+		$("#statusReset").css("display","none");
+		window.close();
+	}, 2000);
 	//$("#specialCharactersInput").prop("checked",true);
 });

@@ -62,18 +62,18 @@ body{
 	box-shadow: 0px 0px 5px #151515;
 }
 
-button:nth-child(2){
-	background-color: #32CD32;
+#save{
+	background-color: #228B22;
 	color: #FFFFFF;
 }
 
-button:nth-child(3){
-	background-color: #FF8C00;
+#cancel{
+	background-color: #FFA500;
 	color: #FFFFFF;
 }
 
-button:nth-child(4){
-	background-color: #1E90FF;
+#reset{
+	background-color: #FF4500;
 	color: #FFFFFF;
 }
 

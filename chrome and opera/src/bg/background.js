@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 //Toggle browser actions.
+//Saving the extrasafe disabled field in storage
 chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 	chrome.browserAction.getTitle({},function(title){
 		if(title == "Click to disable extrasafe"){
@@ -36,21 +37,35 @@ chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 			extrasafeDisabled = true;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe_red19.png"});
 			chrome.browserAction.setTitle({title: "Click to enable extrasafe"});
+			chrome.storage.sync.set({
+				extrasafeDisabledStorageFlag : true,
+			}, function(){});
 		}
 		else{
 			broadcast({result:"enable password div"});
 			extrasafeDisabled = false;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe19.png"});
 			chrome.browserAction.setTitle({title: "Click to disable extrasafe"});
+			chrome.storage.sync.set({
+				extrasafeDisabledStorageFlag : false,
+			}, function(){});
 		}
 	});
 });
 
 //To send disabled message to newly created or navigated when browser action is already disabled
+//When the extrasafeDisabled fetched from storage
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	chrome.storage.sync.get({
+    		extrasafeDisabledStorageFlag : false,
+  		}, function(items) {
+			extrasafeDisabled = items.extrasafeDisabledStorageFlag;
+  	});
 	if(extrasafeDisabled){
 		if(changeInfo.status == "complete"){
 			chrome.tabs.sendMessage(tabId, {result:"disable password div"});
+			chrome.browserAction.setIcon({path:"icons/Extrasafe_red19.png"});
+			chrome.browserAction.setTitle({title: "Click to enable extrasafe"});
 		}
 	}
 });
@@ -72,14 +87,6 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 	  }*/
 	}
 });
-
-function initializeStorageVariables(){
-	chrome.storage.sync.get({
-    	securitySequence : "",
-  	}, function(items) {
-		extraSecuritySequence = items.securitySequence;
-  	});
-}
 
 function broadcast(message){
 	chrome.tabs.query({}, function(tabs){
@@ -121,5 +128,3 @@ function findSiteTag(url){
 	}
 	return;
 }
-
-initializeStorageVariables();
