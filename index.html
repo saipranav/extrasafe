@@ -14,7 +14,7 @@
 		<ul>
 			<li id="homeButton">Home</li>
 			<li id="knowMoreButton">Know More</li>
-			<li id="tipsAndTricksButton">Tips / Tricks</li>
+			<li id="faqButton">FAQ</li>
 			<li id="installButton">Install</li>
 			<li id="aboutButton">About</li>
 		</ul>
@@ -41,9 +41,13 @@
 
 	<section id="home">
 		<div id="page1" class="page">	
-			<heading>Do you find it frustrating to recall <b>different</b> complicated passwords for different websites?</heading>
+			<heading>Are you finding it difficult to remember all your passwords?</heading>
+			<br><br>
+			<center><heading>Or</heading></center>
 			<br>
-			<heading>How about remembering just one master password to generate different secured passwords on the fly!</heading>
+			<heading>Do you fall under the other category of people who have the same password for all sites?</heading>
+			<br>
+			<p>Either ways, please sit back and relax while we generate passwords for you everytime. With Extrasafe, all you have to do is remember just ONE master password, and we take care of the rest.</p>
 			<p>Here is a demo of Extrasafe. Hover on site names to see passwords generated from the <b>same</b> Master Password. This demo is purely for illustration purposes. The usage of Extrasafe is not limited to the sites displayed below.</p>
 		</div>
 		<div id="container" class="container">
@@ -75,7 +79,7 @@
 			<img id="Yahoo" class="sceneText" src="Extrasafe Website/images/yahoo.png"></img>
 		</div>
 		<div id="page2" class="page">
-			<heading><b>Why</b> should you use Extrasafe</heading>
+			<heading><b>Why</b> should you use Extrasafe &nbsp;&nbsp;&nbsp; (hover to see in detail)</heading>
 			<ul>
 				<li class="usePoint">
 					Generate Passwords on the fly
@@ -86,13 +90,19 @@
 					<p>Generates totally different passwords for different sites. Even if one of your accounts is compromised, your other accounts cannot be tampered with.</p>
 				</li>
 				<li class="usePoint">
-					Your passwords are safer than a safe
+					Your passwords are safer than a safe, because we don't store it anywhere, we create it everytime
 					<p>Extrasafe will NEVER store passwords anywhere. All computations are done within your browser/application.</p>
 				</li>
 				<li class="usePoint">
 					Simple, Efficient, Sustainable Design
 					<p>Extrasafe is designed for humans.</p>
 					<p>It is created in such a way that users will not experience any delay in log in and sign up processes.</p>
+				</li>
+				<li class="usePoint">
+					Options to double your security
+					<p>You have extra security sequence which is also added to password generation, just like another master password but not asked everytime.</p>
+					<p>You have start index, end index to derive a substring from a lengthy random sequence of characters.</p>
+					<p>These options are stored within your browser/app.</p>
 				</li>
 				<li class="usePoint">
 					Mercilessly Tested
@@ -116,8 +126,9 @@
 			</div>
 				<heading><b>How</b> it works</heading>
 					<ul>
-						<li>Your <i>master password</i> <b>+</b> <i>site name</i> will be given to a Hash Algorithm.</li>
-						<li>Say Master Password (<i>mypass#12</i>) in Site (<i>facebook</i>) will generate a output password (<i>7{A32e3088#Ef4b1f598@75</i>).</li>
+						<li>Remember a good master password like (<i>q1!Q</i>) </li>
+						<li>Your <i>master password</i> <b>+</b> <i>site name</i> will be given to a Hash Algorithm</li>
+						<li>Say Master Password (<i>q1!Q</i>) in Site (<i>facebook</i>) will generate a output password (<i>7{A32e08#Ef4b1f598@7</i>)</li>
 						<li>So, what is a Hash Algorithm?</li>
 						<ul>
 							<li>It will return the same output (a sequence of characters), when you give the same input.</li>
@@ -130,22 +141,28 @@
 		</div>
 	</section>
 
-	<section id="tipsAndTricks">
+	<section id="faq">
 		<div id="page4" class="page">
-			<heading><b>Tips</b> and <b>Tricks</b></heading>
+			<heading><b>Doubts</b> that you may have &nbsp;&nbsp;&nbsp; (hover to see the answers)</heading>
 			<ul>
-				<h2>Extrasafe provides ways to increase your level of security : </h2>
 				<li class="usePoint">
-				Goto Extrasafe Options in your extension/application add a lengthy sequence of characters/numbers/special characters in extra security sequence
-					<p>Extrasafe is a open source product, but we need you to be more secured.The Extra security sequence is given by you, we will not disturb you every time for extra security sequence because we store it in your browser. We give this extra security sequence with site name and master password for generating the site password.</p>
+				What if someone comes to know my master password?
+					<p>He must know that you are using Extrasafe to generate same site password.</p>
+					<p>If you have changed the default Extrasafe options, he must know the exact options to generate the same site password.</p>
 				</li>
 				<li class="usePoint">
-				Goto Extrasafe Options in your extension/application modify the start index, end index for generated password
-					<p>Extrasafe is a open source product, but we need you to be more secured. The default start and end indexes are 0 and 12 respectively. You can change these indexes in Extrasafe Options.<br>Minimum start index : 0, Maximum start index: 115<br>Minimum end index: 12, Maximum end index: 128</p>
+				What are default Extrasafe options? 
+					<p>Extra security sequence : Its like another master password, also used to generate site passwords. Default : </p>
+					<p>Start Index : Its a number which is used along with end index to derive a substring from the lengthy random string, which is the result from generation algorithm. Default : Minimum - 0, Maximum - 116</p>
+					<p>End Index : Its a number which is used along with start index to derive a substring from the lengthy random string, which is the result from generation algorithm. Default : Minimum - 12, Maximum - 128</p>
+					<p>To change default settings in browser extension you can goto manage extensions then select Options under the Extrasafe space.</p>
+					<p>To change default settings in mobile application you can open menu and select Options.</p>
 				</li>
 				<li class="usePoint">
-				In case if your browser extension / mobile application fails we have a backup plan
-					<p><a href="portable.html" target="_blank">Extrasafe Portable</a> is a web page where you can give your site name, master password, extrasafe options to generate the site password. If you want Extrasafe to used offline you can <a href="https://github.com/saipranav/Extrasafe/archive/portable.zip">download</a> Extrasafe Portable</p>
+				What if something goes wrong?
+					<p>We have a backup plan!</p>
+					<p><a href="portable.html" target="_blank">Extrasafe Portable</a> is a web page where you can give your site name, master password, extrasafe options to generate the site password when ever you need.</p>
+					<p>If you want Extrasafe to used offline you can <a href="https://github.com/saipranav/Extrasafe/archive/portable.zip">download</a> Extrasafe Portable</p>
 				</li>
 			</ul>
 	</section>
@@ -174,7 +191,7 @@
 
 	<section id="about">
 		<div id="page6" class="page">
-			<heading>About</heading>
+			<heading><b>About</b></heading>
 				<ul>
 					<li>We are enthusiastic in <b>crafting</b> high quality products that are really useful to people.</li>
 					<li>We are <b>thrilled</b> to see our products being used.</li>
