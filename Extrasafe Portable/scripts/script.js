@@ -56,8 +56,8 @@ $("#generate").click(function(){
 			if(isNaN(maxLength)){
 				maxLength = 10;
 			}
-			if( (minLength<0) || (maxLength>128) || (minLength>=maxLength) || (minLength>116) || (maxLength<12) || ((maxLength-minLength)<12) ){
-				window.alert("Minimum length : 0\nMaximum length : 128\nMinimum length greater than Maximum length\nDifference between max length and min length should be greater than 12");
+			if( (minLength<0) || (maxLength>128) || (minLength>=maxLength) || (minLength>115) || (maxLength<12) || ((maxLength-minLength)<12) ){
+				window.alert("Minimum Start index : 0\nMaximum End index : 12\n\nMinimum Start index : 115\nMaximum End index : 128");
 			}
 			else{
 				Hasher.start = minLength;
