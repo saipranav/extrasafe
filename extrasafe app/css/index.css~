@@ -1,0 +1,51 @@
+body {
+    background-color:#FFFFFF;	
+    font-size:12px;
+    height:100%;
+    width:80%;
+	margin: auto auto;
+}
+
+#logo{
+    width:70%;
+    max-width:206px;
+    margin:35px 0 40px;
+}
+
+#generate-button{
+	height: 100px;
+    width: 100px;
+	border-radius: 5px;
+}
+
+#about-button>a{
+	background-color: #8e44ad;
+}
+
+#about-button>a:hover{
+	background-color: #9B59B6;
+}
+
+.page{
+	padding: 5% 0%;
+}
+
+.error{
+	color: #e74c3c
+}
+
+.my-button{
+	margin:auto auto;
+	margin-bottom: 20px;
+}
+
+.center-text{
+    text-align:center;
+}
+
+.big-text{
+    font-size: 1.3em;
+}
+.small-text{
+    font-size:0.8em;
+}
