@@ -42,6 +42,18 @@ body {
     text-align:center;
 }
 
+#tooltip{
+    position: absolute;
+    background-color: #282828;
+    color: #FFFFFF;
+    top: 80%;
+    padding: 10px 19px;
+    border-radius: 6px;
+    width: 80%;
+    text-align: center;
+    font-size: 1.3em;
+}
+
 .big-text{
     font-size: 1.3em;
 }

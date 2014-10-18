@@ -1,6 +1,10 @@
 $("#options-page").hide();
 $("#about-page").hide();
 
+$("#site-password").click(function(){
+	$("#site-password").select();
+});
+
 $("#options-button").click(function(){
 	$("#home-page").hide();
 	$("#about-page").hide();
@@ -21,6 +25,7 @@ $(".back-button").click(function(){
 
 $("#generate-button").click(function(){
 
+	var goAhead = false;
 	//get all required parameters
 	var masterPassword = $("#master-password").val();
 	var siteName = $("#site-name").val();
@@ -31,20 +36,62 @@ $("#generate-button").click(function(){
 		$("#master-password").keyup(function(){
 			$("#master-password").parent().removeClass("has-error");
 		});
+		$("#master-password").focus();
 	}
 	else{
 		$("#master-password").parent().removeClass("has-error");
+		goAhead = true;
 	}
 
-	//check site name
+	if(goAhead){
+		//check site name
 	if(siteName == ""){
 		$("#site-name").parent().addClass("has-error");
 		$("#site-name").keyup(function(){
 			$("#site-name").parent().removeClass("has-error");
 		});
+		$("#site-name").focus();
+		goAhead = false;
 	}
 	else{
 		$("#site-name").parent().removeClass("has-error");
+		goAhead = true;
 	}
+	}
+
+	var startIndex = 5;
+	var endIndex = 20;
+	var extraSequence = "a";
+
+	if(goAhead){
+		Hasher.start = startIndex;
+		Hasher.end = endIndex;
+		Hasher.extraSecuritySequence = extraSequence;
+		$("#site-password").val( Hasher.passy($("#master-password").val(), $("#site-name").val()) );
+	}
+	else{
+		$("#site-password").val("");
+	}
+
 });
 
+$("#save-button").click(function(){
+	$("#tooltip").html("All your options are saved").fadeIn();
+	setTimeout(function(){
+		$("#tooltip").fadeOut();
+	},2000);
+});
+
+$("#cancel-button").click(function(){
+	$("#tooltip").html("Your operations are canceled").fadeIn();
+	setTimeout(function(){
+		$("#tooltip").fadeOut();
+	},2000);
+});
+
+$("#reset-button").click(function(){
+	$("#tooltip").html("All your options are reset to default").fadeIn();
+	setTimeout(function(){
+		$("#tooltip").fadeOut();
+	},2500);
+});
