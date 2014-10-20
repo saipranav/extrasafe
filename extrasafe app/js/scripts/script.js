@@ -4,8 +4,6 @@ $("#helpExtrasafe").hide();
 $("#optionsDiv").slideToggle("slow");
 $("#minLength").val(0);
 $("#maxLength").val(12);
-$("#optionsHide").hide("fast");
-$("#optionsDiv").hide("fast");
 
 $("#siteName").hover(function(){
 	$("#helpSiteName").show();
@@ -37,16 +35,14 @@ $("#showPassword").hover(function(){
 	$("#masterPassword").attr("type","password");
 });
 
-$("#optionsHide").click(function(){
-	$("#optionsHide").slideToggle("fast");
-	$("#optionsShow").slideToggle("fast");
-	$("#optionsDiv").slideToggle("fast");
-});
-
-$("#optionsShow").click(function(){
-	$("#optionsHide").slideToggle("fast");
-	$("#optionsShow").slideToggle("fast");
-	$("#optionsDiv").slideToggle("fast");
+$("#options").click(function(){
+	if($(this).text() == "Hide Options"){
+		$(this).text("Show Options");
+	}
+	else{
+		$(this).text("Hide Options");
+	}
+	$("#optionsDiv").slideToggle("slow");
 });
 
 $("#generate").click(function(){
