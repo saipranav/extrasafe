@@ -126,6 +126,11 @@ $("#generate-button").click(function(){
 		Hasher.end = endIndex;
 		Hasher.extraSecuritySequence = extraSequence;
 		$("#site-password").val( Hasher.passy($("#master-password").val(), $("#site-name").val()) );
+		$("#tooltip").html("Your site password is generated, please copy it from the Site Password box").fadeIn();
+		setTimeout(function(){
+			$("#tooltip").fadeOut();
+		},2000);
+		return;
 	}
 	else{
 		$("#site-password").val("");
