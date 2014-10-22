@@ -87,8 +87,10 @@ $("#generate-button").click(function(){
 	//check master password
 	if(masterPassword == ""){
 		$("#master-password").parent().addClass("has-error");
+		$("#master-password").siblings(".error").show();
 		$("#master-password").keyup(function(){
 			$("#master-password").parent().removeClass("has-error");
+			$("#master-password").siblings(".error").hide();
 		});
 		$("#master-password").focus();
 	}
@@ -101,8 +103,10 @@ $("#generate-button").click(function(){
 		//check site name
 		if(siteName == ""){
 			$("#site-name").parent().addClass("has-error");
+			$("#site-name").siblings(".error").show();
 			$("#site-name").keyup(function(){
 				$("#site-name").parent().removeClass("has-error");
+				$("#site-name").siblings(".error").hide();
 			});
 			$("#site-name").focus();
 			goAhead = false;
