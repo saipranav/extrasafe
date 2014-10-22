@@ -24,7 +24,6 @@ var app = {
     }
 };
 
-
 $("#options-page").hide();
 $("#about-page").hide();
 
@@ -148,9 +147,11 @@ $("#save-button").click(function(){
 		},2000);
 		return;
 	}
+
 	store.setItem("extraSecuritySequence", extraSequence);
 	store.setItem("startIndex", startIndex);
 	store.setItem("endIndex", endIndex);
+
 	$("#tooltip").html("All your options are saved").fadeIn();
 	setTimeout(function(){
 		$("#tooltip").fadeOut();
