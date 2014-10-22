@@ -4,7 +4,8 @@
     	<meta charset="utf-8">
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <!-- <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
+        <meta name="viewport" content="width=device-width, user-scalable=no">
     	<title>Extrasafe</title>
 
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
@@ -40,7 +41,7 @@
 		        	<input type="text" readonly class="form-control" id="site-password" data-mini="true"/>
 				</div>
 				<div class="form-group center-text">
-					<img id="generate-button" src="img/generate.png" title="Generate"></img>
+					<img id="generate-button" src="img/generate1.png" title="Generate"></img>
 				</div>
 				<div id="about-button" class="my-button">
           			<a class="btn btn-block btn-lg btn-default"><span class="fui-cmd"></span> About</a>
@@ -60,8 +61,8 @@
 					</div>
 					<div class="form-group center-text">
 		        		<label for="start-index">Start Index</label>
-						<input type="number" min=0 max=115 class="form-control" minid="start-index" data-mini="true"/>
-						<label class="error" style="display:none" >Minimum : 12, Maximum : 128</label>
+						<input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
+						<label class="error" style="display:none" >Minimum : 0, Maximum : 115</label>
 					</div>
 					<div class="form-group center-text">
 		        		<label for="end-index">End Index</label>
