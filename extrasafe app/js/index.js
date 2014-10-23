@@ -195,3 +195,8 @@ $("#reset-button").click(function(){
 		$("#tooltip").fadeOut();
 	},2500);
 });
+
+$("#show-password").click(function(){
+	var type = ( $("#master-password").attr("type") == "text" ) ? "password" : "text";
+	$("#master-password").attr("type",type);
+});
