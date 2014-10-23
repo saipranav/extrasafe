@@ -60,3 +60,7 @@ body {
 .small-text{
     font-size:0.8em;
 }
+
+.form-control[readonly]{
+    color : #1B1D1D;
+}
