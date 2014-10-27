@@ -64,3 +64,8 @@ body {
 .form-control[readonly]{
     color : #1B1D1D;
 }
+
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
