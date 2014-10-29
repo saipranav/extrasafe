@@ -61,11 +61,15 @@ body {
     font-size:0.8em;
 }
 
-.form-control[readonly]{
+#site-password{
     color : #1B1D1D;
 }
 
 #scrollable-dropdown-menu .tt-dropdown-menu {
   max-height: 150px;
   overflow-y: auto;
+}
+
+.help-label{
+    line-height: 1.25em;
 }

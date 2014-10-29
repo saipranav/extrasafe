@@ -29,6 +29,7 @@
                     <div id="scrollable-dropdown-menu">
                         <input class="typeahead form-control" id="site-name" data-mini="true" type="text" placeholder="">
                     </div>
+                    <label class="help-label">Example if the site is <b>www.gmail.com</b>, just give <b>google</b></label>
                     <label class="error" style="display:none" >Mandatory field</label>
 				</div>
 				<div class="form-group center-text">
@@ -37,25 +38,22 @@
                     <img id="show-password" src="./img/Unmask16.png"></img>
                     <label class="error" style="display:none" >Mandatory field</label>
 				</div>
-				<div id="options-button" class="my-button">
-          			<a class="btn btn-block btn-lg btn-info"><span class="fui-gear"></span> Options</a>
-        		</div>
+                <div class="form-group center-text">
+                    <img id="generate-button" src="img/generate.png" title="Generate"></img>
+                </div>
 				<div class="form-group center-text">
 					<label for="site-password">Site Password</label>
-		        	<input type="text" readonly class="form-control" id="site-password" data-mini="true"/>
+		        	<input type="text" class="form-control" readonly id="site-password" data-mini="true"/>
 				</div>
-				<div class="form-group center-text">
-					<img id="generate-button" src="img/generate.png" title="Generate"></img>
-				</div>
+                <div id="options-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-info"><span class="fui-gear"></span> Options</a>
+                </div>
 				<div id="about-button" class="my-button">
           			<a class="btn btn-block btn-lg btn-default"><span class="fui-cmd"></span> About</a>
         		</div>
             </div>
 
             <div id="options-page" class="page" data-role="page">
-				<div class="back-button">
-          			<a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
-        		</div>
                 <h4 class="center-text">Options</h4>
 				<br>
                 <div data-role="content">
@@ -82,14 +80,14 @@
 					<div id="reset-button" class="my-button">
           				<a class="btn btn-block btn-lg btn-danger"><span class="fui-alert-circle"></span> Reset</a>
         			</div>
+                    <div class="back-button">
+                        <a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
+                    </div>
                 </div>
 
             </div>
 
             <div id="about-page" class="page" data-role="page">
-                <div class="back-button">
-          			<a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
-        		</div>
                 <h4 class="center-text">About</h4>
                 <div data-role="content"  class="big-text center-text">
                     <h6>Version</h6>
@@ -97,6 +95,9 @@
                     <h6>Team</h6>
                     <p>asdasd asdasda asdasdasda asd asdasd as dasd asads dasdasda asdas da sdasdasdas dasd as dasd asd asd asd</p>
 					<a target="_blank" href="http://saipranav.github.io/extrasafe"> To Know More</a>
+                </div>
+                <div class="back-button">
+                    <a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
                 </div>
             </div>
 

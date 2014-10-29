@@ -18,6 +18,9 @@ var app = {
         if(store.getItem("endIndex") == null){
         	store.setItem("endIndex", 12);
         }
+        if(store.getItem("sites") == null){
+        	store.setItem("sites", JSON.stringify(['google', 'facebook']));
+        }
         $("#extra-security-sequence").val(store.getItem("extraSecuritySequence"));
 		$("#start-index").val(store.getItem("startIndex"));
 		$("#end-index").val(store.getItem("endIndex"));
@@ -51,18 +54,17 @@ var substringMatcher = function(strs) {
   };
 };
 
-var sites = ['google', 'facebook'];
-
 $('#site-name').typeahead({
   hint: true,
   highlight: true,
-  minLength: 1
+  minLength: 2
 },
 {
   name: 'sites',
   displayKey: 'value',
-  source: substringMatcher(sites)
-});
+  source: substringMatcher(JSON.parse(store.getItem("sites")))
+}
+);
 
 $("#site-password").click(function(){
 	$("#site-password").select();
@@ -156,7 +158,7 @@ $("#generate-button").click(function(){
 
 	var extraSequence = store.getItem("extraSecuritySequence");
 	var startIndex = store.getItem("startIndex");
-	var endIndex = store.getItem("endIndex");
+	var endIndex = store.getItem("endIndex");			
 
 	if(goAhead){
 		Hasher.start = startIndex;
@@ -167,6 +169,11 @@ $("#generate-button").click(function(){
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},2000);
+		var sites = JSON.parse(store.getItem("sites"));
+		if($.inArray($("#site-name").val(),sites) == -1){
+			sites.push($("#site-name").val());
+		}
+		store.setItem("sites", JSON.stringify(sites));
 		return;
 	}
 	else{
