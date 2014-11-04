@@ -73,3 +73,33 @@ body {
 .help-label{
     line-height: 1.25em;
 }
+
+ul#credits{
+    list-style: none;
+    font-size: 1.5em;
+    padding-left: 0px;
+}
+
+li.person{
+    display: inline-block;
+}
+
+.personDetails{
+    height: 50px;
+    width: 100%;
+    margin: auto auto;
+}
+
+.person>a>img{
+    height: 200px;
+    width: 200px;
+}
+
+.person>a{
+    color: #34495E;
+    text-decoration: none;
+}
+
+.rounded{
+    border-radius: 50%;
+}
