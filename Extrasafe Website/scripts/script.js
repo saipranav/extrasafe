@@ -155,13 +155,10 @@ $("#yahooIcon").mousemove(function(e){
 	$("#Yahoo").css({ left:e.pageX+5 , top:e.pageY+10 });
 });
 
-$(".usePoint").hover(
+$(".usePoint").click(
 	function(){
+		$(".usePoint").children("p").hide(1000);
 		$(this).children("p").show(500);	
-	}
-	,
-	function(){
-		$(this).children("p").hide(1000);
 	}
 );
 

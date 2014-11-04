@@ -100,6 +100,7 @@ nav>ul>li:hover{
 	margin-top: 1%;
 	font-size: 1.75em;
 	transition: all 2s ease-in-out;
+	cursor: pointer;
 }
 
 #page2>ul>.usePoint>p{
@@ -147,6 +148,7 @@ nav>ul>li:hover{
 	margin-top: 1%;
 	font-size: 1.75em;
 	transition: all 2s ease-in-out;
+	cursor: pointer;
 }
 
 #page4>ul>.usePoint>p{
