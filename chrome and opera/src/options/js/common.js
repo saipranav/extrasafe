@@ -82,10 +82,20 @@ $("#reset").click(function(){
 	$("#securityLevelInput").val("");
 	$("#startIndex").val("0");
 	$("#endIndex").val("12");
-	$("#statusReset").css("display","inline");
-	setTimeout(function(){
-		$("#statusReset").css("display","none");
-		window.close();
-	}, 2000);
+	var sequence = "";
+	var min = 0;
+	var max = 12;
+	chrome.storage.sync.set({
+			securitySequence : sequence,
+			startIndex : min,
+			endIndex : max
+			//specialCharactersCheck : special
+		}, function(){
+			$("#statusReset").css("display","inline");
+			setTimeout(function(){
+				$("#statusReset").css("display","none");
+				window.close();
+			}, 2000);
+	});
 	//$("#specialCharactersInput").prop("checked",true);
 });
