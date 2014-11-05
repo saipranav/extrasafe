@@ -1,0 +1,126 @@
+body {
+    background-color:#FFFFFF;	
+    font-size:12px;
+    height:100%;
+    width:80%;
+	margin: auto auto;
+}
+
+#logo{
+    width:70%;
+    max-width:206px;
+    margin:35px 0 40px;
+}
+
+#generate-button{
+	height: 100px;
+    width: 100px;
+}
+
+#about-button>a{
+	background-color: #8e44ad;
+}
+
+#about-button>a:hover{
+	background-color: #9B59B6;
+}
+
+.page{
+	padding: 5% 0%;
+}
+
+.error{
+	color: #e74c3c
+}
+
+.my-button{
+	margin:auto auto;
+	margin-bottom: 20px;
+}
+
+.center-text{
+    text-align:center;
+}
+
+#tooltip{
+    position: absolute;
+    background-color: #282828;
+    color: #FFFFFF;
+    top: 80%;
+    padding: 10px 19px;
+    border-radius: 6px;
+    width: 80%;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.big-text{
+    font-size: 1.3em;
+}
+.small-text{
+    font-size:0.8em;
+}
+
+#site-password{
+    color : #1B1D1D;
+}
+
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.help-label{
+    line-height: 1.25em;
+}
+
+ul#credits{
+    list-style: none;
+    font-size: 1.5em;
+    padding-left: 0px;
+}
+
+li.person{
+    display: inline-block;
+}
+
+.personDetails{
+    height: 50px;
+    width: 100%;
+    margin: auto auto;
+}
+
+.person>a>img{
+    height: 200px;
+    width: 200px;
+}
+
+.person>a{
+    color: #34495E;
+    text-decoration: none;
+}
+
+.rounded{
+    border-radius: 50%;
+}
+
+#recommend{
+    background-color: #F1C40F;
+    width: 100%;
+    color: #000;
+    font-size: 1.2em;
+    border-radius: 5%;
+    border: 2px solid #F39C12;
+    padding: 5px;
+    box-shadow: 0px 0px 5px #F39C12;
+}
+
+#clear{
+    background-color: #B22222;
+    color: #FFFFFF;
+    padding: 3px;
+    border: none;
+    outline: none;
+    transition: all 0.30s ease-in-out;
+    box-shadow: 0px 0px 5px #FFFFFF;
+}
