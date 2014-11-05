@@ -247,7 +247,6 @@ pageMod.PageMod({
 		worker.port.on("master password", function(message){
 			findSiteTag(worker.url);
 			var password = Hasher.passy(message.masterPassword,siteTag);
-			console.log("master password "+message.masterPassword+";; siteTag "+siteTag+";; password "+password+";;");
 			worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
 		});
 		worker.on("detach", function () {
@@ -330,7 +329,6 @@ function broadcast(kind,messageBody){
 }
 
 function findSiteTag(url){
-	console.error(siteUrl+" : "+url+" : "+siteTag);
 	if(siteTag != "" && siteUrl == url){
 		return;
 	}

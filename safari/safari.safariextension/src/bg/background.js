@@ -90,7 +90,6 @@ function broadcast(command,message){
 }
 
 function findSiteTag(url){
-	console.error(siteUrl+" : "+url+" : "+siteTag);
 	if(siteTag != "" && siteUrl == url){
 		return;
 	}
