@@ -12,6 +12,8 @@ $("#Wordpress").hide();
 $("#Yahoo").hide();
 $("#inProgress").hide();
 $(".usePoint>p").hide();
+$("#caption>p").hide();
+$("#caption-text>p").hide();
 
 $("#container").hover(function(){
 	$("#MasterPassword").show();
@@ -159,6 +161,22 @@ $(".usePoint").click(
 	function(){
 		$(".usePoint").children("p").hide(1000);
 		$(this).children("p").show(500);	
+	}
+);
+
+$("#page2>ul>li").click(
+	function(){
+		if($("#caption>p[data-id='"+$(this).attr("data-id")+"']").css("display") == "none"){
+			$("#caption>p").hide(1000);
+			$("#caption-text>p").hide(1000);
+			$("#caption>p[data-id='"+$(this).attr("data-id")+"']").show(1000);
+			$("#caption-text>p[data-id='"+$(this).attr("data-id")+"']").show(1000);
+		}
+		else{
+			$("#caption>p").hide(1000);
+			$("#caption-text>p").hide(1000);
+		}
+		
 	}
 );
 
