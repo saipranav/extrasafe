@@ -13,7 +13,7 @@ function inject(){
 		var passwordPosition = originalPassword.offset();
 		var passwordHeight = originalPassword.outerHeight(true);
 
-		var masterPasswordDiv = $('<div class=extrasafeMasterPasswordDiv style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
+		var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
 		var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
 		var images = $('<span class="images"></span>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+self.options.unmaskPng+'"></img>');
@@ -98,6 +98,7 @@ function inject(){
 inject();
 
 self.port.on("disable password div", function(message){
+	$(".extrasafeMasterPasswordDiv").hide();
 	$("input[type='password']:not('.extrasafeMasterPassword')").removeClass('enableExtrasafe');
 	$("input[type='password']:not('.extrasafeMasterPassword')").addClass('disableExtrasafe');
 	$("input[type='password']:not('.extrasafeMasterPassword')").trigger('classToggled');
