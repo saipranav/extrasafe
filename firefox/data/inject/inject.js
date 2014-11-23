@@ -64,6 +64,9 @@ function inject(){
 
 		//This function shows the master password div.
 		var toggleFocus = function(){
+			passwordPosition = originalPassword.offset();
+			passwordHeight = originalPassword.outerHeight(true);
+			masterPasswordDiv.css("top",(passwordPosition.top+passwordHeight+5)+'px').css("left",passwordPosition.left+'px');
 			masterPasswordDiv.show();
 			masterPasswordField.focus();
 		}
