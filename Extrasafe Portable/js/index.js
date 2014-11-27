@@ -66,6 +66,17 @@ $("#site-password").click(function(){
 	$("#site-password").select();
 });
 
+$("#site-name").keyup(function(){
+	if($("#site-name").val().match(/\./g)){
+		$("#site-name").parent().addClass("has-error");
+		$("#site-name").parent().parent().siblings(".error1").show();
+	}
+	else{
+		$("#site-name").parent().removeClass("has-error");
+		$("#site-name").parent().parent().siblings(".error1").hide();
+	}
+});
+
 $("#options-button").click(function(){
 	$("#home-page").hide();
 	$("#about-page").hide();
@@ -138,10 +149,10 @@ $("#generate-button").click(function(){
 		//check site name
 		if(siteName == ""){
 			$("#site-name").parent().addClass("has-error");
-			$("#site-name").siblings(".error").show();
+			$("#site-name").parent().parent().siblings(".error2").show();
 			$("#site-name").keyup(function(){
 				$("#site-name").parent().removeClass("has-error");
-				$("#site-name").siblings(".error").hide();
+				$("#site-name").parent().parent().siblings(".error2").hide();
 			});
 			$("#site-name").focus();
 			goAhead = false;
