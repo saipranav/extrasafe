@@ -67,7 +67,7 @@ $("#site-password").click(function(){
 });
 
 $("#site-name").keyup(function(){
-	if($("#site-name").val().match(/\./g)){
+	if($("#site-name").val().match(/[^a-z]/g)){
 		$("#site-name").parent().addClass("has-error");
 		$("#site-name").parent().parent().siblings(".error1").show();
 	}
@@ -145,6 +145,14 @@ $("#generate-button").click(function(){
 		goAhead = true;
 	}
 
+	if($(".has-error").length>0){
+		$("#tooltip").html("Retry after fixing errors in red input fields").fadeIn();
+		setTimeout(function(){
+			$("#tooltip").fadeOut();
+		},3000);
+		goAhead = false;
+	}
+
 	if(goAhead){
 		//check site name
 		if(siteName == ""){
@@ -175,7 +183,7 @@ $("#generate-button").click(function(){
 		$("#tooltip").html("Your site password is generated, please copy it from the Site Password box").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
-		},2000);
+		},3000);
 		var sites = JSON.parse(store.getItem("sites"));
 		if($.inArray($("#site-name").val(),sites) == -1){
 			sites.push($("#site-name").val());
@@ -197,14 +205,14 @@ $("#save-button").click(function(){
 		$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
-		},2000);
+		},3000);
 		return;
 	}
 	if( (isNaN(startIndex)) || (isNaN(endIndex))  ){
 		$("#tooltip").html("Failed to save your options, please enter your options").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
-		},2000);
+		},3000);
 		return;
 	}
 
