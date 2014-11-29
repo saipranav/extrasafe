@@ -71,7 +71,7 @@ $("#site-password").click(function(){
 });
 
 $("#site-name").keyup(function(){
-	if($("#site-name").val().match(/[^a-z][^0-9]/g)){
+	if($("#site-name").val().match(/[^a-z0-9]/g)){
 		$("#site-name").parent().addClass("has-error");
 		$("#site-name").parent().parent().siblings(".error1").show();
 	}
