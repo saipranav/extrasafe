@@ -29,8 +29,8 @@ body {
 	padding: 5% 0%;
 }
 
-.error{
-	color: #e74c3c
+.error, .error1, .error2{
+    color: #e74c3c
 }
 
 .my-button{
