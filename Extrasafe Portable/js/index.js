@@ -153,6 +153,14 @@ $("#generate-button").click(function(){
 		goAhead = false;
 	}
 
+	if($("#clear").attr("value") == "CLEARED"){
+		$("#tooltip").html("You have cleared everything, please open the application / refresh web page again").fadeIn();
+		setTimeout(function(){
+			$("#tooltip").fadeOut();
+		},8000);
+		goAhead = false;
+	}
+
 	if(goAhead){
 		//check site name
 		if(siteName == ""){
