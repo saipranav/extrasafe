@@ -1,38 +1,12 @@
-Extrasafe
-=========
+------------------------------------------------------------------------
+##### Extrasafe Just remember one password to generate different password for different sites.
+For more information : http://saipranav.github.io/extrasafe
 
-Just Remember one Master Password to generate Different Passwords for Different Sites.
+##### Extrasafe Portable
+We have a backup plan for you, even if everything goes off.
+The web site http://saipranav.github.io/extrasafe/portable.html will be available always for you to get sites password by giving your options and master password. Its interface is similar to Extrasafe mobile app, so will be simple!.
 
-We do __NOT__ store any password any where.
+You can also download Extrasafe Portable if you want to get your site password even in offline. Download at https://github.com/saipranav/extrasafe/archive/portable.zip
 
+Open the portable.html in any browser to use Extrsafe offline.
 -----------------------------------------------------------------------
-#### How it works
------------------------------------------------------------------------
-Any form in any site having a password field will have an extra input field called master password.
-
-You can enter your master password there, while entering itself a password is generated and pasted to your original password field in form.
-
-The { site name + your master password } is hashed by the popular hashing algorithm (used in banks) to get the new password.
-
-Hashing some string will give the same random sequence of characters as output when you give the same input.
-
-We do NOT store your master password in cloud or anywhere in computer, which is obviously the most secured, every computation is done within browser.
-
-If you are the first time user for the extension, you will need to change the password in sites where you already have an account.
-
-------------------------------------------------------------------------
-##### Chrome Extension
-
-------------------------------------------------------------------------
-##### Firefox Extension
-
-------------------------------------------------------------------------
-##### Safari Extension
-
-------------------------------------------------------------------------
-##### Opera Extension
-
-------------------------------------------------------------------------
-##### Internet Explorer Extension
-
-------------------------------------------------------------------------
