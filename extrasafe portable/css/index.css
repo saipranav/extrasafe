@@ -29,7 +29,7 @@ body {
 	padding: 5% 0%;
 }
 
-.error{
+.error, .error1, .error2{
 	color: #e74c3c
 }
 
@@ -119,8 +119,14 @@ li.person{
     background-color: #B22222;
     color: #FFFFFF;
     padding: 3px;
-    border: none;
     outline: none;
+    border: none;
+    border-bottom: 1px solid #696969; 
+    border-radius: 5px;
     transition: all 0.30s ease-in-out;
-    box-shadow: 0px 0px 5px #FFFFFF;
+    box-shadow: 0px 3px 3px #333333;
+}
+
+#clear:hover{
+    box-shadow: 0px 1px 3px #878787;
 }
