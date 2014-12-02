@@ -4,7 +4,7 @@ var globalNoInputFields = 0;
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
 function inject(){
-	$("input[type='password']").each(function(){
+	$("input[type=password]").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -109,16 +109,16 @@ chrome.runtime.onMessage.addListener(function(message){
 	//disable master password div
 	else if(message.result == "disable password div"){
 		$(".extrasafeMasterPasswordDiv").hide();
-		$("input[type='password']:not('.extrasafeMasterPassword')").removeClass('enableExtrasafe');
-		$("input[type='password']:not('.extrasafeMasterPassword')").addClass('disableExtrasafe');
-		$("input[type='password']:not('.extrasafeMasterPassword')").trigger('classToggled');
+		$("input[type=password]:not(.extrasafeMasterPassword)").removeClass('enableExtrasafe');
+		$("input[type=password]:not(.extrasafeMasterPassword)").addClass('disableExtrasafe');
+		$("input[type=password]:not(.extrasafeMasterPassword)").trigger('classToggled');
 	}
 
 	//enable master password div
 	else if(message.result == "enable password div"){
-		$("input[type='password']:not('.extrasafeMasterPassword')").removeClass('disableExtrasafe');
-		$("input[type='password']:not('.extrasafeMasterPassword')").addClass('enableExtrasafe');
-		$("input[type='password']:not('.extrasafeMasterPassword')").trigger('classToggled');
+		$("input[type=password]:not(.extrasafeMasterPassword)").removeClass('disableExtrasafe');
+		$("input[type=password]:not(.extrasafeMasterPassword)").addClass('enableExtrasafe');
+		$("input[type=password]:not(.extrasafeMasterPassword)").trigger('classToggled');
 	}
 
 	//This is the password. Set in the password field.
