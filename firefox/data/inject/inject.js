@@ -47,6 +47,19 @@ function inject(){
 			}
 		});
 
+		//User presses tab or shift tab we listen in key down which will be triggered before keyup.
+		//We unbind , focus on originalPassword and then bind again.
+		//event bubbling is prevented so as to focus the original password again after pressing tab from master password instead of showing the next password
+		masterPasswordField.keydown(function(e){
+			if(e.keyCode == 9){
+				e.preventDefault();
+				e.stopPropagation();
+				originalPassword.off("focus");
+				originalPassword.focus();
+				originalPassword.on("focus",toggleFocus);
+			}
+		});
+
 		//If user mouse enters over the master password show password, change the input type to text.
 		showPassword.mouseenter(function(){
 			masterPasswordField.attr('type','text');
@@ -72,15 +85,15 @@ function inject(){
 		}
 		
 		//Initially bind the focus event with toggleFocus function.
-		$(this).on("focus",toggleFocus);
+		originalPassword.on("focus",toggleFocus);
 
 		//On Users click on page action icon to enable or disable the Extrasafe in current site. The class of original password differs, bind or unbind accordingly.
-		$(this).on("classToggled",function(){
-			if($(this).hasClass('enableExtrasafe')){
-				$(this).on("focus",toggleFocus);
+		originalPassword.on("classToggled",function(){
+			if(originalPassword.hasClass('enableExtrasafe')){
+				originalPassword.on("focus",toggleFocus);
 			}
-			else if($(this).hasClass('disableExtrasafe')){
-				$(this).off("focus");
+			else if(originalPassword.hasClass('disableExtrasafe')){
+				originalPassword.off("focus");
 			}
 		});
 
