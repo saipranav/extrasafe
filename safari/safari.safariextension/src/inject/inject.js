@@ -48,11 +48,11 @@ function inject(){
 
 		//User presses tab or shift tab we listen in key down which will be triggered before keyup.
 		//We unbind , focus on originalPassword and then bind again.
-		//event bubbling is prevented so as to focus the original password again after pressing tab from master password instead of showing the next password
+		//COMMENTED : event bubbling is prevented so as to focus the original password again after pressing tab from master password instead of showing the next password
 		masterPasswordField.keydown(function(e){
 			if(e.keyCode == 9){
-				e.preventDefault();
-				e.stopPropagation();
+				//e.preventDefault();
+				//e.stopPropagation();
 				originalPassword.off("focus");
 				originalPassword.focus();
 				originalPassword.on("focus",toggleFocus);
