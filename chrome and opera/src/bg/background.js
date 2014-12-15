@@ -5,21 +5,6 @@ var siteUrl = "";
 //Global variable to remember enabling and disabling.
 var extrasafeDisabled = false;
 
-//For web pages containing login form dynamically generated through ajax.
-//This function listens to xmlhttprequests and reruns the DOM modification script in content script.
-//This works in chrome but have to see for other browsers. Commenting it to maintain consistency.
-/*chrome.webRequest.onCompleted.addListener(function(info){
-		chrome.tabs.sendMessage(info.tabId,{result:"rerun input script"});
-		if(extrasafeDisabled){
-			chrome.tabs.sendMessage(info.tabId, {result:"disable password div"});
-		}
-	},
-	{
-		urls: ["<all_urls>"],
-		types: ["xmlhttprequest"]
-	}
-);*/
-
 //Single message handler.
 //Called for every keyup in master password field.
 //Returns the password from algorithm to content script.

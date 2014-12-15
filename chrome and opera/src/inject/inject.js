@@ -1,5 +1,20 @@
 var globalNoInputFields = 0;
 
+//Forcefully injecting code which overrides the default XMLHttpRequest, so that we can rerun the inject function if the site contains
+// any password field fetched by ajax
+var actualCode = ['XMLHttpRequest.prototype.reallyOpen = XMLHttpRequest.prototype.open;',
+                  'XMLHttpRequest.prototype.open = function(method, url, async, user, password) {',
+                  ' this.addEventListener("loadend", function() {',
+                  '   document.body.setAttribute("extrasafe","rerun")',
+                  '   console.log("asdf");',
+                  ' }, false);',
+				  'this.reallyOpen (method, url, async, user, password);',
+                  '}'].join('\n');
+
+var script = document.createElement('script');
+script.textContent = actualCode;
+(document.head||document.documentElement).appendChild(script);
+
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
@@ -108,6 +123,21 @@ function inject(){
 }
 
 inject();
+
+// Watcher for the body attribute change which is done by the content script forcefully injected
+$('body').attrchange({
+	trackValues: true,
+	callback: function (event) { 
+		alert(event.attributeName+"="+event.newValue);
+	    if(event.attributeName == "extrasafe" && event.newValue == "rerun"){
+	    	if($("input[type=password]:not(.extrasafeMasterPassword):not(.enableExtrasafe):not(.disableExtrasafe)").length){
+				inject();
+			}
+	    	
+	    	$('body').removeAttr("extrasafe","rerun");
+	    }
+	}        
+});
 
 //Single message handler function to handle messages from content scripts.
 //Note: message.result is the only field in all messages.
