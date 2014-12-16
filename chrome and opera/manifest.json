@@ -17,7 +17,7 @@
   "content_scripts" : [
     {
       "matches" : [ "<all_urls>" ],
-      "js" : [ "js/jquery.min.js","js/attrchange.js","src/inject/inject.js" ],
+      "js" : [ "js/jquery.min.js","src/inject/inject.js" ],
       "css": [ "src/inject/inject.css" ],
       "run_at" : "document_idle",
       "all_frames" : true

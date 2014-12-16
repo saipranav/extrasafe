@@ -1,11 +1,26 @@
 
 var globalNoInputFields = 0;
 
+//Forcefully injecting code which overrides the default XMLHttpRequest, so that we can rerun the inject function if the site contains
+// any password field fetched by ajax
+var actualCode = ['XMLHttpRequest.prototype.reallyOpen = XMLHttpRequest.prototype.open;',
+                  'XMLHttpRequest.prototype.open = function(method, url, async, user, password) {',
+                  ' this.addEventListener("loadend", function() {',
+                  '   document.body.setAttribute("extrasafe","rerun")',
+                  '   console.log("asdf");',
+                  ' }, false);',
+				  'this.reallyOpen (method, url, async, user, password);',
+                  '}'].join('\n');
+
+var script = document.createElement('script');
+script.textContent = actualCode;
+(document.head||document.documentElement).appendChild(script);
+
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
-function inject(){
-	$("input[type=password]").each(function(){
+function inject(rerun){
+	$("input[type=password]:not(.extrasafeMasterPassword):not(.enableExtrasafe):not(.disableExtrasafe)").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -14,6 +29,9 @@ function inject(){
 		var passwordHeight = originalPassword.outerHeight(true);
 
 		var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px ">');
+		if(rerun){
+			masterPasswordDiv.addClass("reruned");
+		}
 		var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
 		var images = $('<span class="images"></span>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+self.options.unmaskPng+'"></img>');
@@ -108,7 +126,23 @@ function inject(){
 	});
 }
 
-inject();
+inject(false);
+
+// Watcher for the body attribute change which is done by the content script forcefully injected
+var target = document.body;
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+  	if(mutation.attributeName == "extrasafe" && mutation.target.getAttribute("extrasafe") == "rerun"){
+  		if($("input[type=password]:not(.extrasafeMasterPassword):not(.enableExtrasafe):not(.disableExtrasafe)").length){
+  			$(".reruned").remove();
+			inject(true);
+			console.log("injected");
+		}
+  	}
+  });    
+});
+var config = { attributes: true, childList: true, characterData: true };
+observer.observe(target, config);
 
 self.port.on("disable password div", function(message){
 	$(".extrasafeMasterPasswordDiv").hide();
