@@ -1,10 +1,11 @@
 var globalNoInputFields = 0;
+var disabled = false;
 
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
 function inject(){
-	$("input[type=password]:not(.extrasafeMasterPassword):not(.enableExtrasafe):not(.disableExtrasafe)").each(function(){
+	$("input[type=password]:not(.extrasafeChild):not(.extrasafeParent)").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -12,8 +13,8 @@ function inject(){
 		var passwordPosition = originalPassword.offset();
 		var passwordHeight = originalPassword.outerHeight(true);
 
-		var masterPasswordDiv = $('<div class="extrasafeMasterPasswordDiv" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
-		var masterPasswordField = $('<input type="password" class="extrasafeMasterPassword" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
+		var masterPasswordDiv = $('<div class="extrasafeChildContainer" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
+		var masterPasswordField = $('<input type="password" class="extrasafeChild" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
 		var images = $('<span class="images"></span>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+chrome.extension.getURL("icons/Unmask16.png")+'"></img>');
 		var extrasafeIcon = $('<img class="extrasafeIcon" src="'+chrome.extension.getURL("icons/Extrasafe16.png")+'"></img>');
@@ -48,7 +49,7 @@ function inject(){
 
 		//User presses tab or shift tab we listen in key down which will be triggered before keyup.
 		//We unbind , focus on originalPassword and then bind again.
-		// COMMENTED : event bubbling is prevented so as to focus the original password again after pressing tab from master password instead of showing the next password
+		//COMMENTED : event bubbling is prevented so as to focus the original password again after pressing tab from master password instead of showing the next password
 		masterPasswordField.keydown(function(e){
 			if(e.keyCode == 9){
 				//e.preventDefault();
@@ -86,12 +87,14 @@ function inject(){
 		//Initially bind the focus event with toggleFocus function.
 		originalPassword.on("focus",toggleFocus);
 
-		//On Users click on page action icon to enable or disable the Extrasafe in current site. The class of original password differs, bind or unbind accordingly.
-		originalPassword.on("classToggled",function(){
-			if(originalPassword.hasClass('enableExtrasafe')){
+		//On Users click on page action icon to enable or disable the Extrasafe in current site. Bind or unbind according to disabled global attribute.
+		originalPassword.on("coupler",function(){
+			if(!disabled){
 				originalPassword.on("focus",toggleFocus);
+				originalPassword.blur();
+				originalPassword.focus();
 			}
-			else if(originalPassword.hasClass('disableExtrasafe')){
+			else{
 				originalPassword.off("focus");
 				originalPassword.focus();
 			}
@@ -103,13 +106,12 @@ function inject(){
 
 		//Add class infomation, and these are initial settings.
 		originalPassword.addClass(""+globalNoInputFields);
-		originalPassword.addClass('enableExtrasafe');
+		originalPassword.addClass('extrasafeParent');
 
-		if( $("input[type=password].disableExtrasafe").length > 0 ){
-			originalPassword.removeClass('enableExtrasafe');
-			originalPassword.addClass('disableExtrasafe');
-			originalPassword.trigger('classToggled');
-		} 
+		//Trigger the coupler to initialize the newly created extrasafechild for ajax based login form, in case the extrasafe is in disabled mode 
+		if(disabled){
+			originalPassword.trigger('coupler');
+		}
 
 	});
 }
@@ -137,17 +139,15 @@ chrome.runtime.onMessage.addListener(function(message){
 
 	//disable master password div
 	if(message.result == "disable password div"){
-		$(".extrasafeMasterPasswordDiv").hide();
-		$("input[type=password]:not(.extrasafeMasterPassword)").removeClass('enableExtrasafe');
-		$("input[type=password]:not(.extrasafeMasterPassword)").addClass('disableExtrasafe');
-		$("input[type=password]:not(.extrasafeMasterPassword)").trigger('classToggled');
+		$(".extrasafeChildContainer").hide();
+		disabled = true;
+		$("input[type=password]:not(.extrasafeChild)").trigger('coupler');
 	}
 
 	//enable master password div
 	else if(message.result == "enable password div"){
-		$("input[type=password]:not(.extrasafeMasterPassword)").removeClass('disableExtrasafe');
-		$("input[type=password]:not(.extrasafeMasterPassword)").addClass('enableExtrasafe');
-		$("input[type=password]:not(.extrasafeMasterPassword)").trigger('classToggled');
+		disabled = false;
+		$("input[type=password]:not(.extrasafeChild)").trigger('coupler');
 	}
 
 	//This is the password. Set in the password field.
