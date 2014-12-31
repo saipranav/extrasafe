@@ -12,6 +12,6 @@
 	outline: none !important;
 }
 
-.images{
-	display: block-inline;
+.extrasafeChildContainer img {
+	padding : 0px 5px;
 }

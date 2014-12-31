@@ -15,13 +15,9 @@ function inject(){
 
 		var masterPasswordDiv = $('<div class="extrasafeChildContainer" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
 		var masterPasswordField = $('<input type="password" class="extrasafeChild" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
-		var images = $('<span class="images"></span>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+chrome.extension.getURL("icons/Unmask16.png")+'"></img>');
 		var extrasafeIcon = $('<img class="extrasafeIcon" src="'+chrome.extension.getURL("icons/Extrasafe16.png")+'"></img>');
 		
-		images.append(showPassword);
-		images.append(extrasafeIcon);
-
 		//When user clicks outside the master password div, master password div should hide
 		masterPasswordDiv.focusout(function(){
 			masterPasswordDiv.hide();
@@ -71,8 +67,9 @@ function inject(){
 		});
 
 		//Append all the fields and icons to master password div and hide it initially.
+		masterPasswordDiv.append(extrasafeIcon);
 		masterPasswordDiv.append(masterPasswordField);
-		masterPasswordDiv.append(images);
+		masterPasswordDiv.append(showPassword);
 		masterPasswordDiv.hide();
 
 		//This function shows the master password div.
