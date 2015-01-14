@@ -1,4 +1,5 @@
 var store = window.localStorage;
+var numberRegex = new RegExp('/^\d+$/;');
 
 var app = {
 	initialize: function() {
@@ -67,13 +68,14 @@ $("#site-password").click(function(){
 });
 
 $("#site-name").keyup(function(){
-	if($("#site-name").val().match(/[^a-z0-9]/g)){
-		$("#site-name").parent().addClass("has-error");
-		$("#site-name").parent().parent().siblings(".error1").show();
+	var siteName = $("#site-name");
+	if(siteName.val().match(/[^a-z0-9]/g)){
+		siteName.parent().addClass("has-error");
+		siteName.parent().parent().siblings(".error1").show();
 	}
 	else{
-		$("#site-name").parent().removeClass("has-error");
-		$("#site-name").parent().parent().siblings(".error1").hide();
+		siteName.parent().removeClass("has-error");
+		siteName.parent().parent().siblings(".error1").hide();
 	}
 });
 
@@ -96,23 +98,25 @@ $(".back-button").click(function(){
 });
 
 $("#start-index").focusout(function(){
-	if($("#start-index").val() > 115 || $("#start-index").val() < 0){
-		$("#start-index").parent().addClass("has-error");
-		$("#start-index").siblings(".error").show();
-		$("#start-index").keyup(function(){
-			$("#start-index").parent().removeClass("has-error");
-			$("#start-index").siblings(".error").hide();
+	var startIndex = $("#start-index");
+	if(!numberRegex.test(startIndex.val()) || startIndex.val() > 115 || startIndex.val() < 0){
+		startIndex.parent().addClass("has-error");
+		startIndex.siblings(".error").show();
+		startIndex.keyup(function(){
+			startIndex.parent().removeClass("has-error");
+			startIndex.siblings(".error").hide();
 		});
 	}
 });
 
 $("#end-index").focusout(function(){
-	if($("#end-index").val() > 128 || $("#end-index").val() < 12){
-		$("#end-index").parent().addClass("has-error");
-		$("#end-index").siblings(".error").show();
-		$("#end-index").keyup(function(){
-			$("#end-index").parent().removeClass("has-error");
-			$("#end-index").siblings(".error").hide();
+	var endIndex = $("#end-index");
+	if(!numberRegex.test(endIndex.val()) || endIndex.val() > 128 || endIndex.val() < 12){
+		endIndex.parent().addClass("has-error");
+		endIndex.siblings(".error").show();
+		endIndex.keyup(function(){
+			endIndex.parent().removeClass("has-error");
+			endIndex.siblings(".error").hide();
 		});
 	}
 });
@@ -127,21 +131,21 @@ $("#generate-button").click(function(){
 
 	var goAhead = false;
 	//get all required parameters
-	var masterPassword = $("#master-password").val();
-	var siteName = $("#site-name").val();
+	var masterPassword = $("#master-password");
+	var siteName = $("#site-name");
 
 	//check master password
-	if(masterPassword == ""){
-		$("#master-password").parent().addClass("has-error");
-		$("#master-password").siblings(".error").show();
-		$("#master-password").keyup(function(){
-			$("#master-password").parent().removeClass("has-error");
-			$("#master-password").siblings(".error").hide();
+	if(masterPassword.val() == ""){
+		masterPassword.parent().addClass("has-error");
+		masterPassword.siblings(".error").show();
+		masterPassword.keyup(function(){
+			masterPassword.parent().removeClass("has-error");
+			masterPassword.siblings(".error").hide();
 		});
-		$("#master-password").focus();
+		masterPassword.focus();
 	}
 	else{
-		$("#master-password").parent().removeClass("has-error");
+		masterPassword.parent().removeClass("has-error");
 		goAhead = true;
 	}
 
@@ -163,18 +167,18 @@ $("#generate-button").click(function(){
 
 	if(goAhead){
 		//check site name
-		if(siteName == ""){
-			$("#site-name").parent().addClass("has-error");
-			$("#site-name").parent().parent().siblings(".error2").show();
-			$("#site-name").keyup(function(){
-				$("#site-name").parent().removeClass("has-error");
-				$("#site-name").parent().parent().siblings(".error2").hide();
+		if(siteName.val() == ""){
+			siteName.parent().addClass("has-error");
+			siteName.parent().parent().siblings(".error2").show();
+			siteName.keyup(function(){
+				siteName.parent().removeClass("has-error");
+				siteName.parent().parent().siblings(".error2").hide();
 			});
-			$("#site-name").focus();
+			siteName.focus();
 			goAhead = false;
 		}
 		else{
-			$("#site-name").parent().removeClass("has-error");
+			siteName.parent().removeClass("has-error");
 			goAhead = true;
 		}
 	}
@@ -187,14 +191,14 @@ $("#generate-button").click(function(){
 		Hasher.start = startIndex;
 		Hasher.end = endIndex;
 		Hasher.extraSecuritySequence = extraSequence;
-		$("#site-password").val( Hasher.passy($("#master-password").val(), $("#site-name").val()) );
+		$("#site-password").val( Hasher.passy(masterPassword.val(), siteName.val()) );
 		$("#tooltip").html("Your site password is generated, please copy it from the Site Password box").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},3000);
 		var sites = JSON.parse(store.getItem("sites"));
-		if($.inArray($("#site-name").val(),sites) == -1){
-			sites.push($("#site-name").val());
+		if($.inArray(siteName.val(),sites) == -1){
+			sites.push(siteName.val());
 		}
 		store.setItem("sites", JSON.stringify(sites));
 		return;
@@ -263,7 +267,7 @@ $("#reset-button").click(function(){
 	},2500);
 });
 
-$("#show-password").click(function(){
+$("#show-password").hover(function(){
 	var type = ( $("#master-password").attr("type") == "text" ) ? "password" : "text";
 	$("#master-password").attr("type",type);
 });
@@ -273,4 +277,3 @@ $("#clear").click(function(){
 	$(this).attr("value","CLEARED");
 	$(this).css("background-color","#228B22");
 });
-
