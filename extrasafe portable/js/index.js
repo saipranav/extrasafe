@@ -1,5 +1,5 @@
 var store = window.localStorage;
-var numberRegex = new RegExp('/^\d+$/;');
+var numberRegex = /^\d+$/;
 
 var app = {
 	initialize: function() {
