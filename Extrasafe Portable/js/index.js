@@ -213,15 +213,17 @@ $("#save-button").click(function(){
 	var extraSequence = $("#extra-security-sequence").val();
 	var startIndex = $("#start-index").val();
 	var endIndex = $("#end-index").val();
-	if( !numberRegex.test(startIndex) || !numberRegex.test(endIndex) || (startIndex<0) || (endIndex>128) || (startIndex>=endIndex) || (startIndex>115) || (endIndex<12) || ((endIndex-startIndex)<12) ){
+        var startIndexNum = parseInt($("#start-index").val());
+        var endIndexNum = parseInt($("#end-index").val());
+	if( !numberRegex.test(startIndex) || !numberRegex.test(endIndex) || (startIndexNum<0) || (endIndexNum>128) || (startIndexNum>=endIndexNum) || (startIndexNum>115) || (endIndexNum<12)){
 		$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},3000);
 		return;
 	}
-	if( (isNaN(startIndex)) || (isNaN(endIndex))  ){
-		$("#tooltip").html("Failed to save your options, please enter your options").fadeIn();
+	if( endIndex-startIndex < 12  ){
+		$("#tooltip").html("The difference between the end and start index should be atleast 12").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},3000);
