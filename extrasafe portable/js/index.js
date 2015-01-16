@@ -1,5 +1,5 @@
 var store = window.localStorage;
-var numberRegex = new RegExp('/^\d+$/;');
+var numberRegex = /^\d+$/;
 
 var app = {
 	initialize: function() {
@@ -211,9 +211,9 @@ $("#generate-button").click(function(){
 
 $("#save-button").click(function(){
 	var extraSequence = $("#extra-security-sequence").val();
-	var startIndex = parseInt($("#start-index").val());
-	var endIndex = parseInt($("#end-index").val());
-	if( (startIndex<0) || (endIndex>128) || (startIndex>=endIndex) || (startIndex>115) || (endIndex<12) || ((endIndex-startIndex)<12) ){
+	var startIndex = $("#start-index").val();
+	var endIndex = $("#end-index").val();
+	if( !numberRegex.test(startIndex) || !numberRegex.test(endIndex) || (startIndex<0) || (endIndex>128) || (startIndex>=endIndex) || (startIndex>115) || (endIndex<12) || ((endIndex-startIndex)<12) ){
 		$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
@@ -246,6 +246,10 @@ $("#cancel-button").click(function(){
 	$("#start-index").val(startIndex);
 	$("#end-index").val(endIndex);
 	$("#tooltip").html("Your operations are canceled").fadeIn();
+        $("#start-index").parent().removeClass("has-error");
+        $("#start-index").siblings(".error").hide();
+        $("#end-index").parent().removeClass("has-error");
+        $("#end-index").siblings(".error").hide();
 	setTimeout(function(){
 		$("#tooltip").fadeOut();
 	},2000);
@@ -262,6 +266,10 @@ $("#reset-button").click(function(){
 	$("#start-index").val(startIndex);
 	$("#end-index").val(endIndex);
 	$("#tooltip").html("All your options are reset to default").fadeIn();
+        $("#start-index").parent().removeClass("has-error");
+        $("#start-index").siblings(".error").hide();
+        $("#end-index").parent().removeClass("has-error");
+        $("#end-index").siblings(".error").hide();
 	setTimeout(function(){
 		$("#tooltip").fadeOut();
 	},2500);
