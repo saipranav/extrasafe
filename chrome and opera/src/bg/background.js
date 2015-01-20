@@ -3,14 +3,27 @@ var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
 //Global variable to remember enabling and disabling.
+//Setting it in storage
 var extrasafeDisabled = false;
+chrome.storage.local.set({
+	extrasafeDisabledStorageFlag : false,
+}, function(){});
 
 //Single message handler.
 //Called for every keyup in master password field.
 //Returns the password from algorithm to content script.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	findSiteTag(sender.url);
-	chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword,siteTag), fromInputField: request.fromInputField });
+	chrome.storage.local.get({
+    		extraSecuritySequence : "",
+    		startIndex : 0,
+    		endIndex : 12
+  		}, function(items) {
+			var extraSecuritySequence = items.extraSecuritySequence;
+			var startIndex = items.startIndex;
+			var endIndex = items.endIndex;
+			chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
+  	});
 });
 
 //Toggle browser actions.
@@ -22,7 +35,7 @@ chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 			extrasafeDisabled = true;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe_red19.png"});
 			chrome.browserAction.setTitle({title: "Click to enable extrasafe"});
-			chrome.storage.sync.set({
+			chrome.storage.local.set({
 				extrasafeDisabledStorageFlag : true,
 			}, function(){});
 		}
@@ -31,7 +44,7 @@ chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 			extrasafeDisabled = false;
 			chrome.browserAction.setIcon({path:"icons/Extrasafe19.png"});
 			chrome.browserAction.setTitle({title: "Click to disable extrasafe"});
-			chrome.storage.sync.set({
+			chrome.storage.local.set({
 				extrasafeDisabledStorageFlag : false,
 			}, function(){});
 		}
@@ -41,7 +54,7 @@ chrome.browserAction.onClicked.addListener(function togglePasswordDiv(){
 //To send disabled message to newly created or navigated when browser action is already disabled
 //When the extrasafeDisabled fetched from storage
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	chrome.storage.sync.get({
+	chrome.storage.local.get({
     		extrasafeDisabledStorageFlag : false,
   		}, function(items) {
 			extrasafeDisabled = items.extrasafeDisabledStorageFlag;

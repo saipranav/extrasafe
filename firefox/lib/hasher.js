@@ -1,3 +1,6 @@
+//Importing required modules
+var CryptoJS = require("sha3");
+
 Hasher = {
 
 	masterPassword: "", //input master password
@@ -19,7 +22,7 @@ Hasher = {
 	
 	//Call the crypto graphic algorithm.
 	hashy: function(){	
-			Hasher.password = CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword + Hasher.extraSecuritySequence).toString();
+			Hasher.password = CryptoJS.CryptoJS.SHA3( Hasher.siteTag + Hasher.masterPassword + Hasher.extraSecuritySequence).toString();
 			},
 
 	//It will be called after the Crypto returns.
@@ -186,3 +189,5 @@ Hasher = {
 						}
 
 };
+
+exports.Hasher = Hasher;

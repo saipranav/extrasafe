@@ -10,7 +10,7 @@
 	</dict>
 	<dict>
 		<key>Key</key>
-		<string>extraSequence</string>
+		<string>extraSecuritySequence</string>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>

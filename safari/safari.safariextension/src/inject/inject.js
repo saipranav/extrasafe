@@ -116,7 +116,7 @@ function inject(){
 inject();
 
 // Watcher for the body subtree change and checking input and password in innerHTML and triggering the inject script to create master password div for ajaxed input forms
-var target = document.body;
+/*var target = document.body;
 var observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation){
   	for (var i = mutation.addedNodes.length - 1; i >= 0; i--) {
@@ -128,7 +128,7 @@ var observer = new MutationObserver(function(mutations) {
   });    
 });
 var config = { childList: true, subtree: true};
-observer.observe(target, config);
+observer.observe(target, config);*/
 
 //Single function to capture all messages
 function captureFunction(event){

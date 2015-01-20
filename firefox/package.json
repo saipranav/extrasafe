@@ -17,13 +17,13 @@
     {
         "name": "startIndex",
         "title": "Password Start Index",
-        "description": "Your passwords will get sliced using this index. Default 0",
+        "description": "Your passwords will get sliced using this index. Default value - 0. Minimum value - 0, Maximum value - 116.",
         "type": "integer"
     },
     {
         "name": "endIndex",
         "title": "Password End Index",
-        "description": "Your passwords will get sliced using this index. Default 12",
+        "description": "Your passwords will get sliced using this index. Default value - 12. Minimum value - 12, Maximum value - 128.",
         "type": "integer"
     },
     {
