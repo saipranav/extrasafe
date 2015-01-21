@@ -69,13 +69,13 @@ $("#site-password").click(function(){
 
 $("#site-name").keyup(function(){
 	var siteName = $("#site-name");
+	siteName.parent().removeClass("has-error");
+	siteName.parent().parent().siblings(".errors").html("");
+	siteName.parent().parent().siblings(".errors").hide();
 	if(siteName.val().match(/[^a-z0-9]/g)){
 		siteName.parent().addClass("has-error");
-		siteName.parent().parent().siblings(".error1").show();
-	}
-	else{
-		siteName.parent().removeClass("has-error");
-		siteName.parent().parent().siblings(".error1").hide();
+		siteName.parent().parent().siblings(".errors").append("<div>Give only the site name</div>");
+		siteName.parent().parent().siblings(".errors").show();
 	}
 });
 
@@ -95,6 +95,18 @@ $(".back-button").click(function(){
 	$("#options-page").hide();
 	$("#about-page").hide();
 	$("#home-page").show();
+});
+
+$("#master-password").keyup(function(e){
+	var masterPassword = $("#master-password");
+	masterPassword.parent().removeClass("has-error");
+	masterPassword.siblings(".errors").html("");
+	masterPassword.siblings(".errors").hide();
+	if(masterPassword.val().match(/\s/g)){
+		masterPassword.parent().addClass("has-error");
+		masterPassword.siblings(".errors").append("<div>Space is not allowed</div>");
+		masterPassword.siblings(".errors").show();
+	}
 });
 
 $("#start-index").focusout(function(){
@@ -135,17 +147,19 @@ $("#generate-button").click(function(){
 	var siteName = $("#site-name");
 
 	//check master password
+	masterPassword.siblings(".errors").html("");
 	if(masterPassword.val() == ""){
 		masterPassword.parent().addClass("has-error");
-		masterPassword.siblings(".error").show();
-		masterPassword.keyup(function(){
-			masterPassword.parent().removeClass("has-error");
-			masterPassword.siblings(".error").hide();
-		});
+		masterPassword.siblings(".errors").append("<div>Mandatory Field</div>");
+		masterPassword.siblings(".errors").show();
 		masterPassword.focus();
 	}
+	else if(masterPassword.val().match(/\s/g)){
+		masterPassword.parent().addClass("has-error");
+		masterPassword.siblings(".errors").append("<div>Space is not allowed</div>");
+		masterPassword.siblings(".errors").show();
+	}
 	else{
-		masterPassword.parent().removeClass("has-error");
 		goAhead = true;
 	}
 
@@ -167,15 +181,18 @@ $("#generate-button").click(function(){
 
 	if(goAhead){
 		//check site name
+		siteName.parent().parent().siblings(".errors").html("");
 		if(siteName.val() == ""){
 			siteName.parent().addClass("has-error");
-			siteName.parent().parent().siblings(".error2").show();
-			siteName.keyup(function(){
-				siteName.parent().removeClass("has-error");
-				siteName.parent().parent().siblings(".error2").hide();
-			});
+			siteName.parent().parent().siblings(".errors").append("<div>Mandatory Field</div>");
+			siteName.parent().parent().siblings(".errors").show();
 			siteName.focus();
 			goAhead = false;
+		}
+		else if(siteName.val().match(/[^a-z0-9]/g)){
+			siteName.parent().addClass("has-error");
+			siteName.parent().parent().siblings(".errors").append("<div>Give only the site name</div>");
+			siteName.parent().parent().siblings(".errors").show();
 		}
 		else{
 			siteName.parent().removeClass("has-error");

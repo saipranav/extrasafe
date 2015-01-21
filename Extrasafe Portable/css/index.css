@@ -29,7 +29,9 @@ body {
 	padding: 5% 0%;
 }
 
-.error, .error1, .error2{
+.errors{
+	font-weight: bold;
+	font-size: 1.25em;
 	color: #e74c3c
 }
 
