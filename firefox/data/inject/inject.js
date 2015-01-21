@@ -17,6 +17,7 @@ function inject(){
 		var masterPasswordField = $('<input type="password" class="extrasafeChild" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+self.options.unmaskPng+'"></img>');
 		var extrasafeIcon = $('<img title="Powered by Extrasafe" class="extrasafeIcon" src="'+self.options.extrasafePng+'"></img>');
+		var masterPasswordFieldErrors = $('<div class="errors center-text" style="display:none" id="master_password_errors"></div>');
 		
 		//When user clicks outside the master password div, master password div should hide
 		masterPasswordDiv.focusout(function(){
@@ -28,14 +29,24 @@ function inject(){
 		//	check for whether enter is pressed -> Send the master password to background, hide the master password div, submit the login form.
 		//	If master password is empty then clear the original password field also.
 		//	For all other key ups send the master password to background.
+        //  If it has space then show the red error things as space is not allowed because it might be confuse the user while typing master password in portable site.  
 		//Reason for key up is its called after key pressed actions (eg clearing does not work properly on other key events).
 		masterPasswordField.keyup(function(e){
+			masterPasswordField.removeClass("error-div");
+			masterPasswordFieldErrors.html("");
+			masterPasswordFieldErrors.hide();
 			if(e.keyCode == 13){
 				self.port.emit("master password",{ masterPassword: $(this).val(), fromInputField: masterPasswordField.attr('inputField') });
 				masterPasswordDiv.hide();
 				originalPassword.closest("form").submit();
 			}
 			if(masterPasswordField.val() == ""){
+				originalPassword.val("");
+			}
+			else if(masterPasswordField.val().match(" ")){
+				masterPasswordField.addClass("error-div");
+				masterPasswordFieldErrors.append("<div>Space is not allowed</div>");
+				masterPasswordFieldErrors.show();
 				originalPassword.val("");
 			}
 			else{
@@ -70,6 +81,7 @@ function inject(){
 		masterPasswordDiv.append(extrasafeIcon);
 		masterPasswordDiv.append(masterPasswordField);
 		masterPasswordDiv.append(showPassword);
+		masterPasswordDiv.append(masterPasswordFieldErrors);
 		masterPasswordDiv.hide();
 
 		//This function shows the master password div.

@@ -15,3 +15,15 @@
 .extrasafeChildContainer img {
 	padding : 0px 5px;
 }
+
+.errors{
+	color: #B22222;
+}
+
+.error-div{
+	border: solid 1px #B22222 !important;
+}
+
+.center-text{
+	text-align: center;
+}
