@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    	<title>xtrasafe</title>
+
+		<link rel="shortcut icon" type="image/png" href="Extrasafe Portable/img/favicon.png"/>
+    	<!-- Loading Bootstrap -->
+    	<link href="Extrasafe Portable/libs/css/bootstrap.min.css" rel="stylesheet">
+
+    	<!-- Loading Flat UI -->
+    	<link href="Extrasafe Portable/libs/css/flat-ui.css" rel="stylesheet">
+    	<link href="Extrasafe Portable/css/index.css" rel="stylesheet">
+  	</head>
+	<body>
+	<div id="app">
+        <div id="options-page" class="page" data-role="page">
+            <h4 class="center-text">Options</h4>
+            <br>
+            <div data-role="content">
+
+                <div class="form-group center-text">
+                        <label for="extra-security-sequence">Extra Security Sequence</label>
+                    <input type="text" class="form-control" id="extra-security-sequence" data-mini="true"/>
+                </div>
+
+                <div class="form-group center-text">
+                    <label for="start-index">Start Index</label>
+                    <input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
+                    <label class="errors" style="display:none" >Minimum : 0, Maximum : 115</label>
+                </div>
+
+                <div class="form-group center-text">
+                    <label for="end-index">End Index</label>
+                    <input type="number" min=12 max=128 class="form-control" id="end-index" data-mini="true"/>
+                    <label class="errors" style="display:none" >Minimum : 12, Maximum : 128</label>
+                </div>
+
+                <div id="save-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-success"><span class="fui-check-circle"></span> Save</a>
+                </div>
+
+                <div id="cancel-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-warning"><span class="fui-cross-circle"></span> Cancel</a>
+                </div>
+
+                <div id="reset-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-danger"><span class="fui-alert-circle"></span> Reset</a>
+                </div>
+
+                <div class="back-button">
+                    <a class="btn btn-block btn-lg btn-inverse" href="portable.html"><span class="fui-arrow-left"></span> Back</a>
+                </div>
+            </div>
+            <div id="tooltip" style="display:none"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="Extrasafe Portable/libs/js/jquery.min.js"></script>
+    <script type="text/javascript" src="Extrasafe Portable/js/options.js"></script>
+
+    </body>
+</html>
