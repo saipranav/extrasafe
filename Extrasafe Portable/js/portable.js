@@ -88,7 +88,7 @@ $("#generate-button").click(function(){
 
 	if(goAhead){
 		//check site name
-		siteUrl.parent().parent().siblings(".errors").html("");
+		siteUrl.parent().siblings(".errors").html("");
 		if(siteUrl.val() == ""){
 			siteUrl.parent().addClass("has-error");
 			siteUrl.parent().siblings(".errors").append("<div>Mandatory Field</div>");
