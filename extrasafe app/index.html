@@ -3,9 +3,8 @@
 	<head>
     	<meta charset="utf-8">
 		<meta name="format-detection" content="telephone=no" />
-		<meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, user-scalable=no">
-    	<title>Extrasafe</title>
+    	<title>xtrasafe</title>
 
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     	<!-- Loading Bootstrap -->
@@ -16,127 +15,61 @@
     	<link href="css/index.css" rel="stylesheet">
   	</head>
 	<body>
-		<div id="app">
-            <div id="home-page" data-role="page">
-                <div data-role="content" >
-                    	<div id="logoContainer" class="center-text">
-                            <img src="img/logo.png" id="logo">
-							</img>
-		       			</div>
+	<div id="app">
+        <div id="home-page" data-role="page">
+            <div data-role="content" >
+
+		    	<div id="logoContainer" class="center-text">
+		            <img src="img/logo.png" id="logo"></img>
+		       	</div>
+
+		        <div id="recommend" class="center-text">This site saves your Extrasafe options and site names, for best user experience.<br>But, we recommend you to <input type="button" id="clear" value="CLEAR"></input> the storage every time you get out of this site.</div>
+			</div>
+
+			<div class="form-group center-text">
+				<label for="site-url">Site Url</label>
+				<div id="scrollable-dropdown-menu">
+				<input class="typeahead form-control" id="site-url" data-mini="true" type="text" placeholder="">
 				</div>
-				<div class="form-group center-text">
-                    <label for="site-name">Site Name</label>
-                    <div id="scrollable-dropdown-menu">
-                        <input class="typeahead form-control" id="site-name" data-mini="true" type="text" placeholder="">
-                    </div>
-                    <label class="error1" style="display:none" >Give only the site name (or) company name like <b>google</b> even for <b>www.gmail.com</b></label>
-                    <label class="error2" style="display:none" >Mandatory field</label>
-                </div>
-				<div class="form-group center-text">
-					<label for="master-password">Master Password</label>
-		        	<input type="password" class="form-control" id="master-password" data-mini="true"/>
-                    <img id="show-password" src="./img/Unmask16.png"></img>
-                    <label class="error" style="display:none" >Mandatory field</label>
-				</div>
-                <div class="form-group center-text">
-                    <img id="generate-button" src="img/generate.png" title="Generate"></img>
-                </div>
-				<div class="form-group center-text">
-					<label for="site-password">Site Password</label>
-		        	<input type="text" class="form-control" readonly id="site-password" data-mini="true"/>
-				</div>
-                <div id="options-button" class="my-button">
-                    <a class="btn btn-block btn-lg btn-info"><span class="fui-gear"></span> Options</a>
-                </div>
-				<div id="about-button" class="my-button">
-          			<a class="btn btn-block btn-lg btn-default"><span class="fui-cmd"></span> About</a>
-        		</div>
-            </div>
+				<div style="display:none" class="errors"></div>
+			</div>
 
-            <div id="options-page" class="page" data-role="page">
-                <h4 class="center-text">Options</h4>
-				<br>
-                <div data-role="content">
-					<div class="form-group center-text">
-		        		<label for="extra-security-sequence">Extra Security Sequence</label>
-						<input type="text" class="form-control" id="extra-security-sequence" data-mini="true"/>
-					</div>
-					<div class="form-group center-text">
-		        		<label for="start-index">Start Index</label>
-						<input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
-						<label class="error" style="display:none" >Minimum : 0, Maximum : 115</label>
-					</div>
-					<div class="form-group center-text">
-		        		<label for="end-index">End Index</label>
-						<input type="number" min=12 max=128 class="form-control" id="end-index" data-mini="true"/>
-						<label class="error" style="display:none" >Minimum : 12, Maximum : 128</label>
-					</div>
-					<div id="save-button" class="my-button">
-          				<a class="btn btn-block btn-lg btn-success"><span class="fui-check-circle"></span> Save</a>
-        			</div>
-					<div id="cancel-button" class="my-button">
-          				<a class="btn btn-block btn-lg btn-warning"><span class="fui-cross-circle"></span> Cancel</a>
-        			</div>
-					<div id="reset-button" class="my-button">
-          				<a class="btn btn-block btn-lg btn-danger"><span class="fui-alert-circle"></span> Reset</a>
-        			</div>
-                    <div class="back-button">
-                        <a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
-                    </div>
-                </div>
+			<div class="form-group center-text">
+				<label for="master-password">Master Password</label>
+				<input type="password" class="form-control" id="master-password" data-mini="true"/>
+				<img id="show-password" src="img/Unmask16.png"></img></br>
+				<div style="display:none" class="errors"></div>
+			</div>
 
-            </div>
+			<div class="form-group center-text">
+				<img id="generate-button" src="img/generate.png" title="Generate"></img>
+			</div>
 
-            <div id="about-page" class="page" data-role="page">
-                <h4 class="center-text">About</h4>
-                <div data-role="content"  class="big-text center-text">
-                    <h6>Version</h6>
-                    <p>0.4</p>
-                    <h6>Team</h6>
-                    <ul id="credits">
-						<li class="person">
-							<a href="www.google.com">
-								<img class="rounded" src='img/sai pranav.png'></img>
-								<div class="personDetails">
-									<span class="personDetailsName">Sai Pranav</span>
-									<!-- <br>
-									<span class="personDetailsName">Spark Ignitor</span> -->
-								</div>
-							</a>
-						</li>
-						<li class="person">
-							<a href="mailto:extrasafemonitor@gmail.com?Subject=I am intrested in joining Extrasafe team - {your name}">
-								<img class="rounded" src='img/canbeyou.jpg'></img>
-								<div class="personDetails">
-									<br>
-									<span class="personDetailsName centre-text">Join the team</span>
-									<!-- <br>
-									<br> -->
-								</div>
-							</a>
-						</li>
-					</ul>
-                    <p>We are enthusiastic in <b>crafting</b> high quality products that are really useful to people, and are <b>thrilled</b> to see our products being used.</p>
-					<p>Want us to become happier? <b>Use</b> and Publicize Extrasafe</p>
-					<a target="_blank" href="http://saipranav.github.io/extrasafe"> To Know More</a>
-                </div>
-                <div class="back-button">
-                    <a class="btn btn-block btn-lg btn-inverse"><span class="fui-arrow-left"></span> Back</a>
-                </div>
-            </div>
+			<div class="form-group center-text">
+				<label for="site-password">Site Password</label>
+				<input type="text" class="form-control" readonly id="site-password" data-mini="true"/>
+			</div>
 
-            <div id="tooltip" style="display:none"></div>
+			<div id="options-button" class="my-button">
+				<a class="btn btn-block btn-lg btn-info" href="options.html"><span class="fui-gear"></span> Options</a>
+			</div>
+
+			<div id="about-button" class="my-button">
+	  			<a class="btn btn-block btn-lg btn-default" href="about.html"><span class="fui-cmd"></span> About</a>
+			</div>
         </div>
+        <div id="tooltip" style="display:none"></div>
+	</div>
 
-		<script type="text/javascript" src="libs/js/jquery.min.js"></script>
-        <script type="text/javascript" src="libs/js/twitter_typeahead.js"></script>
-        <script type="text/javascript" src="libs/js/sha3.js"></script>
-        <script type="text/javascript" src="js/hasher.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="phonegap.js"></script>
+	<script type="text/javascript" src="libs/js/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/js/sha3.js"></script>
+    <script type="text/javascript" src="js/hasher.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="phonegap.js"></script>
 
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
     </body>
 </html>
