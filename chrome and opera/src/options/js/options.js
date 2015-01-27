@@ -64,7 +64,6 @@ $("#save").click(function(){
 			$("#statusSave").css("display","inline");
 			setTimeout(function(){
 				$("#statusSave").css("display","none");
-				window.close();
 			}, 2000);
 		});
 	}
@@ -74,7 +73,6 @@ $("#cancel").click(function(){
 	$("#statusCancel").css("display","inline");
 	setTimeout(function(){
 		$("#statusCancel").css("display","none");
-		window.close();
 	}, 2000);
 });
 
@@ -94,7 +92,6 @@ $("#reset").click(function(){
 			$("#statusReset").css("display","inline");
 			setTimeout(function(){
 				$("#statusReset").css("display","none");
-				window.close();
 			}, 2000);
 	});
 	//$("#specialCharactersInput").prop("checked",true);
