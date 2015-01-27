@@ -102,21 +102,11 @@ $("#generate-button").click(function(){
 	if(goAhead){
 		var sitePassword = Hasher.passy(masterPassword.val(), siteUrl.val(), extraSecuritySequence, startIndex, endIndex);
 		$("#site-password").val( sitePassword );
-		cordova.plugins.clipboard.copy(
-			sitePassword,
-			function(){
-				$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
-				setTimeout(function(){
-					$("#tooltip").fadeOut();
-				},3000);		
-			},
-			function(){
-				$("#tooltip").html("Problem in generating and copying site password to clipboard").fadeIn();
-				setTimeout(function(){
-					$("#tooltip").fadeOut();
-				},3000);
-			}
-		);
+		cordova.plugins.clipboard.copy( sitePassword );
+		$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
+		setTimeout(function(){
+			$("#tooltip").fadeOut();
+		},3000);
 		return;
 	}
 	else{
