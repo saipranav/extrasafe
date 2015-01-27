@@ -5,7 +5,7 @@ var disabled = false;
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
 function inject(){
-	$("input[type=password]:not(.extrasafeChild):not(.extrasafeParent)").each(function(){
+	$("input[type=password]:not(.extrasafeChild)[extrasafe!=extrasafeParent]").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -13,6 +13,7 @@ function inject(){
 		var passwordPosition = originalPassword.offset();
 		var passwordHeight = originalPassword.outerHeight(true);
 
+		//the input field number is tagged against child password field which is tagged again with parent, used for pasting the password in respective fields
 		var masterPasswordDiv = $('<div class="extrasafeChildContainer" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
 		var masterPasswordField = $('<input type="password" class="extrasafeChild" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
 		var showPassword = $('<img class="extrasafeUnmask" src="'+chrome.extension.getURL("icons/Unmask16.png")+'"></img>');
@@ -113,9 +114,9 @@ function inject(){
 		//See the inject.css for the position and !important fields to overcome the web sites css. 
 		$(document.body).append(masterPasswordDiv);
 
-		//Add class infomation, and these are initial settings.
-		originalPassword.addClass(""+globalNoInputFields);
-		originalPassword.addClass('extrasafeParent');
+		//Add other infomation, like tagging the input field 
+		originalPassword.attr("extrasafe-password-number",globalNoInputFields);
+		originalPassword.attr("extrasafe","extrasafeParent");
 
 		//Trigger the coupler to initialize the newly created extrasafechild for ajax based login form, in case the extrasafe is in disabled mode 
 		if(disabled){
@@ -161,7 +162,7 @@ chrome.runtime.onMessage.addListener(function(message){
 
 	//This is the password. Set in the password field.
 	else{
-		$("."+message.fromInputField).each(function(){
+		$("[extrasafe-password-number='"+message.fromInputField+"'").each(function(){
 			$(this).val(message.result);
 		});
 	}
