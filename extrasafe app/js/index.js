@@ -102,7 +102,7 @@ $("#generate-button").click(function(){
 	if(goAhead){
 		var sitePassword = Hasher.passy(masterPassword.val(), siteUrl.val(), extraSecuritySequence, startIndex, endIndex);
 		$("#site-password").val( sitePassword );
-		window.plugins.copy(
+		cordova.plugins.clipboard.copy(
 			sitePassword,
 			function(){
 				$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
