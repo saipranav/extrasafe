@@ -32,9 +32,21 @@ $("#site-url").focusout(function(){
 	siteUrl.parent().siblings(".errors").hide();
 	findSiteTag(siteUrl.val());
 	siteUrl.val(siteTag);
+        
+});
+
+$("#site-url").keyup(function(e){
+	var siteUrl = $("#site-url");
+	if(siteUrl.val().trim()==""){
+		$("#generate-button").addClass("disable");	
+	}
+	else if($("#master-password").val()!="") {
+		 $("#generate-button").removeClass("disable");
+	}
 });
 
 $("#master-password").keyup(function(e){
+        var siteUrl = $("#site-url");
 	var masterPassword = $("#master-password");
 	masterPassword.parent().removeClass("has-error");
 	masterPassword.siblings(".errors").html("");
@@ -43,63 +55,28 @@ $("#master-password").keyup(function(e){
 		masterPassword.parent().addClass("has-error");
 		masterPassword.siblings(".errors").append("<div>Space is not allowed</div>");
 		masterPassword.siblings(".errors").show();
+		$("#generate-button").addClass("disable");
 	}
+	else if(masterPassword.val() !="" && siteUrl.val().trim()!=""){
+		$("#generate-button").removeClass("disable");
+	}
+	else $("#generate-button").addClass("disable");
 });
 
 $("#generate-button").click(function(){
-
 	var goAhead = false;
-	//get all required parameters
 	var masterPassword = $("#master-password");
 	var siteUrl = $("#site-url");
-
-	//check master password
-	masterPassword.siblings(".errors").html("");
-	if(masterPassword.val() == ""){
-		masterPassword.parent().addClass("has-error");
-		masterPassword.siblings(".errors").append("<div>Mandatory Field</div>");
-		masterPassword.siblings(".errors").show();
-		masterPassword.focus();
-	}
-	else if(masterPassword.val().match(/\s/g)){
-		masterPassword.parent().addClass("has-error");
-		masterPassword.siblings(".errors").append("<div>Space is not allowed</div>");
-		masterPassword.siblings(".errors").show();
-	}
-	else{
-		goAhead = true;
-	}
-
-	if($(".has-error").length>0){
-		$("#tooltip").html("Retry after fixing errors in red input fields").fadeIn();
-		setTimeout(function(){
-			$("#tooltip").fadeOut();
-		},3000);
-		goAhead = false;
-	}
-
 	if($("#clear").attr("value") == "CLEARED"){
 		$("#tooltip").html("You have cleared everything, please open the application / refresh web page again").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},8000);
 		goAhead = false;
+		return;
 	}
-
-	if(goAhead){
-		//check site name
-		siteUrl.parent().siblings(".errors").html("");
-		if(siteUrl.val() == ""){
-			siteUrl.parent().addClass("has-error");
-			siteUrl.parent().siblings(".errors").append("<div>Mandatory Field</div>");
-			siteUrl.parent().siblings(".errors").show();
-			siteUrl.focus();
-			goAhead = false;
-		}
-		else{
-			siteUrl.parent().removeClass("has-error");
-			goAhead = true;
-		}
+        if(!$("#generate-button").hasClass("disable")){
+		goAhead = true;
 	}
 
 	var extraSecuritySequence = store.getItem("extraSecuritySequence");
@@ -130,10 +107,25 @@ $("#show-password").hover(function(){
 	$("#master-password").attr("type",type);
 });
 
+$("#generate-button").hover(function(){
+	if(!$("#generate-button").hasClass("disable")){
+		$("#generate-button").css({"cursor":"pointer"});	
+	}
+	else{
+		$("#generate-button").css({"cursor":"default"});	
+	}
+
+});
+
 $("#clear").click(function(){
 	store.clear();
 	$(this).attr("value","CLEARED");
 	$(this).css("background-color","#228B22");
+	$("#master-password").val("");
+	$("#site-password").val("");
+	$("#site-url").val("");
+	$("#generate-button").addClass("disable");
+
 });
 
 //Array containing keywords for top level domains and country codes
