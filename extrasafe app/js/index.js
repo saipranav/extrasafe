@@ -15,15 +15,8 @@ var app = {
         if(store.getItem("endIndex") == null){
         	store.setItem("endIndex", 12);
         }
-        if(store.getItem("sites") == null){
-        	store.setItem("sites", JSON.stringify([]));
-        }
     }
 };
-
-$("#site-password").click(function(){
-	$("#site-password").select();
-});
 
 $("#site-url").focusout(function(){
 	var siteUrl = $("#site-url");
@@ -107,16 +100,23 @@ $("#generate-button").click(function(){
 	var endIndex = store.getItem("endIndex");			
 
 	if(goAhead){
-		$("#site-password").val( Hasher.passy(masterPassword.val(), siteUrl.val(), extraSecuritySequence, startIndex, endIndex));
-		$("#tooltip").html("Your site password is generated, please copy it from the Site Password box").fadeIn();
-		setTimeout(function(){
-			$("#tooltip").fadeOut();
-		},3000);
-		var sites = JSON.parse(store.getItem("sites"));
-		if($.inArray(siteUrl.val(),sites) == -1){
-			sites.push(siteUrl.val());
-		}
-		store.setItem("sites", JSON.stringify(sites));
+		var sitePassword = Hasher.passy(masterPassword.val(), siteUrl.val(), extraSecuritySequence, startIndex, endIndex);
+		$("#site-password").val( sitePassword );
+		window.plugins.copy(
+			sitePassword,
+			function(){
+				$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
+				setTimeout(function(){
+					$("#tooltip").fadeOut();
+				},3000);		
+			},
+			function(){
+				$("#tooltip").html("Problem in generating and copying site password to clipboard").fadeIn();
+				setTimeout(function(){
+					$("#tooltip").fadeOut();
+				},3000);
+			}
+		);
 		return;
 	}
 	else{
@@ -125,7 +125,7 @@ $("#generate-button").click(function(){
 
 });
 
-$("#show-password").hover(function(){
+$("#show-password").click(function(){
 	var type = ( $("#master-password").attr("type") == "text" ) ? "password" : "text";
 	$("#master-password").attr("type",type);
 });

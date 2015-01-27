@@ -18,6 +18,7 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:platform name="winphone" />
+	<gap:plugin name="com.verso.cordova.clipboard" version="0.1.0" />
 
     <icon src="icon.png" />
 
