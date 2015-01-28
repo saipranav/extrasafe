@@ -23,7 +23,7 @@
                 <h6>Team</h6>
                 <ul id="credits">
                     <li class="person">
-                        <a href="http://www.google.com">
+                        <a href="#" onclick='openURL("http://www.google.com")';>
                             <img class="rounded" src='img/sai pranav.png'></img>
                             <div class="personDetails">
                                 <span class="personDetailsName">Sai Pranav</span>
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li class="person">
-                        <a href="mailto:extrasafemonitor@gmail.com?Subject=I am intrested in joining Extrasafe team - {your name}">
+                        <a href="#" onclick='openURL("mailto:extrasafemonitor@gmail.com?Subject=I am intrested in joining Extrasafe team - {your name}")'>
                             <img class="rounded" src='img/canbeyou.jpg'></img>
                             <div class="personDetails">
                                 <br>
@@ -48,7 +48,7 @@
                 <p>We are enthusiastic in <b>crafting</b> high quality products that are really useful to people, and are <b>thrilled</b> to see our products being used.</p>
                 <p>Want us to become happier? <b>Use</b> and Publicize Extrasafe</p>
                 <br>
-                <a target="_blank" href="http://saipranav.github.io/extrasafe">To Know More</a>
+                <a href="#" onclick='openURL("http://saipranav.github.io/extrasafe")'>To Know More</a>
                 <br>
                 <br>
             </div>
@@ -64,10 +64,10 @@
 	<script type="text/javascript" src="phonegap.js"></script>
 
 	<script>
-		$("a[target='_blank']").click(function(e){
-		  e.preventDefault();
-		  window.open($(e.currentTarget).attr('href'), '_system', '');
-		});
+		function openURL(urlString){
+			myURL = encodeURI(urlString);
+			window.open(myURL, '_blank');
+		}
 	</script>
 
     </body>
