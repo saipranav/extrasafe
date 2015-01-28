@@ -62,5 +62,12 @@
     <script type="text/javascript" src="js/options.js"></script>
 	<script type="text/javascript" src="phonegap.js"></script>
 
+	<script>
+		$("a[target='_blank']").click(function(e){
+		  e.preventDefault();
+		  window.open($(e.currentTarget).attr('href'), '_system', '');
+		});
+	</script>
+
     </body>
 </html>
