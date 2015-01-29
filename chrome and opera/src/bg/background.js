@@ -3,11 +3,7 @@ var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
 //Global variable to remember enabling and disabling.
-//Setting it in storage
 var extrasafeDisabled = false;
-chrome.storage.local.set({
-	extrasafeDisabledStorageFlag : false,
-}, function(){});
 
 //Single message handler.
 //Called for every keyup in master password field.
