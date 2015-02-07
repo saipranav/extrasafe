@@ -40,7 +40,7 @@
 	<dict>
 		<key>Blacklist</key>
 		<array>
-			<string>http://saipranav.github.io/extrasafe/portable.html</string>
+			<string>http://theextralabs.com/extrasafe/portable.html</string>
 		</array>
 		<key>Scripts</key>
 		<dict>
@@ -70,6 +70,6 @@
 		</dict>
 	</dict>
 	<key>Website</key>
-	<string>http://saipranav.github.io/extrasafe</string>
+	<string>http://theextralabs.com</string>
 </dict>
 </plist>

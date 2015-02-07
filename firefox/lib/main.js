@@ -35,11 +35,12 @@ function detachWorker(worker, workerArray) {
 
 pageMod.PageMod({
 	include: "*",
-	exclude: "http://saipranav.github.io/extrasafe/portable.html",
+	exclude: "http://theextralabs.com/extrasafe/portable.html",
 	contentScriptFile: [self.data.url("lib/jquery.min.js"), self.data.url("inject/inject.js")],
 	contentScriptOptions: {
     	unmaskPng: self.data.url("icons/Unmask16.png"),
-    	extrasafePng: self.data.url("icons/Extrasafe16.png")
+    	extrasafePng: self.data.url("icons/Extrasafe16.png"),
+    	helperPng: self.data.url("icons/Info16.png")
   	},
   	contentStyleFile: self.data.url("inject/inject.css"),
 	onAttach: function(worker){
@@ -51,6 +52,9 @@ pageMod.PageMod({
 			findSiteTag(worker.url);
 			var password = Hasher.Hasher.passy(message.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex );
 			worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
+		});
+		worker.port.on("open portable", function(message){
+			tabs.open("http://theextralabs.com/extrasafe/portable.html");
 		});
 		worker.on("detach", function () {
       		detachWorker(this, injectedWorkers);

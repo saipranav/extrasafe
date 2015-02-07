@@ -5,7 +5,7 @@
   "icon": "data/icons/Extrasafe48.png",
   "icon64": "data/icons/Extrasafe64.png",
   "permissions": {"private-browsing": true},
-  "homepage": "http://saipranav.github.io/extrasafe",
+  "homepage": "http://theextralabs.com",
   "description": "Just Remember one Master Password to generate Different Passwords for Different Sites. We do NOT and will NEVER store your password any where.",
   "author": "Sai Pranav",
   "preferences": [{

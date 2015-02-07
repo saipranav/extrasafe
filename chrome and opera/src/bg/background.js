@@ -9,17 +9,23 @@ var extrasafeDisabled = false;
 //Called for every keyup in master password field.
 //Returns the password from algorithm to content script.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	findSiteTag(sender.url);
-	chrome.storage.local.get({
-    		extraSecuritySequence : "",
-    		startIndex : 0,
-    		endIndex : 12
-  		}, function(items) {
-			var extraSecuritySequence = items.extraSecuritySequence;
-			var startIndex = items.startIndex;
-			var endIndex = items.endIndex;
-			chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
-  	});
+	if(request.message == undefined){
+		findSiteTag(sender.url);
+		chrome.storage.local.get({
+	    		extraSecuritySequence : "",
+	    		startIndex : 0,
+	    		endIndex : 12
+	  		}, function(items) {
+				var extraSecuritySequence = items.extraSecuritySequence;
+				var startIndex = items.startIndex;
+				var endIndex = items.endIndex;
+				chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
+	  	});
+	}
+	else{
+		if(request.message == "open portable")
+		chrome.tabs.create({ url : "http://theextralabs.com/extrasafe/portable.html"});
+	}
 });
 
 //Toggle browser actions.

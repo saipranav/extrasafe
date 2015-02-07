@@ -1,4 +1,4 @@
-.extrasafeChildContainer{
+.extrasafe-child-container{
 	position: absolute !important;
 	z-index: 2147400000;
 	padding: 0.5%;
@@ -7,21 +7,28 @@
 	box-shadow: 0px 0px 20px #151515;
 }
 
-.extrasafeChild{
+.extrasafe-child-container img {
+	padding : 0px 5px;
+}
+
+.extrasafe-child{
 	border: none !important;
 	outline: none !important;
 }
 
-.extrasafeChildContainer img {
-	padding : 0px 5px;
-}
-
-.errors{
+.extrasafe-errors{
 	color: #B22222;
 }
 
-.error-div{
+.extrasafe-error-div{
 	border: solid 1px #B22222 !important;
+}
+
+#extrasafe_helper_inner{
+	width:400px;
+	height:40px;
+	display:inline;
+	z-index: 2147400001;
 }
 
 .center-text{

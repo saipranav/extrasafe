@@ -5,7 +5,7 @@ var disabled = false;
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
 function inject(){
-	$("input[type=password]:not(.extrasafeChild)[extrasafe!=extrasafeParent]").each(function(){
+	$("input[type=password]:not(.extrasafe-child)[extrasafe!=extrasafe-parent]").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -14,12 +14,13 @@ function inject(){
 		var passwordHeight = originalPassword.outerHeight(true);
 
 		//the input field number is tagged against child password field which is tagged again with parent, used for pasting the password in respective fields
-		var masterPasswordDiv = $('<div class="extrasafeChildContainer" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
-		var masterPasswordField = $('<input type="password" class="extrasafeChild" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
-		var showPassword = $('<img class="extrasafeUnmask" src="'+self.options.unmaskPng+'"></img>');
-		var extrasafeIcon = $('<img title="Powered by Extrasafe" class="extrasafeIcon" src="'+self.options.extrasafePng+'"></img>');
-		var masterPasswordFieldErrors = $('<div class="errors center-text" style="display:none" id="master_password_errors"></div>');
-		
+		var masterPasswordDiv = $('<div class="extrasafe-child-container" style="top:'+(passwordPosition.top+passwordHeight+5)+'px; left:'+passwordPosition.left+'px "></div>');
+		var masterPasswordField = $('<input type="password" class="extrasafe-child" id="master_password" inputField="'+globalNoInputFields+'" placeholder="Master Password" ></input>');
+		var showPassword = $('<img class="extrasafe-unmask" src="'+self.options.unmaskPng+'"></img>');
+		var extrasafeIcon = $('<img class="extrasafe-icon" title="Powered by Extrasafe" src="'+self.options.extrasafePng+'"></img>');
+		var masterPasswordFieldErrors = $('<div class="extrasafe-errors center-text" style="display:none" id="master_password_errors"></div>');
+		var extrasafeHelper = $('<img class="extrasafe-helper" title="Not your computer? Stay still for 5 sec to open our backup plan!" src="'+self.options.helperPng+'"></img>');
+
 		//When user clicks outside the master password div, master password div should hide
 		masterPasswordDiv.focusout(function(){
 			masterPasswordDiv.hide();
@@ -33,7 +34,7 @@ function inject(){
         //  If it has space then show the red error things as space is not allowed because it might be confuse the user while typing master password in portable site.  
 		//Reason for key up is its called after key pressed actions (eg clearing does not work properly on other key events).
 		masterPasswordField.keyup(function(e){
-			masterPasswordField.removeClass("error-div");
+			masterPasswordField.removeClass("extrasafe-error-div");
 			masterPasswordFieldErrors.html("");
 			masterPasswordFieldErrors.hide();
 			if(e.keyCode == 13){
@@ -45,7 +46,7 @@ function inject(){
 				originalPassword.val("");
 			}
 			else if(masterPasswordField.val().match(" ")){
-				masterPasswordField.addClass("error-div");
+				masterPasswordField.addClass("extrasafe-error-div");
 				masterPasswordFieldErrors.append("<div>Space is not allowed</div>");
 				masterPasswordFieldErrors.show();
 				originalPassword.val("");
@@ -68,20 +69,29 @@ function inject(){
 			}
 		});
 
-		//If user mouse enters over the master password show password, change the input type to text.
+		//If user hovers over the master password show password, change the input type to text.
 		showPassword.mouseenter(function(){
 			masterPasswordField.attr('type','text');
 		});
-
-		//If user mouse leaves over the master password show password, change the input type to password.
 		showPassword.mouseleave(function(){
 			masterPasswordField.attr('type','password');
+		});
+
+		//If user hovers over the extrasafe helper, wait for 4 sec and open portable site in new tab
+		extrasafeHelper.mouseenter(function(){
+			//extrasafeHelper.find('#extrasafe_helper_inner').css('display','inline');
+			setTimeout(function(){
+				if(extrasafeHelper.is(":hover")){
+					self.port.emit("open portable",{});
+				}
+			},4000);
 		});
 
 		//Append all the fields and icons to master password div and hide it initially.
 		masterPasswordDiv.append(extrasafeIcon);
 		masterPasswordDiv.append(masterPasswordField);
 		masterPasswordDiv.append(showPassword);
+		masterPasswordDiv.append(extrasafeHelper);
 		masterPasswordDiv.append(masterPasswordFieldErrors);
 		masterPasswordDiv.hide();
 
@@ -116,7 +126,7 @@ function inject(){
 
 		//Add other infomation, like tagging the input field 
 		originalPassword.attr("extrasafe-password-number",globalNoInputFields);
-		originalPassword.attr("extrasafe","extrasafeParent");
+		originalPassword.attr("extrasafe","extrasafe-parent");
 
 		//Trigger the coupler to initialize the newly created extrasafechild for ajax based login form, in case the extrasafe is in disabled mode 
 		if(disabled){
@@ -145,18 +155,18 @@ observer.observe(target, config);
 
 //Attach the functions to respond 
 self.port.on("disable password div", function(message){
-	$(".extrasafeChildContainer").hide();
+	$(".extrasafe-child-container").hide();
 	disabled = true;
-	$("input[type=password]:not(.extrasafeChild)").trigger('coupler');
+	$("input[type=password]:not(.extrasafe-child)").trigger('coupler');
 });
 
 self.port.on("enable password div", function(message){
 	disabled = false;
-	$("input[type=password]:not(.extrasafeChild)").trigger('coupler');
+	$("input[type=password]:not(.extrasafe-child)").trigger('coupler');
 });
 
 self.port.on("result", function(message){
-	$("input[extrasafe-password-number='"+message.fromInputField+"'").each(function(){
+	$("input[extrasafe-password-number='"+message.fromInputField+"']").each(function(){
 		$(this).val(message.result);
 	});
 });

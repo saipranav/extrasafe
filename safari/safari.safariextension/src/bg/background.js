@@ -25,6 +25,9 @@ safari.application.activeBrowserWindow.addEventListener("message", function(even
 		findSiteTag(event.target.url);
 		event.target.page.dispatchMessage("result", { result: Hasher.passy(event.message.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: event.message.fromInputField });
 	}
+	else if(event.name == "open portable"){
+		safari.application.activeBrowserWindow.openTab().url = "http://theextralabs.com/extrasafe/portable.html";
+	}
 }, true);
 
 safari.application.addEventListener("command", function(event){

@@ -3,7 +3,7 @@
   "version": "0.4",
   "manifest_version": 2,
   "description": "Just Remember one Master Password to generate Different Passwords for Different Sites . . We do NOT and will NEVER store your password any where.",
-  "homepage_url": "http://saipranav.github.io/extrasafe",
+  "homepage_url": "http://theextralabs.com",
   "icons": {
     "16": "icons/Extrasafe16.png",
     "48": "icons/Extrasafe48.png",
@@ -17,7 +17,7 @@
   "content_scripts" : [
     {
       "matches" : [ "<all_urls>" ],
-      "exclude_matches" : ["http://saipranav.github.io/extrasafe/portable.html"],
+      "exclude_matches" : ["http://theextralabs.com/extrasafe/portable.html"],
       "js" : [ "js/jquery.min.js","src/inject/inject.js" ],
       "css": [ "src/inject/inject.css" ],
       "run_at" : "document_idle",
@@ -27,7 +27,8 @@
   "options_page": "./src/options/options.html",
   "web_accessible_resources": [
 	"icons/Unmask16.png",
-	"icons/Extrasafe16.png"
+	"icons/Extrasafe16.png",
+  "icons/Info16.png"
   ],
   "browser_action": {
 	   "default_icon": "icons/Extrasafe19.png",
