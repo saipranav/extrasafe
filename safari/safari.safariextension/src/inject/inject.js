@@ -1,11 +1,12 @@
 var globalNoInputFields = 0;
 var disabled = false;
+var helperTimer;
 
 //Jquery function to insert master password fields in the web page (DOM modifications).
 //It sees for the input type password and inserts the new master password div into the body.
 //The master password div contains the master password input field, show password icon, Extrasafe icon.
 function inject(){
-	$("input[type=password]:not(.extrasafe-child)[extrasafe!=extrasafe-parent]").each(function(){
+	$("input[type=password]:not(.extrasafe-child):not([extrasafe=extrasafe-parent])").each(function(){
 		globalNoInputFields++;
 
 		//get the original password position in order to show the new master password div in correct position below the original password.
@@ -19,7 +20,7 @@ function inject(){
 		var showPassword = $('<img class="extrasafe-unmask" src="'+safari.extension.baseURI+'icons/Unmask16.png"></img>');
 		var extrasafeIcon = $('<img class="extrasafe-icon" title="Powered by Extrasafe" src="'+safari.extension.baseURI+'icons/Extrasafe16.png"></img>');
 		var masterPasswordFieldErrors = $('<div class="extrasafe-errors center-text" style="display:none" id="master_password_errors"></div>');
-		var extrasafeHelper = $('<img class="extrasafe-helper" title="Not your computer? Stay still for 5 sec to open our backup plan!" src="'+safari.extension.baseURI+'icons/Info16.png"></img>');
+		var extrasafeHelper = $('<img class="extrasafe-helper" title="Not your computer? Stay still for 5 seconds to open our backup plan!" src="'+safari.extension.baseURI+'icons/Info16.png"></img>');
 
 		//When user clicks outside the master password div, master password div should hide
 		masterPasswordDiv.focusout(function(){
@@ -77,14 +78,15 @@ function inject(){
 			masterPasswordField.attr('type','password');
 		});
 
-		//If user hovers over the extrasafe helper, wait for 4 sec and open portable site in new tab
+		//If user mouse entered the extrasafe helper, wait for 4 sec and open portable site in new tab
+		//If user mouse leaved the extrasafe helper, clear the timer
 		extrasafeHelper.mouseenter(function(){
-			//extrasafeHelper.find('#extrasafe_helper_inner').css('display','inline');
-			setTimeout(function(){
-				if(extrasafeHelper.is(":hover")){
-					safari.self.tab.dispatchMessage("open portable", {});
-				}
+			helperTimer = setTimeout(function(){
+				safari.self.tab.dispatchMessage("open portable", {});
 			},4000);
+		});
+		extrasafeHelper.mouseleave(function(){
+			clearTimeout(helperTimer);
 		});
 
 		//Append all the fields and icons to master password div and hide it initially.
