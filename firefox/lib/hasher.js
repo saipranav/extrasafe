@@ -120,30 +120,57 @@ Hasher = {
 	
 	//function to reduce the size of passwords if required
 	finalTrim: function(){
-					if(Hasher.password.length > Hasher.end){
+					if(Hasher.password.length > (Hasher.end - Hasher.start)){
 						Hasher.fillCountCharacters();
-						//check whether numbers or small chars are more in number
-						if(Hasher.numberPos.length > Hasher.smallCharactersPos.length){
+						//check whether numbers are more in number
+						if( (Hasher.numberPos.length > 4 ) && (Hasher.numberPos.length > Hasher.smallCharactersPos.length || Hasher.numberPos.length > Hasher.capitalCharactersPos.length || Hasher.numberPos.length > Hasher.specialCharactersPos.length) ){
 							//reduce the numbers but minimum of 4
-							while(Hasher.password.length > Hasher.end && Hasher.numberPos.length > 4){
+							while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.numberPos.length > 4){
 								Hasher.password = Hasher.password.substr(0, Hasher.numberPos[Hasher.numberPos.length-1])+Hasher.password.substr((Hasher.numberPos[Hasher.numberPos.length-1])+1, Hasher.password.length);
 								Hasher.numberPos.splice(-1,1);
 							}
 							Hasher.iterator++;
-							//check to trim more for 2 times max then forcefully come out
-							if(Hasher.iterator < 2){
+							//check to trim more for 4 times max then forcefully come out
+							if(Hasher.iterator < 4){
 								Hasher.finalTrim();
 							}
 						}
-						else{
+						//check whether small chars are more in number
+						else if( (Hasher.smallCharactersPos.length > 4) && (Hasher.smallCharactersPos.length > Hasher.numberPos.length || Hasher.smallCharactersPos.length > Hasher.capitalCharactersPos.length || Hasher.smallCharactersPos.length > Hasher.specialCharactersPos.length) ){
 							//reduce the small chars but minimum of 4
-							while(Hasher.password.length > Hasher.end && Hasher.smallCharactersPos.length > 4){
+							while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.smallCharactersPos.length > 4){
 								Hasher.password = Hasher.password.substr(0, Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+Hasher.password.substr((Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+1, Hasher.password.length);
 								Hasher.smallCharactersPos.splice(-1,1);
 							}
 							Hasher.iterator++;
-							//check to trim more for 2 times max then forcefully come out
-							if(Hasher.iterator < 2){
+							//check to trim more for 4 times max then forcefully come out
+							if(Hasher.iterator < 4){
+								Hasher.finalTrim();
+							}
+						}
+						//check whether caps are more in number
+						else if( (Hasher.capitalCharactersPos.length > 2) && (Hasher.capitalCharactersPos.length > Hasher.numberPos.length || Hasher.capitalCharactersPos.length > Hasher.smallCharactersPos.length || Hasher.capitalCharactersPos.length > Hasher.specialCharactersPos.length) ){
+							//reduce the caps chars but minimum of 2
+							while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.capitalCharactersPos.length > 2){
+								Hasher.password = Hasher.password.substr(0, Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length-1])+Hasher.password.substr((Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length-1])+1, Hasher.password.length);
+								Hasher.capitalCharactersPos.splice(-1,1);
+							}
+							Hasher.iterator++;
+							//check to trim more for 4 times max then forcefully come out
+							if(Hasher.iterator < 4){
+								Hasher.finalTrim();
+							}
+						}
+						//check whether special chars are more in number
+						else if( (Hasher.specialCharactersPos.length > 1) && (Hasher.specialCharactersPos.length > Hasher.numberPos.length || Hasher.specialCharactersPos.length > Hasher.smallCharactersPos.length || Hasher.specialCharactersPos.length > Hasher.capitalCharactersPos.length) ){
+							//reduce the special chars but minimum of 2
+							while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.specialCharactersPos.length > 1){
+								Hasher.password = Hasher.password.substr(0, Hasher.specialCharactersPos[Hasher.specialCharactersPos.length-1])+Hasher.password.substr((Hasher.specialCharactersPos[Hasher.specialCharactersPos.length-1])+1, Hasher.password.length);
+								Hasher.specialCharactersPos.splice(-1,1);
+							}
+							Hasher.iterator++;
+							//check to trim more for 4 times max then forcefully come out
+							if(Hasher.iterator < 4){
 								Hasher.finalTrim();
 							}
 						}
