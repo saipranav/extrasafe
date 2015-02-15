@@ -14,6 +14,9 @@
 .extrasafe-child{
 	border: none !important;
 	outline: none !important;
+	width:200px !important;
+	height:30px !important;
+	padding-left:10px !important;
 }
 
 .extrasafe-errors{
