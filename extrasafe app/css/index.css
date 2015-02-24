@@ -84,6 +84,7 @@ ul#credits{
 
 li.person{
     display: inline-block;
+	padding: 15px;
 }
 
 .personDetails{
