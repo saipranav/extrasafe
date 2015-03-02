@@ -32,7 +32,13 @@ body {
 .errors{
 	font-weight: bold;
 	font-size: 1.25em;
-	color: #e74c3c
+	color: #e74c3c;
+}
+
+.goahead{
+	font-weight: bold;
+	font-size: 1.25em;
+	color: #228B22;
 }
 
 .my-button{
@@ -136,4 +142,9 @@ li.person{
 
 .disable {
     opacity: 0.4;
+}
+
+#default-options{
+	font-size:0.8em;
+	display: none;
 }

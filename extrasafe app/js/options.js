@@ -70,6 +70,12 @@ $("#save-button").click(function(){
 	},2000);
 	$("#start-index").parent().removeClass("has-error");
 	$("#end-index").parent().removeClass("has-error");
+	if( store.getItem("extraSecuritySequence")=="" && store.getItem("startIndex")==0 && store.getItem("endIndex")==12 ){
+		$("#default-options").show();
+	}
+	else{
+		$("#default-options").hide();
+	}
 });
 
 $("#cancel-button").click(function(){
