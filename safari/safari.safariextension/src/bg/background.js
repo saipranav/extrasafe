@@ -216,6 +216,19 @@ function findSiteTag(url){
 			}
 		}
 	}
+
+	//check if the site tag is "", then if split array has 3 words like (blog.about.me) grab 2nd word; if the split array has 2 words like (about.me) grab 1st word; if more than that we could not find as fall back. 
+	if(siteTag == ""){
+		if(siteUrlBreakupArray.length == 3){
+			siteTag = siteUrlBreakupArray[1];
+		}
+		else if(siteUrlBreakupArray.length == 2){
+			siteTag = siteUrlBreakupArray[0];
+		}
+		else{
+			siteTag = "couldnotfind";
+		}
+	}
 	
 	return;
 }
