@@ -114,11 +114,9 @@ function inject(){
 			if(!disabled){
 				originalPassword.on("focus",toggleFocus);
 				originalPassword.blur();
-				originalPassword.focus();
 			}
 			else{
 				originalPassword.off("focus");
-				originalPassword.focus();
 			}
 		});
 

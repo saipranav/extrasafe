@@ -2,14 +2,13 @@
   "name": "Extrasafe",
   "version": "0.4",
   "manifest_version": 2,
-  "description": "Just Remember one Master Password to generate Different Passwords for Different Sites . . We do NOT and will NEVER store your password any where.",
+  "description": "Just remember one master password text, Extrasafe takes care of the rest ;)",
   "homepage_url": "http://theextralabs.com",
   "icons": {
     "16": "icons/Extrasafe16.png",
     "48": "icons/Extrasafe48.png",
     "128": "icons/Extrasafe128.png"
   },
-  "default_locale": "en",
   "background": {
     "scripts": [ "js/sha3.js", "src/bg/hasher.js", "src/bg/background.js" ]
   },
