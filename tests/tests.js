@@ -1,3 +1,9 @@
+/*******************************************************************************************
+Just Remember one Master Password text, Extrasafe takes care of the rest ;)
+Extrasafe (C) 2014-2015  The Extra Labs
+GNU General Public License v3
+http://theextralabs.com
+********************************************************************************************/
 test( 'Consistency check for master password - "", site name - ""', function() {
 	var testRuns = 100000;
 	var password = Hasher.passy("", "", "", 0, 12);
