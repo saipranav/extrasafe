@@ -9,7 +9,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Extrasafe</string>
 	<key>CFBundleIdentifier</key>
-	<string>saipranav.extrasafe.safari</string>
+	<string>theextralabs.extrasafe.safari</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
@@ -69,6 +69,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://theextralabs.com/extrasafe/downloads/safari_update.plist</string>
 	<key>Website</key>
 	<string>http://theextralabs.com</string>
 </dict>
