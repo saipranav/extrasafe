@@ -42,7 +42,7 @@ function detachWorker(worker, workerArray) {
 pageMod.PageMod({
 	include: "*",
 	exclude: "http://theextralabs.com/extrasafe/portable.html",
-	contentScriptFile: [self.data.url("lib/jquery.min.js"), self.data.url("inject/inject.js")],
+	contentScriptFile: [self.data.url("lib/jquery-2.1.3.min.js"), self.data.url("inject/inject.js")],
 	contentScriptOptions: {
     	unmaskPng: self.data.url("icons/Unmask16.png"),
     	extrasafePng: self.data.url("icons/Extrasafe16.png"),
