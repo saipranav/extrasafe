@@ -6,62 +6,73 @@ GNU General Public License v3
 http://theextralabs.com
 ********************************************************************************************/
 -->
+<!DOCTYPE html>
 <html>
-<head>
-<title>xtrasafe Options</title>
-<link rel="stylesheet" href="css/options.css"></link>
-</head>
-<body>
-	<div id="options">
-		<div id="sideDiv">
-			<img src="../../icons/Extrasafe128.png"></img>
-			<span id="header">Extrasafe Options</span>
-			<span id="securityLevelHeader" class="option">Security Level</span>
-			<span id="passwordLengthHeader" class="option">Password Length</span>
-			<!-- <span id="specialCharactersHeader" class="option">Special Characters</span> -->
-		</div>
-		<div id="buttons">
-			<span id="statusSave">Your options are updated.</span>
-			<span id="statusCancel">Your previous options are saved.</span>
-			<span id="statusReset">Your options are reset to default.</span>
-			<button id="save" title="Save your new options">Save</button>
-			<button id="cancel" title="Maintain the previous options">Cancel</button>
-			<button id="reset" title="Reset all options to default">Reset</button>
-		</div>
-		<div id="securityLevel" class="page">
-			<h4>Security Level</h4>
-			<span>
-				<span>Raise the security level by giving the most hardest sequence of characters, numbers, special characters that you will remember. This sequence will also be used for generating your site password.</span>
-				<div>
-					<input type="text" id="securityLevelInput" placeholder="Security Charcter Sequence"></input>
-				</div>
-			</span>
-			
-		</div>
-		<div id="passwordLength" class="page">
-			
-			<h4>Password Length</h4>
-			<span>
-				<span>Indices which alters the number of characters to be generated for site passwords</span>
-				<div>
-					<input type="number" id="startIndex" min=0 max=115 placeholder="Password Slice Start Index"></input> Minimum: 0
-					<br>
-					<input type="number" id="endIndex" min=12 max=128 placeholder="Password Slice End Index"></input> Maximum: 128
-				</div>
-			</span>
-		</div>
-		<!-- <div id="specialCharacters" class="page">
-			<h4>Special Characters</h4>
-			<span>
-				<span>Include or Exclude special characters for password generation.</span>
-				<div>
-				<br>
-					<input type="checkbox" id="specialCharactersInput">Include Special Characters.</input>
-				</div>
-			</span>
-		</div> -->
-	<div>
-<script src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="js/options.js"></script>
-</body>
+	<head>
+    	<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    	<title>xtrasafe options | The Extra Labs</title>
+
+		<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    	<!-- Loading Bootstrap -->
+    	<link href="libs/css/bootstrap.min.css" rel="stylesheet">
+
+    	<!-- Loading Flat UI -->
+    	<link href="libs/css/flat-ui.css" rel="stylesheet">
+    	<link rel="stylesheet" href="css/options.css"></link>
+  	</head>
+	<body>
+	<div id="app">
+        <div id="options-page" class="page" data-role="page">
+            <h4 class="center-text">Options</h4>
+            <br>
+            <div class="form-group center-text">
+                <label for="profiles">Profiles</label>
+                <br>
+                <div class="btn-group">
+                      <a class="btn btn-primary active"><span class="profile-name" id="profile-personal">Personal</span></a>
+                      <a class="btn btn-primary"><span class="profile-name" id="profile-official">Official</span></a>
+                      <a class="btn btn-primary"><span class="profile-name" id="profile-default">Default</span></a>
+                </div>
+              </div>
+            <div data-role="content">
+
+                <div class="form-group center-text">
+                    <label for="extra-security-sequence">Extra Security Sequence</label>
+                    <input type="text" class="form-control" id="extra-security-sequence" data-mini="true"/>
+                </div>
+
+                <div class="form-group center-text">
+                    <label for="start-index">Start Index</label>
+                    <input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
+                    <label class="errors" style="display:none" >Minimum : 0, Maximum : 115</label>
+                </div>
+
+                <div class="form-group center-text">
+                    <label for="end-index">End Index</label>
+                    <input type="number" min=12 max=128 class="form-control" id="end-index" data-mini="true"/>
+                    <label class="errors" style="display:none" >Minimum : 12, Maximum : 128</label>
+                </div>
+
+                <div id="save-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-success"><span class="fui-check-circle"></span> Save</a>
+                </div>
+
+                <div id="cancel-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-warning"><span class="fui-cross-circle"></span> Cancel</a>
+                </div>
+
+                <div id="reset-button" class="my-button">
+                    <a class="btn btn-block btn-lg btn-danger"><span class="fui-alert-circle"></span> Reset</a>
+                </div>
+            </div>
+            <div id="tooltip" style="display:none"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="libs/js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/options.js"></script>
+
+    </body>
 </html>

@@ -17,16 +17,42 @@ var extrasafeDisabled = false;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.message == undefined){
 		findSiteTag(sender.url);
-		chrome.storage.local.get({
-	    		extraSecuritySequence : "",
-	    		startIndex : 0,
-	    		endIndex : 12
+		if(request.profile.match("Personal")){
+			chrome.storage.local.get({
+	    		personal_extraSequence : "",
+	    		personal_startIndex : 0,
+	    		personal_endIndex : 12
 	  		}, function(items) {
-				var extraSecuritySequence = items.extraSecuritySequence;
-				var startIndex = items.startIndex;
-				var endIndex = items.endIndex;
+				var extraSecuritySequence = items.personal_extraSequence;
+				var startIndex = items.personal_startIndex;
+				var endIndex = items.personal_endIndex;
 				chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
-	  	});
+	  		});
+		}
+		else if(request.profile.match("Official")){
+			chrome.storage.local.get({
+	    		official_extraSequence : "",
+	    		official_startIndex : 0,
+	    		official_endIndex : 12
+	  		}, function(items) {
+				var extraSecuritySequence = items.official_extraSequence;
+				var startIndex = items.official_startIndex;
+				var endIndex = items.official_endIndex;
+				chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
+	  		});
+		}
+		else if(request.profile.match("Default")){
+			chrome.storage.local.get({
+	    		default_extraSequence : "",
+	    		default_startIndex : 0,
+	    		default_endIndex : 12
+	  		}, function(items) {
+				var extraSecuritySequence = items.default_extraSequence;
+				var startIndex = items.default_startIndex;
+				var endIndex = items.default_endIndex;
+				chrome.tabs.sendMessage(sender.tab.id,{ result: Hasher.passy(request.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: request.fromInputField });
+	  		});
+		}
 	}
 	else{
 		if(request.message == "open portable")
@@ -76,7 +102,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	}
 });
 
-chrome.storage.onChanged.addListener(function(changes, namespace) {
+/*chrome.storage.onChanged.addListener(function(changes, namespace) {
 	for (key in changes) {
 	  var storageChange = changes[key];
 	  if(key == "securitySequence"){
@@ -90,9 +116,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 	  }
 	  /*else if(key == "specialCharactersCheck"){
 	  	Hasher. = storageChange.newValue;
-	  }*/
+	  }
 	}
-});
+});*/
 
 function broadcast(message){
 	chrome.tabs.query({}, function(tabs){

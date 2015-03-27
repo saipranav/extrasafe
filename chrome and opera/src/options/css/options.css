@@ -4,109 +4,154 @@ Extrasafe (C) 2014-2015  The Extra Labs
 GNU General Public License v3
 http://theextralabs.com
 ********************************************************************************************/
-body{
-	font-family: Lucida Sans Unicode;
-	overflow: hidden;
+body {
+    background-color:#FFFFFF;	
+    font-size:12px;
+    height:100%;
+    width:80%;
+	margin: auto auto;
 }
 
-#options{
-
+#logo{
+    width:70%;
+    max-width:206px;
+    margin:35px 0 40px;
 }
 
-#sideDiv{
-	display: inline-block;
-	position: absolute;
-	width: 12%;
-	height: 100%;
-	border-right: 2px #888888 solid;
-	border-color: #888888;
-	background-color: rgba(242,242,242,0.3);
+#generate-button{
+	height: 100px;
+    width: 100px;
 }
 
-#sideDiv>img{
-	margin: 5%;
+#about-button>a{
+	background-color: #8e44ad;
 }
 
-#header{
-	font-size: 15px;
-	margin: 5%;
-}
-
-.option{
-	display: block;
-	margin: 3%;
-	margin-top: 15%;
-	padding: 0% 2%;
-	cursor: pointer;
-}
-
-.activeOption{
-	border-left: 5px #FF4500 solid;
+#about-button>a:hover{
+	background-color: #9B59B6;
 }
 
 .page{
-	margin-left: 15%;
-	display: inline-block;
-	padding: 1%;
+	padding: 5% 0%;
 }
 
-#buttons{
-	width: 50%;
-	position: fixed;
-	margin-left: 50%
+.errors{
+	font-weight: bold;
+	font-size: 1.25em;
+	color: #e74c3c
 }
 
-#buttons>button{
-	height: 40px;
-	width: 100px;
-	margin: 2%;
-	outline: medium;
-	border: 1px #151515 solid;
+.goahead{
+	font-weight: bold;
+	font-size: 1.25em;
+	color: #228B22;
 }
 
-#buttons>button:hover{
-	box-shadow: 0px 0px 5px #151515;
+.my-button{
+	margin:auto auto;
+	margin-bottom: 20px;
 }
 
-#save{
-	background-color: #228B22;
-	color: #FFFFFF;
+.center-text{
+    text-align:center;
 }
 
-#cancel{
-	background-color: #FFA500;
-	color: #FFFFFF;
+#tooltip{
+    position: absolute;
+    background-color: #282828;
+    color: #FFFFFF;
+    top: 80%;
+    padding: 10px 19px;
+    border-radius: 6px;
+    width: 80%;
+    text-align: center;
+    font-size: 1.3em;
+    z-index: 9999;
 }
 
-#reset{
-	background-color: #FF4500;
-	color: #FFFFFF;
+.big-text{
+    font-size: 1.3em;
+}
+.small-text{
+    font-size:0.8em;
 }
 
-input[type="text"], [type="number"]{
-	padding: 1% 2%;
-	width: 300px;
-	margin: 1% 0%;
-	transition: ease-in-out 0.5s;
-	outline: none;
-	border-radius: 4px;
-	border: 2px #FF9900 solid;
+#site-password{
+    color : #1B1D1D;
 }
 
-input[type="text"], [type="number"]:focus{
-	box-shadow: 0px 0px 15px #151515;
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
 }
 
-.note{
-	display: block;
-	padding: 1%;
-	border-radius: 5%;
-	background-color: #FF9900;
+.help-label{
+    line-height: 1.25em;
 }
 
-.recommend{
-	display: block;
-	padding: 1%;
-	border-radius: 5%;
-	background-color: #9ACD32;
+ul#credits{
+    list-style: none;
+    font-size: 1.5em;
+    padding-left: 0px;
+}
+
+li.person{
+    display: inline-block;
+    padding: 15px;
+}
+
+.personDetails{
+    height: 50px;
+    width: 100%;
+    margin: auto auto;
+}
+
+.person>a>img{
+    height: 200px;
+    width: 200px;
+}
+
+.person>a{
+    color: #34495E;
+    text-decoration: none;
+}
+
+.rounded{
+    border-radius: 50%;
+}
+
+#recommend{
+    background-color: #F1C40F;
+    width: 100%;
+    color: #000;
+    font-size: 1.2em;
+    border-radius: 5%;
+    border: 2px solid #F39C12;
+    padding: 5px;
+    box-shadow: 0px 0px 5px #F39C12;
+}
+
+#clear{
+    background-color: #B22222;
+    color: #FFFFFF;
+    padding: 3px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #696969; 
+    border-radius: 5px;
+    transition: all 0.30s ease-in-out;
+    box-shadow: 0px 3px 3px #333333;
+}
+
+#clear:hover{
+    box-shadow: 0px 1px 3px #878787;
+}
+
+.disable {
+    opacity: 0.4;
+}
+
+#default-options{
+	font-size:0.8em;
+	display: none;
 }
