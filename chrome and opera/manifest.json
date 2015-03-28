@@ -1,6 +1,6 @@
 {
   "name": "Extrasafe",
-  "version": "0.4",
+  "version": "0.7",
   "manifest_version": 2,
   "description": "Just remember one master password text, Extrasafe takes care of the rest ;)",
   "homepage_url": "http://theextralabs.com",
@@ -12,7 +12,7 @@
   "background": {
     "scripts": [ "js/sha3.js", "src/bg/hasher.js", "src/bg/background.js" ]
   },
-  "permissions" : [ "tabs", "storage", "webRequest", "<all_urls>" ],
+  "permissions" : [ "tabs", "storage", "<all_urls>" ],
   "content_scripts" : [
     {
       "matches" : [ "<all_urls>" ],
