@@ -27,6 +27,8 @@ function inject(){
 		var extrasafeIcon = $('<img class="extrasafe-icon" title="Powered by Extrasafe" src="'+self.options.extrasafePng+'"></img>');
 		var masterPasswordFieldErrors = $('<div class="extrasafe-errors center-text" style="display:none" id="master_password_errors"></div>');
 		var extrasafeHelper = $('<img class="extrasafe-helper" title="Not your computer? Stay still for 5 seconds to open our backup plan!" src="'+self.options.helperPng+'"></img>');
+		var profileDiv = $('<div class="profile-div"><ul><li class="profile-item"><img src="'+self.options.personalPng+'"></img><span>Personal</span></li><li class="profile-item"><img src="'+self.options.officialPng+'"></img><span>Official</span></li><li class="profile-item"><img src="'+self.options.defaultPng+'"></img><span>Default</span></li></ul></div>');
+		var profileSelector = $('<span class="profile-selector"><img src="'+self.options.personalPng+'"></img></span>');
 
 		//When user clicks outside the master password div, master password div should hide
 		masterPasswordDiv.focusout(function(){
@@ -59,7 +61,7 @@ function inject(){
 				originalPassword.val("");
 			}
 			else{
-				self.port.emit("master password",{ masterPassword: $(this).val(), fromInputField: masterPasswordField.attr('inputField') });
+				self.port.emit("master password",{ masterPassword: $(this).val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
 			}
 		});
 
@@ -95,13 +97,37 @@ function inject(){
 			clearTimeout(helperTimer);
 		});
 
+		//If user mouse entered the profile selector, show the profile div for selection
+		//If user mouse entered the profile div, show the profile div for selection
+		//If user mouse leaved the profile div, hide the profile div
+		profileSelector.mouseenter(function(){
+			profileDiv.show();
+		});
+		profileDiv.mouseenter(function(){
+			profileDiv.show();
+		});
+		profileDiv.mouseleave(function(){
+			profileDiv.hide();
+		});
+
+		//On hover of profile items change the settings in background
+		profileDiv.find(".profile-item").mouseenter(function(){
+			profileSelector.find("img").attr("src", $(this).find("img").attr("src"));
+			if(masterPasswordField.val() != ""){
+				self.port.emit("master password",{ masterPassword: masterPasswordField.val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
+			}
+		});
+
 		//Append all the fields and icons to master password div and hide it initially.
 		masterPasswordDiv.append(extrasafeIcon);
 		masterPasswordDiv.append(masterPasswordField);
 		masterPasswordDiv.append(showPassword);
 		masterPasswordDiv.append(extrasafeHelper);
+		masterPasswordDiv.append(profileSelector);
+		masterPasswordDiv.append(profileDiv);
 		masterPasswordDiv.append(masterPasswordFieldErrors);
 		masterPasswordDiv.hide();
+		profileDiv.hide();
 
 		//This function shows the master password div.
 		var toggleFocus = function(){
@@ -110,6 +136,7 @@ function inject(){
 			masterPasswordDiv.css("top",(passwordPosition.top+passwordHeight+5)+'px').css("left",passwordPosition.left+'px');
 			masterPasswordDiv.show();
 			masterPasswordField.focus();
+			profileDiv.hide();
 		}
 		
 		//Initially bind the focus event with toggleFocus function.

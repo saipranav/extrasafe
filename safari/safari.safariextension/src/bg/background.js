@@ -8,19 +8,28 @@ http://theextralabs.com
 var siteTag = "";
 //Global variable for web page url. Useful for performance in findSiteTag.
 var siteUrl = "";
-var extraSecuritySequence = safari.extension.secureSettings.extraSecuritySequence;
-var startIndex = safari.extension.secureSettings.startIndex;
-var endIndex = safari.extension.secureSettings.endIndex;
+var personal_extraSequence = safari.extension.secureSettings.personal_extraSequence;
+var personal_startIndex = safari.extension.secureSettings.personal_startIndex;
+var personal_endIndex = safari.extension.secureSettings.personal_endIndex;
+var official_extraSequence = safari.extension.secureSettings.official_extraSequence;
+var official_startIndex = safari.extension.secureSettings.official_startIndex;
+var official_endIndex = safari.extension.secureSettings.official_endIndex;
+var default_extraSequence = safari.extension.secureSettings.default_extraSequence;
+var default_startIndex = safari.extension.secureSettings.default_startIndex;
+var default_endIndex = safari.extension.secureSettings.default_endIndex;
 var extrasafeDisabled = safari.extension.secureSettings.extrasafeDisabled;
 
 // For the first time settings will be undefined so define it
-if(extraSecuritySequence == undefined || startIndex == undefined || endIndex == undefined || extrasafeDisabled == undefined){
-	safari.extension.secureSettings.extraSecuritySequence = "";
-	safari.extension.secureSettings.startIndex = 0;
-	safari.extension.secureSettings.endIndex = 12;
-	extraSecuritySequence = "";
-	startIndex = 0;
-	endIndex = 12;
+if( personal_extraSequence == undefined || personal_startIndex == undefined || personal_endIndex == undefined || extrasafeDisabled == undefined || official_extraSequence == undefined || official_startIndex == undefined || official_endIndex == undefined ){
+	safari.extension.secureSettings.personal_extraSequence = "";
+	safari.extension.secureSettings.personal_startIndex = 0;
+	safari.extension.secureSettings.personal_endIndex = 12;
+	safari.extension.secureSettings.official_extraSequence = "";
+	safari.extension.secureSettings.official_startIndex = 0;
+	safari.extension.secureSettings.official_endIndex = 12;
+	safari.extension.secureSettings.default_extraSequence = "";
+	safari.extension.secureSettings.default_startIndex = 0;
+	safari.extension.secureSettings.default_endIndex = 12;
 	extrasafeDisabled = false;
 }
 
@@ -29,7 +38,15 @@ if(extraSecuritySequence == undefined || startIndex == undefined || endIndex == 
 safari.application.activeBrowserWindow.addEventListener("message", function(event){
 	if(event.name == "key up"){
 		findSiteTag(event.target.url);
-		event.target.page.dispatchMessage("result", { result: Hasher.passy(event.message.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex), fromInputField: event.message.fromInputField });
+		if(event.message.profile.match("Personal")){
+			event.target.page.dispatchMessage("result", { result: Hasher.passy(event.message.masterPassword, siteTag, personal_extraSequence, personal_startIndex, personal_endIndex), fromInputField: event.message.fromInputField });
+		}
+		else if(event.message.profile.match("Official")){
+			event.target.page.dispatchMessage("result", { result: Hasher.passy(event.message.masterPassword, siteTag, official_extraSequence, official_startIndex, official_endIndex), fromInputField: event.message.fromInputField });
+		}
+		else if(event.message.profile.match("Default")){
+			event.target.page.dispatchMessage("result", { result: Hasher.passy(event.message.masterPassword, siteTag, default_extraSequence, default_startIndex, default_endIndex), fromInputField: event.message.fromInputField });
+		}
 	}
 	else if(event.name == "open portable"){
 		safari.application.activeBrowserWindow.openTab().url = "http://theextralabs.com/extrasafe/portable.html";
@@ -80,15 +97,20 @@ safari.application.addEventListener("navigate", function(event) {
 //To listen to changes in settings
 safari.extension.secureSettings.addEventListener("change", function(event) {
 	if(event.key != "extrasafeDisabled"){
-		var checkStart = safari.extension.secureSettings.startIndex;
-		var checkEnd = safari.extension.secureSettings.endIndex;
-		if((checkStart<0) || (checkEnd>128) || (checkStart>=checkEnd) || (checkStart>116) || (checkEnd<12) || ((checkEnd-checkStart)<12) ){
+		var personal_checkStart = safari.extension.secureSettings.personal_startIndex;
+		var personal_checkEnd = safari.extension.secureSettings.personal_endIndex;
+		var official_checkStart = safari.extension.secureSettings.official_startIndex;
+		var official_checkEnd = safari.extension.secureSettings.official_endIndex;
+		if( (personal_checkStart<0) || (personal_checkEnd>128) || (personal_checkStart>=personal_checkEnd) || (personal_checkStart>116) || (personal_checkEnd<12) || ((personal_checkEnd-personal_checkStart)<12) || (official_checkStart<0) || (official_checkEnd>128) || (official_checkStart>=official_checkEnd) || (official_checkStart>116) || (official_checkEnd<12) || ((official_checkEnd-official_checkStart)<12) ){
 			window.alert("Your options are NOT SAVED\nPassword Length ::\nStart index : Default 0, Minimum: 0, Maximum: 116.\nEnd index : Default 12, Minimum: 12, Maximum: 128.\nEnd index should be greater than Start index.\n Difference between End index and Start index should be greater than or equal to 12");
 		}
 		else{
-			startIndex = safari.extension.secureSettings.startIndex;
-			endIndex = safari.extension.secureSettings.endIndex;
-			extraSecuritySequence = safari.extension.secureSettings.extraSecuritySequence;
+			personal_startIndex = safari.extension.secureSettings.personal_startIndex;
+			personal_endIndex = safari.extension.secureSettings.personal_endIndex;
+			personal_extraSequence = safari.extension.secureSettings.personal_extraSequence;
+			official_startIndex = safari.extension.secureSettings.official_startIndex;
+			official_endIndex = safari.extension.secureSettings.official_endIndex;
+			official_extraSequence = safari.extension.secureSettings.official_extraSequence;
 			window.alert("Your options are SAVED");
 		}
 	}

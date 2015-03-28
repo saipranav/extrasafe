@@ -15,20 +15,35 @@ var simplePrefs = require("sdk/simple-prefs");
 
 var siteTag = "";
 var siteUrl = "";
-var extraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
-var startIndex = simplePrefs.prefs.startIndex;
-var endIndex = simplePrefs.prefs.endIndex;
+var personal_extraSequence = simplePrefs.prefs.personal_extraSequence;
+var personal_startIndex = simplePrefs.prefs.personal_startIndex;
+var personal_endIndex = simplePrefs.prefs.personal_endIndex;
+var official_extraSequence = simplePrefs.prefs.official_extraSequence;
+var official_startIndex = simplePrefs.prefs.official_startIndex;
+var official_endIndex = simplePrefs.prefs.official_endIndex;
+var default_extraSequence = "";
+var default_startIndex = 0;
+var default_endIndex = 12;
 var extrasafeDisabled = simplePrefs.prefs.extrasafeDisabled;
 var injectedWorkers = [];
 
 // For the first time pref will be undefined so define it
-if(extraSecuritySequence == undefined || startIndex == undefined || endIndex == undefined || extrasafeDisabled == undefined){
-	simplePrefs.prefs.extraSecuritySequence = "";
-	simplePrefs.prefs.startIndex = 0;
-	simplePrefs.prefs.endIndex = 12;
-	extraSecuritySequence = "";
-	startIndex = 0;
-	endIndex = 12;
+if( personal_extraSequence == undefined || personal_startIndex == undefined || personal_endIndex == undefined || official_extraSequence == undefined || official_startIndex == undefined || official_endIndex == undefined || extrasafeDisabled == undefined){
+	simplePrefs.prefs.default_extraSequence = "";
+	simplePrefs.prefs.default_startIndex = 0;
+	simplePrefs.prefs.default_endIndex = 12;
+	simplePrefs.prefs.personal_extraSequence = "";
+	simplePrefs.prefs.personal_startIndex = 0;
+	simplePrefs.prefs.personal_endIndex = 12;
+	simplePrefs.prefs.official_extraSequence = "";
+	simplePrefs.prefs.official_startIndex = 0;
+	simplePrefs.prefs.official_endIndex = 12;
+	personal_extraSequence = "";
+	personal_startIndex = 0;
+	personal_endIndex = 12;
+	official_extraSequence = "";
+	official_startIndex = 0;
+	official_endIndex = 12;
 	extrasafeDisabled = false;
 }
 
@@ -46,7 +61,10 @@ pageMod.PageMod({
 	contentScriptOptions: {
     	unmaskPng: self.data.url("icons/Unmask16.png"),
     	extrasafePng: self.data.url("icons/Extrasafe16.png"),
-    	helperPng: self.data.url("icons/Info16.png")
+    	helperPng: self.data.url("icons/Info16.png"),
+    	personalPng: self.data.url("icons/Personal16.png"),
+    	officialPng: self.data.url("icons/Official16.png"),
+    	defaultPng: self.data.url("icons/Default16.png")
   	},
   	contentStyleFile: self.data.url("inject/inject.css"),
 	onAttach: function(worker){
@@ -56,8 +74,18 @@ pageMod.PageMod({
 		}
 		worker.port.on("master password", function(message){
 			findSiteTag(worker.url);
-			var password = Hasher.Hasher.passy(message.masterPassword, siteTag, extraSecuritySequence, startIndex, endIndex );
-			worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
+			if(message.profile.match("Personal")){
+				var password = Hasher.Hasher.passy(message.masterPassword, siteTag, personal_extraSequence, personal_startIndex, personal_endIndex );
+				worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
+			}
+			else if(message.profile.match("Official")){
+				var password = Hasher.Hasher.passy(message.masterPassword, siteTag, official_extraSequence, official_startIndex, official_endIndex );
+				worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
+			}
+			else if(message.profile.match("Default")){
+				var password = Hasher.Hasher.passy(message.masterPassword, siteTag, default_extraSequence, default_startIndex, default_endIndex );
+				worker.port.emit("result",{ result: password, fromInputField: message.fromInputField });
+			}
 		});
 		worker.port.on("open portable", function(message){
 			tabs.open("http://theextralabs.com/extrasafe/portable.html");
@@ -96,36 +124,52 @@ if(extrasafeDisabled){
 
 //For saving options
 simplePrefs.on("update",function(){
-	var checkStart = simplePrefs.prefs.startIndex;
-	var checkEnd = simplePrefs.prefs.endIndex;
-	var checkExtraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
-	if((checkStart<0) || (checkEnd>128) || (checkStart>=checkEnd) || (checkStart>116) || (checkEnd<12) || ((checkEnd-checkStart)<12) ){
+	var personal_checkStart = simplePrefs.prefs.personal_startIndex;
+	var personal_checkEnd = simplePrefs.prefs.personal_endIndex;
+	var personal_checkExtraSequence = simplePrefs.prefs.personal_extraSequence;
+	var official_checkStart = simplePrefs.prefs.official_startIndex;
+	var official_checkEnd = simplePrefs.prefs.official_endIndex;
+	var official_checkExtraSequence = simplePrefs.prefs.official_extraSequence;
+	if( (personal_checkStart<0) || (personal_checkEnd>128) || (personal_checkStart>=personal_checkEnd) || (personal_checkStart>116) || (personal_checkEnd<12) || ((personal_checkEnd-personal_checkStart)<12) || (official_checkStart<0) || (official_checkEnd>128) || (official_checkStart>=official_checkEnd) || (official_checkStart>116) || (official_checkEnd<12) || ((official_checkEnd-official_checkStart)<12) ){
 		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? End index should be greater than Start index. Difference between End index and Start index should be greater than 12";
-		simplePrefs.prefs.extraSecuritySequence = extraSecuritySequence;
-		simplePrefs.prefs.startIndex = startIndex;
-		simplePrefs.prefs.endIndex = endIndex;
+		simplePrefs.prefs.personal_extraSequence = personal_extraSequence;
+		simplePrefs.prefs.personal_startIndex = personal_startIndex;
+		simplePrefs.prefs.personal_endIndex = personal_endIndex;
+		simplePrefs.prefs.official_extraSequence = official_extraSequence;
+		simplePrefs.prefs.official_startIndex = official_startIndex;
+		simplePrefs.prefs.official_endIndex = official_endIndex;
 	}
-	else{
-		extraSecuritySequence = simplePrefs.prefs.extraSecuritySequence;
-		startIndex = simplePrefs.prefs.startIndex;
-		endIndex = simplePrefs.prefs.endIndex;
-		simplePrefs.prefs.updateStatus = "Your options are SAVED";
+	else
+	{
+		personal_extraSequence = simplePrefs.prefs.personal_extraSequence;
+		personal_startIndex = simplePrefs.prefs.personal_startIndex;
+		personal_endIndex = simplePrefs.prefs.personal_endIndex;
+		official_extraSequence = simplePrefs.prefs.official_extraSequence;
+		official_startIndex = simplePrefs.prefs.official_startIndex;
+		official_endIndex = simplePrefs.prefs.official_endIndex;
+		simplePrefs.prefs.updateStatus = "Your options are SAVED for all profiles";
 	}
 });
 simplePrefs.on("reset",function(){
-	extraSecuritySequence = "";
+	extraSequence = "";
 	startIndex = 0;
 	endIndex = 12;
-	simplePrefs.prefs.extraSecuritySequence = extraSecuritySequence;
-	simplePrefs.prefs.startIndex = startIndex;
-	simplePrefs.prefs.endIndex = endIndex;
-	simplePrefs.prefs.updateStatus = "Your options are reset to DEFAULTS";
+	simplePrefs.prefs.personal_extraSequence = extraSequence;
+	simplePrefs.prefs.personal_startIndex = startIndex;
+	simplePrefs.prefs.personal_endIndex = endIndex;
+	simplePrefs.prefs.official_extraSequence = extraSequence;
+	simplePrefs.prefs.official_startIndex = startIndex;
+	simplePrefs.prefs.official_endIndex = endIndex;
+	simplePrefs.prefs.updateStatus = "Your options are reset to DEFAULTS for all profiles";
 });
 simplePrefs.on("cancel",function(){
-	simplePrefs.prefs.extraSecuritySequence = extraSecuritySequence;
-	simplePrefs.prefs.startIndex = startIndex;
-	simplePrefs.prefs.endIndex = endIndex;
-	simplePrefs.prefs.updateStatus = "Your options are Reset to PREVIOUS STATE";
+	simplePrefs.prefs.personal_extraSequence = personal_extraSequence;
+	simplePrefs.prefs.personal_startIndex = personal_startIndex;
+	simplePrefs.prefs.personal_endIndex = personal_endIndex;
+	simplePrefs.prefs.official_extraSequence = official_extraSequence;
+	simplePrefs.prefs.official_startIndex = official_startIndex;
+	simplePrefs.prefs.official_endIndex = official_endIndex;
+	simplePrefs.prefs.updateStatus = "Your options are Reset to PREVIOUS STATE for all profiles";
 });
 
 function broadcast(kind,messageBody){

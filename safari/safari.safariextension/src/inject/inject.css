@@ -34,11 +34,20 @@ http://theextralabs.com
 	border: solid 1px #B22222 !important;
 }
 
-#extrasafe_helper_inner{
-	width:400px;
-	height:40px;
-	display:inline;
-	z-index: 2147400001;
+.profile-div>ul{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.profile-item{
+	display: inline-block;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.profile-item:hover{
+	background: #ABABAB;
 }
 
 .center-text{

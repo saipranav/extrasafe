@@ -4,57 +4,93 @@
 <array>
 	<dict>
 		<key>Title</key>
-		<string>Extra Security</string>
+		<string>Personal Profile</string>
 		<key>Type</key>
 		<string>Group</string>
 	</dict>
 	<dict>
 		<key>Key</key>
-		<string>extraSecuritySequence</string>
+		<string>personal_extraSequence</string>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
-		<string>Extra Security Sequence</string>
+		<string>Personal Extra Security Sequence</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>personal_startIndex</string>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Personal Start Index</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>personal_endIndex</string>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Personal End Index</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>Title</key>
-		<string>Password Length</string>
+		<string>Official Profile</string>
 		<key>Type</key>
 		<string>Group</string>
 	</dict>
 	<dict>
-		<key>DefaultValue</key>
-		<real>0.0</real>
 		<key>Key</key>
-		<string>startIndex</string>
-		<key>MaximumValue</key>
-		<real>115</real>
-		<key>Password</key>
-		<false/>
+		<string>official_extraSequence</string>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
-		<string>Start Index</string>
+		<string>Official Extra Security Sequence</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
-		<key>DefaultValue</key>
-		<real>12</real>
 		<key>Key</key>
-		<string>endIndex</string>
-		<key>MaximumValue</key>
-		<real>128</real>
-		<key>MinimumValue</key>
-		<real>12</real>
+		<string>official_startIndex</string>
 		<key>Secure</key>
 		<true/>
 		<key>Title</key>
-		<string>End Index</string>
+		<string>Official Start Index</string>
 		<key>Type</key>
 		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>official_endIndex</string>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Official End Index</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>default_extraSequence</string>
+		<key>Secure</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>default_startIndex</string>
+		<key>Secure</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>default_endIndex</string>
+		<key>Secure</key>
+		<true/>
 	</dict>
 </array>
 </plist>
