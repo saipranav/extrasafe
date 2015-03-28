@@ -12,7 +12,7 @@ http://theextralabs.com
     	<meta charset="utf-8">
 		<meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, user-scalable=no">
-    	<title>xtrasafe</title>
+    	<title>xtrasafe | The Extra Labs</title>
 
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     	<!-- Loading Bootstrap -->
@@ -27,21 +27,30 @@ http://theextralabs.com
         <div id="options-page" class="page" data-role="page">
             <h4 class="center-text">Options</h4>
             <br>
+            <div class="form-group center-text">
+                <label for="profiles">Profiles</label>
+                <br>
+                <div class="btn-group">
+                    <a class="btn btn-primary active"><span class="profile-name" id="profile-personal">Personal</span></a>
+                    <a class="btn btn-primary"><span class="profile-name" id="profile-official">Official</span></a>
+                    <a class="btn btn-primary"><span class="profile-name" id="profile-default">Default</span></a>
+                </div>
+            </div>
             <div data-role="content">
 
                 <div class="form-group center-text">
-                    <label>Extra Security Sequence</label>
+                    <label for="extra-security-sequence">Extra Security Sequence</label>
                     <input type="text" class="form-control" id="extra-security-sequence" data-mini="true"/>
                 </div>
 
                 <div class="form-group center-text">
-                    <label>Start Index</label>
+                    <label for="start-index">Start Index</label>
                     <input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
                     <label class="errors" style="display:none" >Minimum : 0, Maximum : 115</label>
                 </div>
 
                 <div class="form-group center-text">
-                    <label>End Index</label>
+                    <label for="end-index">End Index</label>
                     <input type="number" min=12 max=128 class="form-control" id="end-index" data-mini="true"/>
                     <label class="errors" style="display:none" >Minimum : 12, Maximum : 128</label>
                 </div>
@@ -68,7 +77,6 @@ http://theextralabs.com
 
     <script type="text/javascript" src="libs/js/jquery.min.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
-	<script type="text/javascript" src="phonegap.js"></script>
 
     </body>
 </html>

@@ -12,17 +12,37 @@ var app = {
         this.onDeviceReady();
     },
     onDeviceReady: function() {
-        if(store.getItem("extraSecuritySequence") == null){
-        	store.setItem("extraSecuritySequence", "");
+        if(store.getItem("default_extraSequence") == null){
+        	store.setItem("default_extraSequence", "");
         }
-        if(store.getItem("startIndex") == null){
-        	store.setItem("startIndex", 0);
+        if(store.getItem("default_startIndex") == null){
+        	store.setItem("default_startIndex", 0);
         }
-        if(store.getItem("endIndex") == null){
-        	store.setItem("endIndex", 12);
+        if(store.getItem("default_endIndex") == null){
+        	store.setItem("default_endIndex", 12);
         }
-		if( store.getItem("extraSecuritySequence")=="" && store.getItem("startIndex")==0 && store.getItem("endIndex")==12 ){
-			$("#default-options").show();
+        if(store.getItem("personal_extraSequence") == null){
+        	store.setItem("personal_extraSequence", "");
+        }
+        if(store.getItem("personal_startIndex") == null){
+        	store.setItem("personal_startIndex", 0);
+        }
+        if(store.getItem("personal_endIndex") == null){
+        	store.setItem("personal_endIndex", 12);
+        }
+        if(store.getItem("official_extraSequence") == null){
+        	store.setItem("official_extraSequence", "");
+        }
+        if(store.getItem("official_startIndex") == null){
+        	store.setItem("official_startIndex", 0);
+        }
+        if(store.getItem("official_endIndex") == null){
+        	store.setItem("official_endIndex", 12);
+        }
+		if( (store.getItem("default_extraSequence")=="" && store.getItem("default_startIndex")==0 && store.getItem("default_endIndex")==12 ) 
+			&& (store.getItem("personal_extraSequence")=="" && store.getItem("personal_startIndex")==0 && store.getItem("personal_endIndex")==12 )
+			&& (store.getItem("official_extraSequence")=="" && store.getItem("official_startIndex")==0 && store.getItem("official_endIndex")==12 ) ){
+				$("#default-options").show();
 		}
     }
 };
@@ -72,25 +92,25 @@ $("#generate-button").click(function(){
 	var goAhead = false;
 	var masterPassword = $("#master-password");
 	var siteUrl = $("#site-url");
-	if($("#clear").attr("value") == "CLEARED"){
-		$("#tooltip").html("You have cleared everything, please open the application / refresh web page again").fadeIn();
-		setTimeout(function(){
-			$("#tooltip").fadeOut();
-		},8000);
-		goAhead = false;
-		return;
-	}
-        if(!$("#generate-button").hasClass("disable")){
+    if(!$("#generate-button").hasClass("disable")){
 		goAhead = true;
 	}
 
-	var extraSecuritySequence = store.getItem("extraSecuritySequence");
-	var startIndex = store.getItem("startIndex");
-	var endIndex = store.getItem("endIndex");			
+	var profileChoice = $(".btn-group a.active").children().attr("id");
+	var prefix = "";
+	if(profileChoice == "profile-default")
+		prefix = "default_";
+	else if(profileChoice == "profile-personal")
+		prefix = "personal_";
+	else if(profileChoice == "profile-official")
+		prefix = "official_";
+
+	var extraSequence = store.getItem(prefix + "extraSequence");
+	var startIndex = store.getItem(prefix + "startIndex");
+	var endIndex = store.getItem(prefix + "endIndex");				
 
 	if(goAhead){
-		var sitePassword = Hasher.passy(masterPassword.val(), siteUrl.val(), extraSecuritySequence, startIndex, endIndex);
-		$("#site-password").val( sitePassword );
+		$("#site-password").val( Hasher.passy(masterPassword.val(), siteUrl.val(), extraSequence, startIndex, endIndex));
 		window.plugins.clipboard.copy( sitePassword );
 		$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
 		setTimeout(function(){
@@ -107,17 +127,6 @@ $("#generate-button").click(function(){
 $("#show-password").click(function(){
 	var type = ( $("#master-password").attr("type") == "text" ) ? "password" : "text";
 	$("#master-password").attr("type",type);
-});
-
-$("#clear").click(function(){
-	store.clear();
-	$(this).attr("value","CLEARED");
-	$(this).css("background-color","#228B22");
-	$("#master-password").val("");
-	$("#site-password").val("");
-	$("#site-url").val("");
-	$("#generate-button").addClass("disable");
-
 });
 
 //Array containing keywords for top level domains and country codes
@@ -254,3 +263,8 @@ function findSiteTag(url){
 	
 	return;
 }
+
+$(".btn-group a").on('click', function(){
+	$(this).siblings().removeClass("active");
+	$(this).addClass("active");
+});
