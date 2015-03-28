@@ -10,13 +10,13 @@ http://theextralabs.com
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "com.extrasafe.app"
-        versionCode = "2" 
-        version     = "0.5" >
+        versionCode = "3" 
+        version     = "0.7" >
 
     <name>Extrasafe</name>
 
     <description>
-        Just one passsword to generate passwords for web sites. 
+        Just remember one master password text, Extrasafe takes care of the rest ;) 
     </description>
 
     <author href="theextralabs.com" email="rsaipranav92@gmail.com">
