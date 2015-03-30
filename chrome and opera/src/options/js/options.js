@@ -73,21 +73,7 @@ $("#profile-official").parent().on('click', function(){
 		$("#cancel-button>a").removeClass("disabled");
 		$("#reset-button>a").removeClass("disabled");
   	});
-});
-$("#profile-default").parent().on('click', function(){
-	chrome.storage.local.get({
-    	default_extraSequence : "",
-		default_startIndex : 0,
-		default_endIndex : 12
-  	}, function(items) {
-		$("#extra-security-sequence").val(items.default_extraSequence).attr("disabled", "disabled");
-		$("#start-index").val(items.default_startIndex).attr("disabled", "disabled");
-		$("#end-index").val(items.default_endIndex).attr("disabled", "disabled");
-		$("#save-button>a").addClass("disabled");
-		$("#cancel-button>a").addClass("disabled");
-		$("#reset-button>a").addClass("disabled");
-  	});
-});
+});	
 
 
 $("#start-index").focusout(function(){

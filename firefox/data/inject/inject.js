@@ -110,12 +110,20 @@ function inject(){
 			profileDiv.hide();
 		});
 
-		//On hover of profile items change the settings in background
+		//On mouse enter of profile items set the timer for 250ms for change the settings in background
 		profileDiv.find(".profile-item").mouseenter(function(){
-			profileSelector.find("img").attr("src", $(this).find("img").attr("src"));
-			if(masterPasswordField.val() != ""){
-				self.port.emit("master password",{ masterPassword: masterPasswordField.val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
-			}
+			currentProfileOnHover = $(this);
+			helperTimer = setTimeout(function(){
+				profileSelector.find("img").attr("src", currentProfileOnHover.find("img").attr("src"));
+				if(masterPasswordField.val() != ""){
+					chrome.runtime.sendMessage({ masterPassword: masterPasswordField.val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
+				}
+			},250);
+		});
+
+		//On mouse leave of profile items cancel the timer
+		profileDiv.find(".profile-item").mouseleave(function(){
+			clearTimeout(helperTimer);
 		});
 
 		//Append all the fields and icons to master password div and hide it initially.
