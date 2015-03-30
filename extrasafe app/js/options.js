@@ -30,14 +30,6 @@ $("#profile-official").parent().on('click', function(){
 	$("#cancel-button>a").removeClass("disabled");
 	$("#reset-button>a").removeClass("disabled");
 });
-$("#profile-default").parent().on('click', function(){
-	$("#extra-security-sequence").val(store.getItem("default_extraSequence")).attr("disabled", "disabled");
-	$("#start-index").val(store.getItem("default_startIndex")).attr("disabled", "disabled");
-	$("#end-index").val(store.getItem("default_endIndex")).attr("disabled", "disabled");
-	$("#save-button>a").addClass("disabled");
-	$("#cancel-button>a").addClass("disabled");
-	$("#reset-button>a").addClass("disabled");
-});
 
 //validate the start index as user focuses out 
 $("#start-index").focusout(function(){
@@ -97,13 +89,7 @@ $("#save-button").click(function(){
 		return;
 	}
 
-	if($("#profile-default").parent().hasClass("active"))
-	{
-		store.setItem("default_extraSequence", extraSequence);
-		store.setItem("default_startIndex", startIndexNum);
-		store.setItem("default_endIndex", endIndexNum);
-	}
-	else if($("#profile-personal").parent().hasClass("active"))
+	if($("#profile-personal").parent().hasClass("active"))
 	{
 		store.setItem("personal_extraSequence", extraSequence);
 		store.setItem("personal_startIndex", startIndexNum);
