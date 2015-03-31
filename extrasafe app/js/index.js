@@ -110,7 +110,8 @@ $("#generate-button").click(function(){
 	var endIndex = store.getItem(prefix + "endIndex");				
 
 	if(goAhead){
-		$("#site-password").val( Hasher.passy(masterPassword.val(), siteUrl.val(), extraSequence, startIndex, endIndex));
+		var sitePassword = Hasher.passy(masterPassword.val(), siteUrl.val(), extraSequence, startIndex, endIndex);
+		$("#site-password").val( sitePassword );
 		window.plugins.clipboard.copy( sitePassword );
 		$("#tooltip").html("Your site password is copied to clipboard").fadeIn();
 		setTimeout(function(){
