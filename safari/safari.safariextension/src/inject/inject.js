@@ -116,7 +116,7 @@ function inject(){
 			helperTimer = setTimeout(function(){
 				profileSelector.find("img").attr("src", currentProfileOnHover.find("img").attr("src"));
 				if(masterPasswordField.val() != ""){
-					chrome.runtime.sendMessage({ masterPassword: masterPasswordField.val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
+					safari.self.tab.dispatchMessage("key up", { masterPassword: masterPasswordField.val(), fromInputField: masterPasswordField.attr('inputField'), profile: profileSelector.find("img").attr("src") });
 				}
 			},250);
 		});

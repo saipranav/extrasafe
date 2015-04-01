@@ -11,7 +11,7 @@
   "preferences": [{
         "name": "personal_extraSequence",
         "title": "Personal Extra Security Sequence",
-        "description": "We RECOMMEND this option. Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
+        "description": "Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
         "type": "string"
     },
     {
