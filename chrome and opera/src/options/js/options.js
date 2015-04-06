@@ -117,7 +117,26 @@ $("#save-button").click(function(){
     var startIndexNum = parseInt($("#start-index").val());
     var endIndexNum = parseInt($("#end-index").val());
 	if( !numberRegex.test(startIndex) || !numberRegex.test(endIndex) || (startIndexNum<0) || (endIndexNum>128) || (startIndexNum>=endIndexNum) || (startIndexNum>115) || (endIndexNum<12)){
-		$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
+		if(startIndexNum>=endIndexNum){
+			$("#tooltip").html("Failed to save your options, start index should be less than end index").fadeIn();
+			var startIndex = $("#start-index");
+			startIndex.parent().addClass("has-error");
+			startIndex.siblings(".errors").show();
+			startIndex.keyup(function(){
+				startIndex.parent().removeClass("has-error");
+				startIndex.siblings(".errors").hide();
+			});
+			var endIndex = $("#end-index");
+			endIndex.parent().addClass("has-error");
+			endIndex.siblings(".errors").show();
+			endIndex.keyup(function(){
+				endIndex.parent().removeClass("has-error");
+				endIndex.siblings(".errors").hide();
+			});
+		}
+		else{
+			$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
+		}
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},3000);
