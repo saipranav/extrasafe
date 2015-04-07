@@ -13,8 +13,7 @@ $(document).ready(function(){
 		personal_endIndex : 12
   	}, function(items) {
   		$("#extra-security-sequence").val(items.personal_extraSequence).removeAttr("disabled");
-		$("#start-index").val(items.personal_startIndex).removeAttr("disabled");
-		$("#end-index").val(items.personal_endIndex).removeAttr("disabled");
+		$("#password-length").val(items.personal_endIndex - items.personal_startIndex).removeAttr("disabled");
 		chrome.storage.local.set({
 			personal_extraSequence : items.personal_extraSequence,
 			personal_startIndex : items.personal_startIndex,
@@ -53,8 +52,7 @@ $("#profile-personal").parent().on('click', function(){
 		personal_endIndex : 12
   	}, function(items) {
 		$("#extra-security-sequence").val(items.personal_extraSequence).removeAttr("disabled");
-		$("#start-index").val(items.personal_startIndex).removeAttr("disabled");
-		$("#end-index").val(items.personal_endIndex).removeAttr("disabled");
+		$("#password-length").val(items.personal_endIndex - items.personal_startIndex).removeAttr("disabled");
 		$("#save-button>a").removeClass("disabled");
 		$("#cancel-button>a").removeClass("disabled");
 		$("#reset-button>a").removeClass("disabled");
@@ -67,96 +65,95 @@ $("#profile-official").parent().on('click', function(){
 		official_endIndex : 12
   	}, function(items) {
 		$("#extra-security-sequence").val(items.official_extraSequence).removeAttr("disabled");
-		$("#start-index").val(items.official_startIndex).removeAttr("disabled");
-		$("#end-index").val(items.official_endIndex).removeAttr("disabled");
+		$("#password-length").val(items.official_endIndex - items.official_startIndex).removeAttr("disabled");
 		$("#save-button>a").removeClass("disabled");
 		$("#cancel-button>a").removeClass("disabled");
 		$("#reset-button>a").removeClass("disabled");
   	});
-});	
+});
 
-
-$("#start-index").focusout(function(){
-	var startIndex = $("#start-index");
-	if(!numberRegex.test(startIndex.val()) || startIndex.val() > 115 || startIndex.val() < 0){
-		startIndex.parent().addClass("has-error");
-		startIndex.siblings(".errors").show();
-		startIndex.keyup(function(){
-			startIndex.parent().removeClass("has-error");
-			startIndex.siblings(".errors").hide();
+$("#extra-security-sequence").focusout(function(){
+	var extraSequence = $("#extra-security-sequence");
+	if( extraSequence.val().length > 500 ){
+		extraSequence.parent().addClass("has-error");
+		extraSequence.siblings(".errors").show();
+		extraSequence.keyup(function(){
+			extraSequence.parent().removeClass("has-error");
+			extraSequence.siblings(".errors").hide();
 		});
 	}
 	else{
-		startIndex.parent().removeClass("has-error");
-		startIndex.siblings(".errors").hide();
+		extraSequence.parent().removeClass("has-error");
+		extraSequence.siblings(".errors").hide();
 	}
 });
 
-$("#end-index").focusout(function(){
-	var endIndex = $("#end-index");
-	if(!numberRegex.test(endIndex.val()) || endIndex.val() > 128 || endIndex.val() < 12){
-		endIndex.parent().addClass("has-error");
-		endIndex.siblings(".errors").show();
-		endIndex.keyup(function(){
-			endIndex.parent().removeClass("has-error");
-			endIndex.siblings(".errors").hide();
+$("#password-length").focusout(function(){
+	var passwordLength = $("#password-length");
+	if(!numberRegex.test(passwordLength.val()) || passwordLength.val() > 128 || passwordLength.val() < 12){
+		passwordLength.parent().addClass("has-error");
+		passwordLength.siblings(".errors").show();
+		passwordLength.keyup(function(){
+			passwordLength.parent().removeClass("has-error");
+			passwordLength.siblings(".errors").hide();
 		});
 	}
 	else{
-		endIndex.parent().removeClass("has-error");
-		endIndex.siblings(".errors").hide();
+		passwordLength.parent().removeClass("has-error");
+		passwordLength.siblings(".errors").hide();
 	}
 });
 
+function deriveStartIndexAndEndIndex(extraSequence, passwordLength){
+	var startIndex = 0;
+	var endIndex = 12;
+	var extraLength = extraSequence.length % 116;
+	startIndex = extraLength;
+	endIndex = extraLength + passwordLength;
+	if(endIndex > 128){
+		if( extraLength > (endIndex - 128) ){
+			extraLength = extraLength - (endIndex - 128);
+			startIndex = extraLength;
+			endIndex = extraLength + passwordLength;
+		}
+		else{
+			startIndex = 0;
+			endIndex = passwordLength;
+		}
+	}
+	return {"startIndex": startIndex, "endIndex": endIndex}
+}
 
 //Save button
 $("#save-button").click(function(){
 	var extraSequence = $("#extra-security-sequence").val();
-	var startIndex = $("#start-index").val();
-	var endIndex = $("#end-index").val();
-    var startIndexNum = parseInt($("#start-index").val());
-    var endIndexNum = parseInt($("#end-index").val());
-	if( !numberRegex.test(startIndex) || !numberRegex.test(endIndex) || (startIndexNum<0) || (endIndexNum>128) || (startIndexNum>=endIndexNum) || (startIndexNum>115) || (endIndexNum<12)){
-		if(startIndexNum>=endIndexNum){
-			$("#tooltip").html("Failed to save your options, start index should be less than end index").fadeIn();
-			var startIndex = $("#start-index");
-			startIndex.parent().addClass("has-error");
-			startIndex.siblings(".errors").show();
-			startIndex.keyup(function(){
-				startIndex.parent().removeClass("has-error");
-				startIndex.siblings(".errors").hide();
-			});
-			var endIndex = $("#end-index");
-			endIndex.parent().addClass("has-error");
-			endIndex.siblings(".errors").show();
-			endIndex.keyup(function(){
-				endIndex.parent().removeClass("has-error");
-				endIndex.siblings(".errors").hide();
-			});
-		}
-		else{
-			$("#tooltip").html("Failed to save your options, please rectify the errors in red input boxes").fadeIn();
-		}
-		setTimeout(function(){
-			$("#tooltip").fadeOut();
-		},3000);
-		return;
-	}
-	if( endIndex-startIndex < 12  ){
-		$("#tooltip").html("The difference between the end and start index should be atleast 12").fadeIn();
-		$("#start-index").parent().addClass("has-error");
-		$("#end-index").parent().addClass("has-error");
+	var passwordLength = parseInt($("#password-length").val())	;
+
+	if( !numberRegex.test(passwordLength) || passwordLength > 128 || passwordLength < 12 ){
+		$("#tooltip").html("Failed to save your options, rectify errors in password length field").fadeIn();
 		setTimeout(function(){
 			$("#tooltip").fadeOut();
 		},3000);
 		return;
 	}
 
+	if( extraSequence.length > 500 ){
+		$("#tooltip").html("Failed to save your options, rectify errors in extra sequence field").fadeIn();
+		setTimeout(function(){
+			$("#tooltip").fadeOut();
+		},3000);
+		return;
+	}
+
+	var result = deriveStartIndexAndEndIndex(extraSequence, passwordLength);
+	var startIndex = result.startIndex;
+	var endIndex = result.endIndex;
+
 	if($("#profile-personal").parent().hasClass("active"))
 	{
 		personal_extraSequence = extraSequence;
-		personal_startIndex = startIndexNum;
-		personal_endIndex = endIndexNum;
+		personal_startIndex = startIndex;
+		personal_endIndex = endIndex;
 		chrome.storage.local.set({
 			personal_extraSequence : personal_extraSequence,
 			personal_startIndex : personal_startIndex,
@@ -171,8 +168,8 @@ $("#save-button").click(function(){
 	else if($("#profile-official").parent().hasClass("active"))
 	{
 		official_extraSequence = extraSequence;
-		official_startIndex = startIndexNum;
-		official_endIndex = endIndexNum;
+		official_startIndex = startIndex;
+		official_endIndex = endIndex;
 		chrome.storage.local.set({
 			official_extraSequence : official_extraSequence,
 			official_startIndex : official_startIndex,
@@ -184,9 +181,8 @@ $("#save-button").click(function(){
 			},2000);
 		});
 	}
-	$("#start-index").parent().removeClass("has-error");
-	$("#end-index").parent().removeClass("has-error");
-
+	$("#extra-security-sequence").parent().removeClass("has-error");
+	$("#password-length").parent().removeClass("has-error");
 });
 
 
@@ -203,8 +199,7 @@ $("#cancel-button").click(function(){
 			var startIndex = items.personal_startIndex;
 			var endIndex = items.personal_endIndex;
 			$("#extra-security-sequence").val(extraSequence);
-			$("#start-index").val(startIndex);
-			$("#end-index").val(endIndex);
+			$("#password-length").val(endIndex - startIndex);
 			$("#tooltip").html("Your operations are canceled for personal profile").fadeIn();
 	  	});
 	}
@@ -219,15 +214,12 @@ $("#cancel-button").click(function(){
 			var startIndex = items.official_startIndex;
 			var endIndex = items.official_endIndex;
 			$("#extra-security-sequence").val(extraSequence);
-			$("#start-index").val(startIndex);
-			$("#end-index").val(endIndex);
+			$("#password-length").val(endIndex - startIndex);
 			$("#tooltip").html("Your operations are canceled for official profile").fadeIn();
 	  	});
 	}
-    $("#start-index").parent().removeClass("has-error");
-    $("#start-index").siblings(".errors").hide();
-    $("#end-index").parent().removeClass("has-error");
-    $("#end-index").siblings(".errors").hide();
+    $("#password-length").parent().removeClass("has-error");
+    $("#password-length").siblings(".errors").hide();
 	setTimeout(function(){
 		$("#tooltip").fadeOut();
 	},2000);
@@ -260,12 +252,9 @@ $("#reset-button").click(function(){
 		});
 	}
 	$("#extra-security-sequence").val(extraSequence);
-	$("#start-index").val(startIndex);
-	$("#end-index").val(endIndex);
-    $("#start-index").parent().removeClass("has-error");
-    $("#start-index").siblings(".errors").hide();
-    $("#end-index").parent().removeClass("has-error");
-    $("#end-index").siblings(".errors").hide();
+	$("#password-length").val(endIndex - startIndex);
+    $("#password-length").parent().removeClass("has-error");
+    $("#password-length").siblings(".errors").hide();
 	setTimeout(function(){
 		$("#tooltip").fadeOut();
 	},2500);
