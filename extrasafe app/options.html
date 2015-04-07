@@ -42,19 +42,12 @@ http://theextralabs.com
 					<br>
 					<span>Random character string, may be your dog's name. example Charlie</span>
                     <input type="text" class="form-control" id="extra-security-sequence" data-mini="true"/>
+                    <label class="errors" style="display:none" >It has crossed 500 characters. It will be difficult for you to remember</label>
                 </div>
 
                 <div class="form-group center-text">
-					<span>Difference between these numbers gives your generated password length. Example 12-0 = 12 characters.</span>
-					<br>
-                    <label for="start-index">Start Index</label>
-                    <input type="number" min=0 max=115 class="form-control" id="start-index" data-mini="true"/>
-                    <label class="errors" style="display:none" >Minimum : 0, Maximum : 115</label>
-                </div>
-
-                <div class="form-group center-text">
-                    <label for="end-index">End Index</label>
-                    <input type="number" min=12 max=128 class="form-control" id="end-index" data-mini="true"/>
+					<label for="password-length">Password length</label>
+                    <input type="number" min=12 max=128 class="form-control" id="password-length" data-mini="true"/>
                     <label class="errors" style="display:none" >Minimum : 12, Maximum : 128</label>
                 </div>
 
