@@ -12,27 +12,31 @@
 		<key>Key</key>
 		<string>personal_extraSequence</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Personal Extra Security Sequence</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
 		<key>Key</key>
 		<string>personal_startIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Personal Start Index</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
 		<key>Key</key>
 		<string>personal_endIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Personal End Index</string>
 		<key>Type</key>
@@ -48,27 +52,31 @@
 		<key>Key</key>
 		<string>official_extraSequence</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Official Extra Security Sequence</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
 		<key>Key</key>
 		<string>official_startIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Official Start Index</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
 		<key>Key</key>
 		<string>official_endIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 		<key>Title</key>
 		<string>Official End Index</string>
 		<key>Type</key>
@@ -78,19 +86,23 @@
 		<key>Key</key>
 		<string>default_extraSequence</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
 		<key>Key</key>
 		<string>default_startIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
 		<key>Key</key>
 		<string>default_endIndex</string>
 		<key>Secure</key>
-		<true/>
+		<false/>
 	</dict>
 </array>
 </plist>
