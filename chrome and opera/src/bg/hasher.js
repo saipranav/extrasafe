@@ -11,16 +11,16 @@ Hasher = {
     password: '', // output password
     start: 0, // start for triming
     end: 12, // end for triming
-    specialCharacters : new Array('@', '!', '&', '*', '#', '(', ')', '/'),
-    capitalCharacters : new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'),
-    smallCharacters : new Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'),
-    numbers : new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'),
-    specialCharactersPos : new Array(),
-    numberPos : new Array(),
-    smallCharactersPos : new Array(),
-    capitalCharactersPos : new Array(),
+    specialCharacters: new Array('@', '!', '&', '*', '#', '(', ')', '/'),
+    capitalCharacters: new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'),
+    smallCharacters: new Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'),
+    numbers: new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'),
+    specialCharactersPos: new Array(),
+    numberPos: new Array(),
+    smallCharactersPos: new Array(),
+    capitalCharactersPos: new Array(),
     injectedChars: new Array(),
-    iterator : 0,
+    iterator: 0,
 
     // Call the crypto graphic algorithm.
     hashy: function() {
@@ -123,7 +123,7 @@ Hasher = {
         // check whether small chars are more in number
         else if ((Hasher.smallCharactersPos.length > 4) && (Hasher.smallCharactersPos.length > Hasher.numberPos.length || Hasher.smallCharactersPos.length > Hasher.capitalCharactersPos.length || Hasher.smallCharactersPos.length > Hasher.specialCharactersPos.length) ){
             // reduce the small chars but minimum of 4
-            while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.smallCharactersPos.length > 4){
+            while(Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.smallCharactersPos.length > 4) {
                 Hasher.password = Hasher.password.substr(0, Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+Hasher.password.substr((Hasher.smallCharactersPos[Hasher.smallCharactersPos.length-1])+1, Hasher.password.length);
                 Hasher.smallCharactersPos.splice(-1, 1);
             }
@@ -131,7 +131,7 @@ Hasher = {
         // check whether caps are more in number
         else if ((Hasher.capitalCharactersPos.length > 2) && (Hasher.capitalCharactersPos.length > Hasher.numberPos.length || Hasher.capitalCharactersPos.length > Hasher.smallCharactersPos.length || Hasher.capitalCharactersPos.length > Hasher.specialCharactersPos.length) ){
             // reduce the caps chars but minimum of 2
-            while (Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.capitalCharactersPos.length > 2){
+            while (Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.capitalCharactersPos.length > 2) {
                 Hasher.password = Hasher.password.substr(0, Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length-1])+Hasher.password.substr((Hasher.capitalCharactersPos[Hasher.capitalCharactersPos.length-1])+1, Hasher.password.length);
                 Hasher.capitalCharactersPos.splice(-1, 1);
             }
@@ -139,7 +139,7 @@ Hasher = {
         // check whether special chars are more in number
         else if ((Hasher.specialCharactersPos.length > 1) && (Hasher.specialCharactersPos.length > Hasher.numberPos.length || Hasher.specialCharactersPos.length > Hasher.smallCharactersPos.length || Hasher.specialCharactersPos.length > Hasher.capitalCharactersPos.length) ){
             // reduce the special chars but minimum of 2
-            while (Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.specialCharactersPos.length > 1){
+            while (Hasher.password.length > (Hasher.end - Hasher.start) && Hasher.specialCharactersPos.length > 1) {
                 Hasher.password = Hasher.password.substr(0, Hasher.specialCharactersPos[Hasher.specialCharactersPos.length-1])+Hasher.password.substr((Hasher.specialCharactersPos[Hasher.specialCharactersPos.length-1])+1, Hasher.password.length);
                 Hasher.specialCharactersPos.splice(-1, 1);
             }
