@@ -56,7 +56,7 @@
 		</array>
 	</dict>
 	<key>Description</key>
-	<string>Just remember one master password to generate different passwords for different sites without storing</string>
+	<string>Just remember one master password text, Extrasafe takes care of the rest ;)</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>

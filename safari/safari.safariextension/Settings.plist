@@ -11,10 +11,18 @@
 	<dict>
 		<key>Key</key>
 		<string>personal_extraSequence</string>
-		<key>Secure</key>
-		<false/>
 		<key>Title</key>
 		<string>Personal Extra Security Sequence</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
+		<key>Key</key>
+		<string>personal_passwordLength</string>
+		<key>Title</key>
+		<string>Personal Password Length</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -23,24 +31,12 @@
 		<real>0.0</real>
 		<key>Key</key>
 		<string>personal_startIndex</string>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Personal Start Index</string>
-		<key>Type</key>
-		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
 		<real>12</real>
 		<key>Key</key>
 		<string>personal_endIndex</string>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Personal End Index</string>
-		<key>Type</key>
-		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>Title</key>
@@ -51,10 +47,18 @@
 	<dict>
 		<key>Key</key>
 		<string>official_extraSequence</string>
-		<key>Secure</key>
-		<false/>
 		<key>Title</key>
 		<string>Official Extra Security Sequence</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>12</real>
+		<key>Key</key>
+		<string>official_passwordLength</string>
+		<key>Title</key>
+		<string>Official Password Length</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -63,46 +67,36 @@
 		<real>0.0</real>
 		<key>Key</key>
 		<string>official_startIndex</string>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Official Start Index</string>
-		<key>Type</key>
-		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
 		<real>12</real>
 		<key>Key</key>
 		<string>official_endIndex</string>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Official End Index</string>
-		<key>Type</key>
-		<string>TextField</string>
 	</dict>
 	<dict>
+		<key>DefaultValue</key>
+		<string></string>
 		<key>Key</key>
 		<string>default_extraSequence</string>
-		<key>Secure</key>
-		<false/>
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
 		<real>0.0</real>
 		<key>Key</key>
 		<string>default_startIndex</string>
-		<key>Secure</key>
-		<false/>
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
 		<real>12</real>
 		<key>Key</key>
 		<string>default_endIndex</string>
-		<key>Secure</key>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
 		<false/>
+		<key>Key</key>
+		<string>extrasafeDisabled</string>
 	</dict>
 </array>
 </plist>

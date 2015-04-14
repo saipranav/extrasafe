@@ -16,9 +16,11 @@ var simplePrefs = require("sdk/simple-prefs");
 var siteTag = "";
 var siteUrl = "";
 var personal_extraSequence = simplePrefs.prefs.personal_extraSequence;
+var personal_passwordLength = simplePrefs.prefs.personal_passwordLength;
 var personal_startIndex = simplePrefs.prefs.personal_startIndex;
 var personal_endIndex = simplePrefs.prefs.personal_endIndex;
 var official_extraSequence = simplePrefs.prefs.official_extraSequence;
+var official_passwordLength = simplePrefs.prefs.official_passwordLength;
 var official_startIndex = simplePrefs.prefs.official_startIndex;
 var official_endIndex = simplePrefs.prefs.official_endIndex;
 var default_extraSequence = "";
@@ -26,24 +28,21 @@ var default_startIndex = 0;
 var default_endIndex = 12;
 var extrasafeDisabled = simplePrefs.prefs.extrasafeDisabled;
 var injectedWorkers = [];
+var numberRegex = /^\d+$/;
 
 // For the first time pref will be undefined so define it
-if( personal_extraSequence == undefined || personal_startIndex == undefined || personal_endIndex == undefined || official_extraSequence == undefined || official_startIndex == undefined || official_endIndex == undefined || extrasafeDisabled == undefined){
+if( personal_extraSequence == undefined || personal_passwordLength == undefined || personal_startIndex == undefined || personal_endIndex == undefined || official_extraSequence == undefined || official_passwordLength == undefined || official_startIndex == undefined || official_endIndex == undefined || extrasafeDisabled == undefined){
 	simplePrefs.prefs.default_extraSequence = "";
 	simplePrefs.prefs.default_startIndex = 0;
 	simplePrefs.prefs.default_endIndex = 12;
-	simplePrefs.prefs.personal_extraSequence = "";
-	simplePrefs.prefs.personal_startIndex = 0;
-	simplePrefs.prefs.personal_endIndex = 12;
-	simplePrefs.prefs.official_extraSequence = "";
-	simplePrefs.prefs.official_startIndex = 0;
-	simplePrefs.prefs.official_endIndex = 12;
-	personal_extraSequence = "";
-	personal_startIndex = 0;
-	personal_endIndex = 12;
-	official_extraSequence = "";
-	official_startIndex = 0;
-	official_endIndex = 12;
+	simplePrefs.prefs.personal_extraSequence = personal_extraSequence = "";
+	simplePrefs.prefs.personal_passwordLength = personal_passwordLength = 12;
+	simplePrefs.prefs.personal_startIndex = personal_startIndex = 0;
+	simplePrefs.prefs.personal_endIndex = personal_endIndex = 12;
+	simplePrefs.prefs.official_extraSequence = official_extraSequence = "";
+	simplePrefs.prefs.official_passwordLength = official_passwordLength = 12;
+	simplePrefs.prefs.official_startIndex = official_startIndex = 0;
+	simplePrefs.prefs.official_endIndex = official_endIndex = 12;
 	extrasafeDisabled = false;
 }
 
@@ -124,29 +123,39 @@ if(extrasafeDisabled){
 
 //For saving options
 simplePrefs.on("update",function(){
-	var personal_checkStart = simplePrefs.prefs.personal_startIndex;
-	var personal_checkEnd = simplePrefs.prefs.personal_endIndex;
 	var personal_checkExtraSequence = simplePrefs.prefs.personal_extraSequence;
-	var official_checkStart = simplePrefs.prefs.official_startIndex;
-	var official_checkEnd = simplePrefs.prefs.official_endIndex;
+	var personal_checkPasswordLength = simplePrefs.prefs.personal_passwordLength;
 	var official_checkExtraSequence = simplePrefs.prefs.official_extraSequence;
-	if( (personal_checkStart<0) || (personal_checkEnd>128) || (personal_checkStart>=personal_checkEnd) || (personal_checkStart>116) || (personal_checkEnd<12) || ((personal_checkEnd-personal_checkStart)<12) || (official_checkStart<0) || (official_checkEnd>128) || (official_checkStart>=official_checkEnd) || (official_checkStart>116) || (official_checkEnd<12) || ((official_checkEnd-official_checkStart)<12) ){
-		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? End index should be greater than Start index. Difference between End index and Start index should be greater than 12";
-		simplePrefs.prefs.personal_extraSequence = personal_extraSequence;
-		simplePrefs.prefs.personal_startIndex = personal_startIndex;
-		simplePrefs.prefs.personal_endIndex = personal_endIndex;
-		simplePrefs.prefs.official_extraSequence = official_extraSequence;
-		simplePrefs.prefs.official_startIndex = official_startIndex;
-		simplePrefs.prefs.official_endIndex = official_endIndex;
+	var official_checkPasswordLength = simplePrefs.prefs.official_passwordLength;
+
+	if( !numberRegex.test(personal_checkPasswordLength) || personal_checkPasswordLength > 128 || personal_checkPasswordLength < 12 ){
+		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? Personal password, maximum is 128 and minimum is 12";
+		cancelOptions();
 	}
-	else
-	{
+	else if( !numberRegex.test(official_checkPasswordLength) || official_checkPasswordLength > 128 || official_checkPasswordLength < 12 ){
+		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? Official password, maximum is 128 and minimum is 12";
+		cancelOptions();
+	}
+	else if( personal_checkExtraSequence.length > 500 ){
+		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? Personal Security sequence, maximum is 500 characters";
+		cancelOptions();
+	}
+	else if( official_checkExtraSequence.length > 500 ){
+		simplePrefs.prefs.updateStatus = "Your options are NOT SAVED. Why ? Official Security sequence, maximum is 500 characters";
+		cancelOptions();
+	}
+	else{
+		var personal_result = deriveStartIndexAndEndIndex(personal_checkExtraSequence, personal_checkPasswordLength);
+		var official_result = deriveStartIndexAndEndIndex(official_checkExtraSequence, official_checkPasswordLength);
+
 		personal_extraSequence = simplePrefs.prefs.personal_extraSequence;
-		personal_startIndex = simplePrefs.prefs.personal_startIndex;
-		personal_endIndex = simplePrefs.prefs.personal_endIndex;
+		personal_startIndex = simplePrefs.prefs.personal_startIndex = personal_result.startIndex;
+		personal_endIndex = simplePrefs.prefs.personal_endIndex = personal_result.endIndex;
+		personal_passwordLength = simplePrefs.prefs.personal_passwordLength;
 		official_extraSequence = simplePrefs.prefs.official_extraSequence;
-		official_startIndex = simplePrefs.prefs.official_startIndex;
-		official_endIndex = simplePrefs.prefs.official_endIndex;
+		official_startIndex = simplePrefs.prefs.official_startIndex = official_result.startIndex;
+		official_endIndex = simplePrefs.prefs.official_endIndex = official_result.endIndex;
+		official_passwordLength = simplePrefs.prefs.official_passwordLength;
 		simplePrefs.prefs.updateStatus = "Your options are SAVED for all profiles";
 	}
 });
@@ -154,21 +163,19 @@ simplePrefs.on("reset",function(){
 	extraSequence = "";
 	startIndex = 0;
 	endIndex = 12;
+	passwordLength = 12;
 	simplePrefs.prefs.personal_extraSequence = extraSequence;
+	simplePrefs.prefs.personal_passwordLength = passwordLength;
 	simplePrefs.prefs.personal_startIndex = startIndex;
 	simplePrefs.prefs.personal_endIndex = endIndex;
 	simplePrefs.prefs.official_extraSequence = extraSequence;
+	simplePrefs.prefs.official_passwordLength = passwordLength;
 	simplePrefs.prefs.official_startIndex = startIndex;
 	simplePrefs.prefs.official_endIndex = endIndex;
 	simplePrefs.prefs.updateStatus = "Your options are reset to DEFAULTS for all profiles";
 });
 simplePrefs.on("cancel",function(){
-	simplePrefs.prefs.personal_extraSequence = personal_extraSequence;
-	simplePrefs.prefs.personal_startIndex = personal_startIndex;
-	simplePrefs.prefs.personal_endIndex = personal_endIndex;
-	simplePrefs.prefs.official_extraSequence = official_extraSequence;
-	simplePrefs.prefs.official_startIndex = official_startIndex;
-	simplePrefs.prefs.official_endIndex = official_endIndex;
+	cancelOptions();
 	simplePrefs.prefs.updateStatus = "Your options are Reset to PREVIOUS STATE for all profiles";
 });
 
@@ -177,6 +184,37 @@ function broadcast(kind,messageBody){
 	for(i=0; i<injectedWorkers.length; i++){
 		injectedWorkers[i].port.emit(kind,messageBody);
 	}
+}
+
+function deriveStartIndexAndEndIndex(extraSequence, passwordLength){
+	var startIndex = 0;
+	var endIndex = 12;
+	var extraLength = extraSequence.length % 116;
+	startIndex = extraLength;
+	endIndex = extraLength + passwordLength;
+	if(endIndex > 128){
+		if( extraLength > (endIndex - 128) ){
+			extraLength = extraLength - (endIndex - 128);
+			startIndex = extraLength;
+			endIndex = extraLength + passwordLength;
+		}
+		else{
+			startIndex = 0;
+			endIndex = passwordLength;
+		}
+	}
+	return {"startIndex": startIndex, "endIndex": endIndex}
+}
+
+function cancelOptions(){
+	simplePrefs.prefs.personal_extraSequence = personal_extraSequence;
+	simplePrefs.prefs.personal_startIndex = personal_startIndex;
+	simplePrefs.prefs.personal_endIndex = personal_endIndex;
+	simplePrefs.prefs.personal_passwordLength = personal_passwordLength;
+	simplePrefs.prefs.official_extraSequence = official_extraSequence;
+	simplePrefs.prefs.official_startIndex = official_startIndex;
+	simplePrefs.prefs.official_endIndex = official_endIndex;
+	simplePrefs.prefs.official_passwordLength = official_passwordLength;
 }
 
 //Array containing keywords for top level domains and country codes

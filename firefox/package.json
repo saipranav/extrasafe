@@ -11,43 +11,59 @@
   "preferences": [{
         "name": "personal_extraSequence",
         "title": "Personal Extra Security Sequence",
-        "description": "Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
+        "description": "Random character string, may be your dog's name. example Charlie.",
         "type": "string"
+    },
+    {
+        "name": "personal_passwordLength",
+        "title": "Personal Password Length",
+        "description": "Your personal password length. Default value - 12. Minimum value - 12, Maximum value - 128.",
+        "type": "integer"
     },
     {
         "name": "personal_startIndex",
         "title": "Personal Start Index",
-        "description": "Your passwords will get sliced using this index. Default value - 0. Minimum value - 0, Maximum value - 116.",
-        "type": "integer"
+        "description": "Slicing index. Default value - 0. Minimum value - 0, Maximum value - 116.",
+        "type": "integer",
+        "hidden": true
     },
     {
         "name": "personal_endIndex",
         "title": "Personal End Index",
-        "description": "Your passwords will get sliced using this index. Default value - 12. Minimum value - 12, Maximum value - 128.",
-        "type": "integer"
+        "description": "Slicing index. Default value - 12. Minimum value - 12, Maximum value - 128.",
+        "type": "integer",
+        "hidden": true
     },
     {
         "name": "official_extraSequence",
         "title": "Official Extra Security Sequence",
-        "description": "Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
+        "description": "Random character string, may be your dog's name. example Charlie",
         "type": "string"
+    },
+    {
+        "name": "official_passwordLength",
+        "title": "Official Password Length",
+        "description": "Your official password length. Default value - 12. Minimum value - 12, Maximum value - 128.",
+        "type": "integer"
     },
     {
         "name": "official_startIndex",
         "title": "Official Start Index",
-        "description": "Your passwords will get sliced using this index. Default value - 0. Minimum value - 0, Maximum value - 116.",
-        "type": "integer"
+        "description": "Slicing index. Default value - 0. Minimum value - 0, Maximum value - 116.",
+        "type": "integer",
+        "hidden": true
     },
     {
         "name": "official_endIndex",
         "title": "Official End Index",
-        "description": "Your passwords will get sliced using this index. Default value - 12. Minimum value - 12, Maximum value - 128.",
-        "type": "integer"
+        "description": "Slicing index. Default value - 12. Minimum value - 12, Maximum value - 128.",
+        "type": "integer",
+        "hidden": true
     },
     {
         "name": "default_extraSequence",
-        "title": "Official Extra Security Sequence",
-        "description": "Give the most hard sequence of characters, numbers, special characters. Extrasafe remembers this sequence.",
+        "title": "Default Extra Security Sequence",
+        "description": "Random character string, may be your dog's name. example Charlie",
         "type": "string",
         "hidden": true
     },
@@ -60,9 +76,16 @@
     },
     {
         "name": "default_endIndex",
-        "title": " End Index",
+        "title": "Default End Index",
         "description": "Your passwords will get sliced using this index. Default value - 12. Minimum value - 12, Maximum value - 128.",
         "type": "integer",
+        "hidden": true
+    },
+    {
+        "name": "extrasafeDisabled",
+        "title": "Extrasafe Disabled",
+        "description": "to store the disabled state",
+        "type": "bool",
         "hidden": true
     },
     {
