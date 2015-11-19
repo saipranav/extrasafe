@@ -95,7 +95,7 @@
 
 /*PREVIOUS*/
 .slideOutToBottom{
-	animation: slideOutToBottom 2s;
+	animation: slideOutToBottom 1.5s;
 }
 
 .slideInFromTop{

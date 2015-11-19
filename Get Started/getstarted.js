@@ -35,7 +35,7 @@ function generateCard(cardNumber){
 function answerClicked(){
 	var nextCardNumber = parseInt($(this).attr("data-answer-to"));
 	saveAnswers(currentCardData.number, $(this).text().trim());
-	$.when( $("#current").removeClass("slideInFromTop").addClass("slideOutToBottom").delay( 800 ) )
+	$.when( $("#current").removeClass("slideInFromTop").addClass("slideOutToBottom").delay( 1000 ) )
 	.done( function(){
 		generateCard(nextCardNumber);
 		updateUrl(nextCardNumber);
