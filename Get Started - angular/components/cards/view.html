@@ -1,0 +1,14 @@
+ <div class="cards col-lg-10 current {{directionForward? 'slideOutToTop' : 'slideOutToBottom' }}">
+	<div class="card row" data-card-number={{card.number}}>
+		<div class="question">{{card.question}}</div>
+		<div class="help-text">{{card.helpText}}</div>
+		<div class="help-elements">{{card.helpElements}}</div>
+	</div>
+	<div class="answers row">
+		<div class="answer" ng-repeat="option in card.options" ng-click="answered(option)">
+			{{option.text}}
+		</div>
+	</div>
+</div>
+
+<!-- View having controller alais name -->

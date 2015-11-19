@@ -1,0 +1,38 @@
+[
+	{
+		"number": 0,
+		"name": "start",
+		"description": "begin on-boarding",
+		"question": "questionisaquestion questionisaquestion questionisaquestion questionisaquestion questionisaquestion questionisaquestion",
+		"helpText": "helptext helptext helptext helptext helptext helptext helptext helptext helptext helptext helptext helptext",
+		"helpElements": "<input type='text'></input>",
+		"options": [
+					{
+						"text": "yes",
+						"to": 1
+					},
+					{
+						"text": "no",
+						"to": 2
+					}
+				]
+	},
+	{
+		"number": 1,
+		"name": "st",
+		"description": "barding",
+		"question": "adasdawsd",
+		"helpText": "helptext helptext helptext helptext helptext helptext helptext helptext",
+		"helpElements": "<html></html>",
+		"options": [
+					{
+						"text": "yes",
+						"to": 3
+					},
+					{
+						"text": "no",
+						"to": 4
+					}
+				]
+	}
+]

@@ -1,0 +1,46 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Just Remember One Password to generate different passwords for different sites. We do not store any passwords anywhere">
+	<meta name="keywords" content="One Password, Master password, different password, extrasafe, extension, browser, app, chrome, firefox, opera, safari, android, ios, hashing">
+	<meta name="author" content="Sai Pranav R">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>Get Started : Extrasafe</title>
+	<!-- libs and scripts -->
+	<script type="text/javascript" src="libs/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/handlebars.js"></script>
+	<script type="text/javascript" src="getstarted.js"></script>
+	<link type="text/css" rel="stylesheet" href="libs/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="card.css"/>
+	<link type="text/css" rel="stylesheet" href="getstarted.css"/>
+	<link type="image/x-icon" rel="shortcut icon" href="assets/img/icon.png"/>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div id="main-content" class="col-lg-offset-1 vertical-center">
+		<card></card>
+	</div>
+</body>
+<script type="text/x-handlebars-template" id="card-template">
+	<div id="current" class="cards slideInFromTop col-lg-10">
+		<div id="questions" class="row card" data-card-number={{number}}>
+			<div id="question">{{question}}</div>
+			<div id="help-text">{{helpText}}</div>
+			<div id="help-elements">{{{helpElements}}}</div>
+		</div>
+		<div id="answers" class="row">
+		{{#each options}}
+			<paper-button elevation="5" class="answer" data-answer-to={{to}}>{{text}}</paper-button>
+		{{/each}}	
+		</div>
+	</div>
+</script>
+
+<!-- Polymers -->
+<script type="text/javascript" src="libs/polymers/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="libs/polymers/paper-button/paper-button.html">
+<link rel="import" href="libs/polymers/paper-input/paper-input.html">
+<link rel="import" href="libs/polymers/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="libs/polymers/paper-toggle-button/paper-toggle-button.html">
+
+</html>

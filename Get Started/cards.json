@@ -1,0 +1,57 @@
+[
+	{
+		"number": 0,
+		"name": "start",
+		"description": "begin on-boarding",
+		"question": "Hi, Welcome to Get Started tutorial kit crafted by The Extra Labs",
+		"helpText": "We will walk through few features",
+		"helpElements": "",
+		"options": [
+					{
+						"text": "Yaay",
+						"to": 1
+					}
+				]
+	},
+	{
+		"number": 1,
+		"name": "card concepts",
+		"description": "basic concepts of this kit",
+		"question": "Whole thing is a card and starts with card 0 all the data are fetched from cards.json and this is the question block",
+		"helpText": "Here is where help text resides for the above question, below is the html elements which are related to the question. PSST! We are using 'paper elements' and 'polymers'",
+		"helpElements": "<paper-input data-for='summa_input' label='Input box for gathering data'></paper-input>",
+		"options": [
+					{
+						"text": "ok",
+						"to": 2
+					}
+				]
+	},
+	{
+		"number": 2,
+		"name": "end",
+		"description": "end on-boarding",
+		"question": "All things have an end, Did you love this kit?",
+		"helpText": "It can also be used for forms, surveys, get started tutorials. All results like answers, data inputs and the path user has travelled are stored as json, further can be pushed to database",
+		"helpElements": "",
+		"options": [
+					{
+						"text": "I loved it",
+						"to": 3
+					},
+					{
+						"text": "Somewhat okay",
+						"to": 3
+					}
+				]
+	},
+	{
+		"number": 3,
+		"name": "thank you",
+		"description": "thank you",
+		"question": "Thank You so much",
+		"helpText": "",
+		"helpElements": "",
+		"options": []
+	}
+]

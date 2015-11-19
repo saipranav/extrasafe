@@ -1,0 +1,75 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Just Remember One Password to generate different passwords for different sites. We do not store any passwords anywhere">
+	<meta name="keywords" content="One Password, Master password, different password, extrasafe, extension, browser, app, chrome, firefox, opera, safari, android, ios, hashing">
+	<meta name="author" content="Sai Pranav R">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>Get Started : Extrasafe</title>
+	<!-- <script type="text/javascript" src="app/libs/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+	<script type="text/javascript" src="components/cards/controller.js"></script>
+	<link type="text/css" rel="stylesheet" href="app/libs/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="components/cards/card.css"/>
+	<link type="text/css" rel="stylesheet" href="app/css/app.css"/>
+	
+	<!-- <link type="image/x-icon" rel="shortcut icon" href="assets/img/icon.png"/> -->
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="col-lg-offset-1 vertical-center" ng-app="appCards" ng-controller="cardsController as cards">
+		 <!-- <div class="previous cards col-lg-10" ng-show="!cards.directionForward" ng-class="cards.directionForward? '' : 'slideInFromTop' ">
+			<div class="card row" data-card-number={{cards.previousData.number}}>
+				<div class="question">{{cards.previousData.question}}</div>
+				<div class="help-text">{{cards.previousData.helpText}}</div>
+				<div class="help-elements">{{cards.previousData.helpElements}}</div>
+			</div>
+			<div class="answers row">
+				<div class="answer" ng-repeat="option in cards.previousData.options" ng-click="cards.answered(option)">
+					{{option.text}}
+				</div>
+			</div>
+		</div>
+		-->
+		<!-- <div class="current cards col-lg-10">
+			<div class="card row" data-card-number={{cards.currentData.number}}>
+				<div class="question">{{cards.currentData.question}}</div>
+				<div class="help-text">{{cards.currentData.helpText}}</div>
+				<div class="help-elements">{{cards.currentData.helpElements}}</div>
+			</div>
+			<div class="answers row">
+				<div class="answer" ng-repeat="option in cards.currentData.options" ng-click="cards.answered(option)">
+					{{option.text}}
+				</div>
+			</div>
+		</div> -->
+		<!-- <div class="next cards col-lg-10" ng-show="cards.directionForward" ng-class="cards.directionForward? 'slideInFromBottom' : '' ">
+		next
+			<div class="card row" data-card-number={{cards.nextData.number}}>
+				<div class="question">{{cards.nextData.question}}</div>
+				<div class="help-text">{{cards.nextData.helpText}}</div>
+				<div class="help-elements">{{cards.nextData.helpElements}}</div>
+			</div>
+			<div class="answers row">
+				<div class="answer" ng-repeat="option in cards.nextData.options" ng-click="cards.answered(option)">
+					{{option.text}}
+				</div>
+			</div>
+		</div> -->
+		<!-- <div cards card-type="current" class="next cards col-lg-10" ng-show="true" ng-class="slideAnimate">
+			<div class="card row" data-card-number={{cards.nextData.number}}>
+				<div class="question">{{cards.nextData.question}}</div>
+				<div class="help-text">{{cards.nextData.helpText}}</div>
+				<div class="help-elements">{{cards.nextData.helpElements}}</div>
+			</div>
+			<div class="answers row">
+				<div class="answer" ng-repeat="option in cards.nextData.options" ng-click="cards.answered(option)">
+					{{option.text}}
+				</div>
+			</div>
+		</div> -->
+		<cards data-card-type="current" data-direction-forward=cards.directionFoward data-card=cards.currentData></cards>
+	</div>
+</body>
+</html>

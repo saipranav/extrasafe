@@ -1,0 +1,103 @@
+.vertical-center{
+	margin-top: 7%;
+}
+
+.cards{
+	font-size: 30px;
+	font-weight: 600;
+	text-align: center;
+	position: absolute;
+	color: #181A1C;
+	background-color: #FECE1A;
+}
+
+.card{
+	min-height: 300px;
+	padding: 5%;
+}
+
+#questions{
+
+}
+
+#question{
+
+}
+
+#help-text{
+	font-size: 20px;
+	margin-top: 0.5%;
+}
+
+#help-elements{
+	font-size: 30px;
+	margin-top: 1%;
+}
+
+#answers{
+	max-height: 200px;
+}
+
+.answer{
+	margin: 10px 10px;
+	color: #ffffff;
+	background-color: #181A1C;
+	border: 1px solid #FECE1A;
+	padding: 0% 5%;
+}
+
+#current{
+	z-index: 200;
+}
+
+@keyframes paper {
+    0%      { transform: rotateZ(0deg); }
+    20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+    40%     { transform: rotateZ(17deg); }
+    60%     { transform: rotateZ(16deg); }
+    100%    { transform: translateY(100%) rotateZ(17deg); }
+}
+
+/*NEXT card animations*/
+@keyframes slideInFromBottom {
+    0%     { transform: translateY(200%) scale(0.9); }
+    80%    { transform: scale(0.9); }
+    100%   { transform: translateY(0%); }
+}
+
+@keyframes slideOutToTop {
+    0%     { transform: translateY(0%); }
+    20%    { transform: scale(0.9); }
+    100%    { transform: translateY(-200%) scale(0.9); }
+}
+
+/*PREVIOUS card animations*/
+@keyframes slideInFromTop {
+    0%     { transform: translateY(-200%) scale(0.9); }
+    80%    { transform: scale(0.9); }
+    100%   { transform: translateY(0%); }
+}
+
+@keyframes slideOutToBottom {
+    0%     { transform: translateY(0%); }
+    20%    { transform: scale(0.9); }
+    100%   { transform: translateY(200%) scale(0.9); }
+}
+
+/*NEXT*/
+.slideInFromBottom{
+	animation: slideInFromBottom 1.5s ease-in;
+}
+
+.slideOutToTop{
+	animation: slideOutToTop 1.5s;
+}
+
+/*PREVIOUS*/
+.slideOutToBottom{
+	animation: slideOutToBottom 1.5s;
+}
+
+.slideInFromTop{
+	animation: slideInFromTop 1.5s;
+}
