@@ -17,12 +17,12 @@
 		"number": 1,
 		"name": "card concepts",
 		"description": "basic concepts of this kit",
-		"question": "All questions are converted to individual cards and given to user one at a time.\nData for these cards are dynamic and can be changed specific to application needs",
-		"helpText": "We will walk through few features",
+		"question": "All questions are converted to individual cards and given to user one at a time.",
+		"helpText": "Data for these cards are dynamic and can be changed specific to application needs",
 		"helpElements": "",
 		"options": [
 					{
-						"text": "Yaay",
+						"text": "Super",
 						"to": 2
 					}
 				]
@@ -54,7 +54,7 @@
 						"to": 4
 					},
 					{
-						"text": "Somewhat okay",
+						"text": "Somewhat",
 						"to": 4
 					}
 				]
